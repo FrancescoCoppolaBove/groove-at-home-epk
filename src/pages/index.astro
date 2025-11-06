@@ -20,7 +20,7 @@ const heroData = {
 const metricsData = {
   stats: {
     followers: {
-      value: "53K+",
+      value: "40K+",
       label: "Total Followers",
       growth: "18% this month"
     },
@@ -30,58 +30,27 @@ const metricsData = {
       detail: "Above industry avg"
     },
     reach: {
-      value: "2.5M",
+      value: "635K",
       label: "Monthly Reach",
       platforms: ["Instagram", "TikTok", "YouTube"]
     },
-    shows: {
-      value: "50+",
-      label: "Live Shows 2025",
-      upcoming: "EU Tour 2026"
+    partnership: {
+      value: "Thomann",
+      label: "Official Partner",
+      detail: "Thomann Artist"
     }
   }
 };
 
-// Videos data
-const videosData = {
-  videos: [
-    {
-      src: "/assets/reel-1.mp4",
-      poster: "/assets/reel-1-poster.jpg",
-      title: "Live at Blue Note Milano",
-      views: "416K",
-      platform: "tiktok" as const
-    },
-    {
-      src: "/assets/reel-2.mp4",
-      poster: "/assets/reel-2-poster.jpg",
-      title: "Funk Jam Session",
-      views: "128K",
-      platform: "instagram" as const
-    },
-    {
-      src: "/assets/reel-3.mp4",
-      poster: "/assets/reel-3-poster.jpg",
-      title: "Behind The Groove",
-      views: "89K",
-      platform: "instagram" as const
-    },
-    {
-      src: "/assets/reel-4.mp4",
-      poster: "/assets/reel-4-poster.jpg",
-      title: "Summer Festival Vibes",
-      views: "67K",
-      platform: "youtube" as const
-    },
-    {
-      src: "/assets/reel-5.mp4",
-      poster: "/assets/reel-5-poster.jpg",
-      title: "Studio Sessions Vol.1",
-      views: "93K",
-      platform: "instagram" as const
-    }
-  ]
-};
+// Reels
+const reels = [
+  "https://www.instagram.com/reel/DQOzdJqgrXS/", // Francesca Tandoi
+  "https://www.instagram.com/reel/DO3GnMylTOU/", // Thomann collab
+  "https://www.instagram.com/reel/DNalchUsi_T/", // Live reel
+  "https://www.instagram.com/reel/DMkh8IbMCoB/", // Little Blue (commento di Jacob)
+  "https://www.instagram.com/reel/DMAcue5o30y/", // Miglior arrangiamento
+  "https://www.instagram.com/p/DF0EI_JsQv0/",    // Gabriele Esposito
+];
 
 // Music data
 const musicData = {
@@ -165,7 +134,7 @@ const bookingData = {
 >
   <Hero {...heroData} />
   <MetricsSection {...metricsData} />
-  <VideoShowcase {...videosData} />
+  <VideoShowcase reels={reels} />
   <MusicSection {...musicData} />
   
   <!-- Press Section -->

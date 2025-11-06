@@ -4,7 +4,7 @@ interface Props {
     followers: { value: string; label: string; growth: string };
     engagement: { value: string; label: string; detail: string };
     reach: { value: string; label: string; platforms: string[] };
-    shows: { value: string; label: string; upcoming: string };
+    partnership: { value: string; label: string; detail: string };
   };
 }
 
@@ -93,23 +93,27 @@ const { stats } = Astro.props;
         </div>
       </div>
 
-      <!-- Live Shows -->
-      <div class="glass-card group hover:scale-105 transition-transform duration-300">
-        <div class="flex items-start justify-between mb-4">
-          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
-            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-            </svg>
-          </div>
-          <span class="text-xs text-[var(--accent-primary)] font-semibold">{stats.shows.upcoming}</span>
-        </div>
-        <div class="text-4xl font-black gradient-text mb-2">
-          {stats.shows.value}
-        </div>
-        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
-          {stats.shows.label}
-        </div>
-      </div>
+      <!-- Official Partnership -->
+<div class="glass-card group hover:scale-105 transition-transform duration-300">
+  <div class="flex items-start justify-between mb-4">
+    <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
+      <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 7h18M3 12h18M3 17h18" />
+      </svg>
+    </div>
+    <span class="text-xs text-[var(--accent-primary)] font-semibold">
+      {stats.partnership.detail}
+    </span>
+  </div>
+
+  <div class="text-3xl font-black gradient-text mb-2">
+    {stats.partnership.value}
+  </div>
+  <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
+    {stats.partnership.label}
+  </div>
+</div>
     </div>
 
     <!-- Value Props -->
