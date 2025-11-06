@@ -1,0 +1,198 @@
+---
+interface Props {
+  stats: {
+    followers: { value: string; label: string; growth: string };
+    engagement: { value: string; label: string; detail: string };
+    reach: { value: string; label: string; platforms: string[] };
+    shows: { value: string; label: string; upcoming: string };
+  };
+}
+
+const { stats } = Astro.props;
+---
+
+<section id="metrics" class="relative py-24 overflow-hidden">
+  <!-- Background Pattern -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-[var(--accent-primary)] rounded-full filter blur-3xl"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-[var(--accent-secondary)] rounded-full filter blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 container-max section-padding">
+    <!-- Section Header -->
+    <div class="text-center mb-16 reveal">
+      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
+        Why Book Us
+      </span>
+      <h2 class="text-4xl md:text-5xl font-black mb-4">
+        <span class="gradient-text">Numbers That Matter</span>
+      </h2>
+      <p class="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
+        Real impact, measurable results, engaged community
+      </p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+      <!-- Total Followers -->
+      <div class="glass-card group hover:scale-105 transition-transform duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
+            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <span class="text-xs text-green-400 font-semibold">+{stats.followers.growth}</span>
+        </div>
+        <div class="text-4xl font-black gradient-text mb-2 counter" data-target={stats.followers.value}>
+          {stats.followers.value}
+        </div>
+        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
+          {stats.followers.label}
+        </div>
+      </div>
+
+      <!-- Engagement Rate -->
+      <div class="glass-card group hover:scale-105 transition-transform duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
+            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+            </svg>
+          </div>
+          <span class="text-xs text-[var(--text-tertiary)]">{stats.engagement.detail}</span>
+        </div>
+        <div class="text-4xl font-black gradient-text mb-2">
+          {stats.engagement.value}
+        </div>
+        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
+          {stats.engagement.label}
+        </div>
+      </div>
+
+      <!-- Monthly Reach -->
+      <div class="glass-card group hover:scale-105 transition-transform duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
+            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            </svg>
+          </div>
+          <div class="flex gap-1">
+            {stats.reach.platforms.map(platform => (
+              <span class="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
+            ))}
+          </div>
+        </div>
+        <div class="text-4xl font-black gradient-text mb-2">
+          {stats.reach.value}
+        </div>
+        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
+          {stats.reach.label}
+        </div>
+      </div>
+
+      <!-- Live Shows -->
+      <div class="glass-card group hover:scale-105 transition-transform duration-300">
+        <div class="flex items-start justify-between mb-4">
+          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
+            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+            </svg>
+          </div>
+          <span class="text-xs text-[var(--accent-primary)] font-semibold">{stats.shows.upcoming}</span>
+        </div>
+        <div class="text-4xl font-black gradient-text mb-2">
+          {stats.shows.value}
+        </div>
+        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
+          {stats.shows.label}
+        </div>
+      </div>
+    </div>
+
+    <!-- Value Props -->
+    <div class="mt-16 grid md:grid-cols-3 gap-6 reveal">
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
+          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">High Energy Performance</h3>
+        <p class="text-[var(--text-secondary)]">
+          70-90 minutes of non-stop funk grooves that keep the crowd moving
+        </p>
+      </div>
+      
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
+          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">100+ Musicians Network</h3>
+        <p class="text-[var(--text-secondary)]">
+          Part of Italy's largest funk collective with top-tier musicians
+        </p>
+      </div>
+      
+      <div class="text-center">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
+          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Viral Content Creators</h3>
+        <p class="text-[var(--text-secondary)]">
+          Proven social media presence with content reaching millions
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Animated counter
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200;
+  
+  const countUp = (counter: Element) => {
+    const target = counter.getAttribute('data-target');
+    if (!target) return;
+    
+    const numericTarget = parseInt(target.replace(/\D/g, ''));
+    const suffix = target.replace(/[0-9]/g, '');
+    let count = 0;
+    const increment = numericTarget / speed;
+    
+    const updateCount = () => {
+      count += increment;
+      if (count < numericTarget) {
+        counter.textContent = Math.ceil(count) + suffix;
+        requestAnimationFrame(updateCount);
+      } else {
+        counter.textContent = target;
+      }
+    };
+    
+    updateCount();
+  };
+  
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(entry.target);
+      }
+    });
+  };
+  
+  const observer = new IntersectionObserver(observerCallback, {
+    threshold: 0.5
+  });
+  
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
+</script>
