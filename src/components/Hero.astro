@@ -18,18 +18,32 @@ const { metrics } = Astro.props;
 <section id="home" class="relative min-h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-24 lg:pt-28">
   <!-- Background Image with Parallax Effect -->
   <div class="absolute inset-0 z-0">
-    <div class="hero-image-container absolute inset-0 scale-110">
-      <Image 
-  src={bandPhoto}
-  alt="Groove at Home Band"
-  class="hero-img w-full h-full object-cover"
-  loading="eager"
-  quality={90}
-  format="webp"
-/>
-    </div>
-    <div class="hero-overlay absolute inset-0"></div>
+  <!-- DESKTOP IMAGE -->
+  <div class="hero-image-desktop absolute inset-0">
+    <Image 
+      src={bandPhoto} 
+      alt="Groove at Home Band" 
+      class="w-full h-full object-cover"
+      loading="eager"
+      quality={90}
+      format="webp"
+    />
   </div>
+
+  <!-- MOBILE IMAGE -->
+  <div class="hero-image-mobile absolute inset-0">
+    <Image 
+      src={import('../assets/photo_session_vertical-min.jpg')} 
+      alt="Groove at Home Band - Mobile" 
+      class="w-full h-full object-cover"
+      loading="eager"
+      quality={90}
+      format="webp"
+    />
+  </div>
+
+  <div class="hero-overlay absolute inset-0"></div>
+</div>
 
   <!-- Content -->
   <div class="relative z-10 container-max px-6 md:px-12 lg:px-20 text-center">
@@ -225,15 +239,21 @@ const { metrics } = Astro.props;
     transform: translateY(-2px);
   }
 
-  .hero-img {
-  object-position: center 35%;
+ .hero-image-desktop {
+  display: block;
 }
 
-/* Mobile: sposta l'immagine verso l’alto e permetti un leggero stretch */
+.hero-image-mobile {
+  display: none;
+}
+
+/* Mobile: usa l'immagine verticale */
 @media (max-width: 640px) {
-  .hero-img {
-    object-position: center 10%;
-    transform: scale(1.15); /* leggerissimo zoom per non tagliare le facce */
+  .hero-image-desktop {
+    display: none;
+  }
+  .hero-image-mobile {
+    display: block;
   }
 }
 </style>
