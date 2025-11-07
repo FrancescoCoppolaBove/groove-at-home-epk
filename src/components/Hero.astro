@@ -6,7 +6,7 @@ import bandLogo from '../assets/Groove_transparent_logo.png';
 interface Props {
   metrics: {
     instagram: string;
-    tiktok: string;
+    musicians: string;
     viral: string;
     engagement: string;
   };
@@ -82,8 +82,8 @@ const { metrics } = Astro.props;
       </div>
       <div class="metric-card-hero group">
         <div class="relative z-10">
-          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.tiktok}</div>
-          <div class="text-sm font-bold uppercase tracking-wider metric-label">TikTok</div>
+          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.musicians}</div>
+          <div class="text-sm font-bold uppercase tracking-wider metric-label">Musicians</div>
         </div>
       </div>
       <div class="metric-card-hero group">

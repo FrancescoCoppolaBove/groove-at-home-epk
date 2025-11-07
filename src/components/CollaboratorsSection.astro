@@ -1,0 +1,83 @@
+---
+interface Collaborator {
+  name: string;
+  size?: "lg" | "md" | "sm"; // grandezza controllata
+}
+
+const collaborators: Collaborator[] = [
+  { name: "Mario Biondi", size: "lg" },
+  { name: "Francesca Tandoi", size: "lg" },
+  { name: "Arabella Rustico", size: "lg" },
+
+  // mid-level
+  { name: "Roberta Gentile", size: "md" },
+  { name: "Fabiana Martone", size: "md" },
+  { name: "Nausica", size: "md" },
+  { name: "Folcast", size: "md" },
+  { name: "Roberto Colella", size: "md" },
+
+  // smaller contributors
+  { name: "Zoe Ranno", size: "sm" },
+  { name: "Corinne Ragona", size: "sm" },
+  { name: "Alex Polidori", size: "sm" },
+  { name: "Greg Rega", size: "sm" },
+];
+---
+
+<section id="collaborations" class="py-24 relative overflow-hidden">
+  <!-- Soft lights -->
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-32 left-10 w-[500px] h-[500px] rounded-full blur-3xl opacity-20"
+      style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
+    <div class="absolute -bottom-32 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-20"
+      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+  </div>
+
+  <div class="relative z-10 container-max section-padding px-6 md:px-12 lg:px-20">
+    <!-- Header -->
+    <div class="text-center mb-16 reveal">
+      <h2 class="text-[var(--accent-primary)] text-4xl md:text-5xl font-black mb-3">Collaborations</h2>
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
+        A selection of the amazing artists who shared their sound with us.
+      </p>
+    </div>
+
+    <!-- Word Cloud -->
+    <div class="relative mx-auto max-w-5xl reveal" style="animation-delay:.15s">
+      <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+        {collaborators.map(c => (
+          <span
+  class={`word-item font-bold transition-transform
+    ${c.size === "lg" ? "text-3xl md:text-5xl" : ""}
+    ${c.size === "md" ? "text-2xl md:text-3xl" : ""}
+    ${c.size === "sm" ? "text-lg md:text-xl" : ""}
+  `}
+  style="color:#db7c26;"
+>
+            {c.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    /* Floating leggero, random ma controllato */
+    .word-item {
+      position: relative;
+      display: inline-block;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%   { transform: translateY(0px); }
+      50%  { transform: translateY(-6px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Ogni nome ha un delay diverso, super naturale */
+    .word-item:nth-child(odd)  { animation-delay: .2s; }
+    .word-item:nth-child(3n)   { animation-delay: .6s; }
+    .word-item:nth-child(4n)   { animation-delay: .4s; }
+    .word-item:nth-child(5n)   { animation-delay: .8s; }
+  </style>
+</section>

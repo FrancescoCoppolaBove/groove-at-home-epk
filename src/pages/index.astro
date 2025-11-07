@@ -5,12 +5,15 @@ import MetricsSection from "../components/MetricsSection.astro";
 import VideoShowcase from "../components/VideoShowcase.astro";
 import MusicSection from "../components/MusicSection.astro";
 import BookingSection from "../components/BookingSection.astro";
+import BioSection from '../components/BioSection.astro';
+import LiveSection from '../components/LiveSection.astro';
+import CollaboratorsSection from '../components/CollaboratorsSection.astro';
 
 // Hero data
 const heroData = {
   metrics: {
     instagram: "40K+",
-    tiktok: "13K+",
+    musicians: "105",
     viral: "416K",
     engagement: "5.75"
   }
@@ -46,81 +49,36 @@ const metricsData = {
 const reels = [
   "https://www.instagram.com/reel/DQOzdJqgrXS/", // Francesca Tandoi
   "https://www.instagram.com/reel/DO3GnMylTOU/", // Thomann collab
-  "https://www.instagram.com/reel/DNalchUsi_T/", // Live reel
+  "https://www.instagram.com/p/DI6OIPmspPu/",    // Leave a Message
   "https://www.instagram.com/reel/DMkh8IbMCoB/", // Little Blue (commento di Jacob)
   "https://www.instagram.com/reel/DMAcue5o30y/", // Miglior arrangiamento
   "https://www.instagram.com/p/DF0EI_JsQv0/",    // Gabriele Esposito
 ];
 
-// Music data
-const musicData = {
-  tracks: [
-    {
-      title: "Funky Nights in Milano",
-      duration: "4:32",
-      plays: "128K",
-      featured: true
-    },
-    {
-      title: "Nu-Jazz Collective",
-      duration: "5:18",
-      plays: "89K"
-    },
-    {
-      title: "Italian Groove",
-      duration: "3:45",
-      plays: "156K",
-      featured: true
-    },
-    {
-      title: "Soul Kitchen",
-      duration: "6:22",
-      plays: "72K"
-    },
-    {
-      title: "Sunset Sessions",
-      duration: "4:55",
-      plays: "94K"
-    }
-  ],
-  // Optional: Add Spotify embed code here
-  // spotifyEmbed: `<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/..." width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
-};
-
 // Booking data
 const bookingData = {
-  email: "grooveathomeofficial@gmail.com",
+  email: "athomegroove@gmail.com",
   tour: {
     dates: [
       {
-        date: "Feb 15, 2026",
+        date: "Feb 24, 2026",
         venue: "BIKO",
         city: "Milan, IT",
         status: "confirmed" as const
       },
       {
-        date: "Feb 22, 2026",
+        date: "Feb 26, 2026",
         venue: "Crazy Coqs",
         city: "London, UK",
-        status: "confirmed" as const
+        status: "confirmed" as const,
+        ticketsEnabled: true,
+        ticketsUrl: 'https://www.brasseriezedel.com/events/groove-at-home-one-night-in-london/?instance_id=1825652'
       },
       {
-        date: "Mar 1, 2026",
+        date: "Feb 28, 2026",
         venue: "Das Wohnzimmer",
         city: "Frankfurt, DE",
         status: "confirmed" as const
-      },
-      {
-        date: "Mar 8, 2026",
-        venue: "Blue Note",
-        city: "Milan, IT",
-        status: "available" as const
-      },
-      {
-        date: "Mar 15, 2026",
-        venue: "Jazz Cafe",
-        city: "Rome, IT",
-        status: "available" as const
       }
     ]
   }
@@ -133,93 +91,12 @@ const bookingData = {
   lang="it"
 >
   <Hero {...heroData} />
-  <MetricsSection {...metricsData} />
+  <BioSection />
   <VideoShowcase reels={reels} />
-  <MusicSection {...musicData} />
-  
-  <!-- Press Section -->
-  <section id="press" class="py-24 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--accent-secondary)] rounded-full filter blur-3xl"></div>
-    </div>
-    
-    <div class="relative z-10 container-max section-padding">
-      <div class="text-center mb-16 reveal">
-        <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
-          Press & Reviews
-        </span>
-        <h2 class="text-4xl md:text-5xl font-black mb-4">
-          <span class="gradient-text">What They Say</span>
-        </h2>
-      </div>
-      
-      <!-- Press Quotes Carousel -->
-      <div class="grid md:grid-cols-3 gap-6 mb-12">
-        <div class="glass-card reveal">
-          <div class="text-6xl text-[var(--accent-primary)] opacity-20 mb-4">"</div>
-          <p class="text-lg mb-4">One of the freshest and most contemporary funk projects in Italy today.</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
-            <div>
-              <div class="font-semibold">Jazz Italia</div>
-              <div class="text-sm text-[var(--text-tertiary)]">Music Magazine</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="glass-card reveal" style="animation-delay: 0.1s">
-          <div class="text-6xl text-[var(--accent-primary)] opacity-20 mb-4">"</div>
-          <p class="text-lg mb-4">Young energy combined with surprisingly mature musicianship.</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
-            <div>
-              <div class="font-semibold">Roma in Jazz</div>
-              <div class="text-sm text-[var(--text-tertiary)]">Festival Director</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="glass-card reveal" style="animation-delay: 0.2s">
-          <div class="text-6xl text-[var(--accent-primary)] opacity-20 mb-4">"</div>
-          <p class="text-lg mb-4">A retro-modern groove that truly hits differently on stage.</p>
-          <div class="flex items-center gap-3">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--accent-primary)] to-[var(--accent-secondary)]"></div>
-            <div>
-              <div class="font-semibold">Soul & Beyond</div>
-              <div class="text-sm text-[var(--text-tertiary)]">Music Blog</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Collaborations -->
-      <div class="mt-16 text-center reveal">
-        <h3 class="text-xl font-bold mb-6 text-[var(--text-secondary)]">Featured Collaborations</h3>
-        <div class="flex flex-wrap gap-8 justify-center items-center">
-          <div class="text-lg font-semibold opacity-60 hover:opacity-100 transition-opacity">Mario Biondi</div>
-          <div class="text-lg font-semibold opacity-60 hover:opacity-100 transition-opacity">Francesca Tandoi</div>
-          <div class="text-lg font-semibold opacity-60 hover:opacity-100 transition-opacity">Arabella Rustico</div>
-          <div class="text-lg font-semibold opacity-60 hover:opacity-100 transition-opacity">Thomann</div>
-        </div>
-      </div>
-      
-      <!-- Downloads -->
-      <div class="mt-16 flex justify-center gap-4 reveal">
-        <a href="/assets/epk-onepage.pdf" class="btn-glass">
-          <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          Download Press Kit
-        </a>
-        <a href="/assets/tech-rider.pdf" class="btn-glass">
-          <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-          </svg>
-          Tech Rider
-        </a>
-      </div>
-    </div>
-  </section>
+  <MusicSection />
+  <LiveSection />
+  <MetricsSection {...metricsData} />
+  <CollaboratorsSection />
   
   <BookingSection {...bookingData} />
   
@@ -244,7 +121,7 @@ const bookingData = {
             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
         </a>
-        <a href="https://spotify.com/grooveathome" target="_blank" class="p-3 rounded-full glass hover:bg-white/10 transition-colors">
+        <a href="https://open.spotify.com/intl-it/artist/4HQd9KulsgMrdOL9kwP4re?si=hChu_b37RU-vEO7T-YV4hg" target="_blank" class="p-3 rounded-full glass hover:bg-white/10 transition-colors">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
           </svg>
@@ -253,7 +130,6 @@ const bookingData = {
       
       <div class="text-[var(--text-tertiary)]">
         <p class="mb-2">© 2025 Groove at Home · Electronic Press Kit</p>
-        <p class="text-sm">Modern Funk · Italian Soul · Collective Energy</p>
       </div>
     </div>
   </footer>

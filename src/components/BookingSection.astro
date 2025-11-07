@@ -1,29 +1,34 @@
 ---
-interface Props {
-  email: string;
-  tour: {
-    dates: Array<{
-      date: string;
-      venue: string;
-      city: string;
-      status: 'confirmed' | 'available' | 'sold-out';
-    }>;
-  };
+interface TourDate {
+  date: string;
+  venue: string;
+  city: string;
+  status: 'confirmed' | 'available' | 'sold-out';
+  /** Abilita il bottone Ticket accanto allo stato */
+  ticketsEnabled?: boolean;
+  /** URL pagina acquisto biglietti */
+  ticketsUrl?: string;
 }
 
-const { email, tour } = Astro.props;
+interface Props {
+  /** opzionale: se non passato, uso quello di default */
+  email?: string;
+  tour: { dates: Array<TourDate> };
+}
+
+const { email = 'athomegroove@gmail.com', tour } = Astro.props;
 
 const statusColors = {
-  'confirmed': 'text-green-400',
-  'available': 'text-[var(--accent-primary)]',
-  'sold-out': 'text-red-400'
-};
+  confirmed: 'text-green-400',
+  available: 'text-[var(--accent-primary)]',
+  'sold-out': 'text-red-400',
+} as const;
 
 const statusLabels = {
-  'confirmed': 'Confirmed',
-  'available': 'Available',
-  'sold-out': 'Sold Out'
-};
+  confirmed: 'Confirmed',
+  available: 'Available',
+  'sold-out': 'Sold Out',
+} as const;
 ---
 
 <section id="booking" class="py-24 bg-[var(--bg-secondary)]">
@@ -44,95 +49,96 @@ const statusLabels = {
     <div class="grid lg:grid-cols-2 gap-12">
       <!-- Booking Form -->
       <div class="reveal">
-        <div class="glass-card">
-          <h3 class="text-2xl font-bold mb-6">Request Booking</h3>
-          
-          <form class="space-y-6" data-booking-form>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                  Your Name *
-                </label>
-                <input 
-                  type="text" 
-                  required 
-                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                  placeholder="John Doe"
-                />
-              </div>
-              
-              <div>
-                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                  Email *
-                </label>
-                <input 
-                  type="email" 
-                  required 
-                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                  placeholder="john@example.com"
-                />
-              </div>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                  Event Date
-                </label>
-                <input 
-                  type="date" 
-                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                />
-              </div>
-              
-              <div>
-                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                  Event Type
-                </label>
-                <select class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors">
-                  <option value="">Select type...</option>
-                  <option value="festival">Festival</option>
-                  <option value="club">Club Night</option>
-                  <option value="corporate">Corporate Event</option>
-                  <option value="private">Private Party</option>
-                  <option value="wedding">Wedding</option>
-                </select>
-              </div>
-            </div>
-            
-            <div>
-              <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                Venue / Location
-              </label>
-              <input 
-                type="text" 
-                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-                placeholder="Venue name and city"
-              />
-            </div>
-            
-            <div>
-              <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                Message
-              </label>
-              <textarea 
-                rows="4"
-                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
-                placeholder="Tell us about your event..."
-              ></textarea>
-            </div>
-            
-            <div class="flex gap-4">
-              <button type="submit" class="btn-primary flex-1">
-                Send Request
-              </button>
-              <a href={`mailto:${email}`} class="btn-glass flex-1 text-center">
-                Direct Email
-              </a>
-            </div>
-          </form>
-        </div>
-      </div>
+  <div class="glass-card">
+    <h3 class="text-2xl font-bold mb-6">Request Booking</h3>
+
+    <form class="space-y-6" data-booking-form action="https://api.web3forms.com/submit" method="POST">
+  <!-- Campo nascosto con la tua Access Key -->
+  <input type="hidden" name="access_key" value="75d28099-114b-46f8-b209-c58ff4a6d96d">
+  
+  <!-- Campo nascosto per redirect dopo invio -->
+  <input type="hidden" name="redirect" value="https://tuosito.com/thank-you">
+  
+  <!-- Campo nascosto per l'email di destinazione -->
+  <input type="hidden" name="email" value="athomegroove@gmail.com">
+  
+  <!-- Campo nascosto per il subject personalizzato -->
+  <input type="hidden" name="subject" value="New Booking Request from Website">
+  
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+        Your Name *
+      </label>
+      <input
+        name="name"
+        type="text"
+        required
+        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+        placeholder="John Doe"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+        Email *
+      </label>
+      <input
+        name="from_email"
+        type="email"
+        required
+        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+        placeholder="john@example.com"
+      />
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+        Event Date
+      </label>
+      <input
+        name="event_date"
+        type="date"
+        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+      />
+    </div>
+
+    <div>
+      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+        Venue / Location
+      </label>
+      <input
+        name="venue"
+        type="text"
+        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+        placeholder="Venue name and city"
+      />
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+      Message
+    </label>
+    <textarea
+      name="message"
+      rows="4"
+      class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
+      placeholder="Tell us about your event..."
+    ></textarea>
+  </div>
+
+  <!-- Honeypot per anti-spam -->
+  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+  <button type="submit" class="btn-primary w-full">
+    Send Request
+  </button>
+</form>
+  </div>
+</div>
 
       <!-- Tour Dates & Info -->
       <div class="space-y-6 reveal" style="animation-delay: 0.2s">
@@ -149,7 +155,7 @@ const statusLabels = {
                 <div class="text-sm text-[var(--text-secondary)]">70-90 minutes</div>
               </div>
             </div>
-            
+
             <div class="flex items-start gap-3">
               <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
@@ -159,7 +165,7 @@ const statusLabels = {
                 <div class="text-sm text-[var(--text-secondary)]">6 musicians (expandable to 8)</div>
               </div>
             </div>
-            
+
             <div class="flex items-start gap-3">
               <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -169,7 +175,7 @@ const statusLabels = {
                 <div class="text-sm text-[var(--text-secondary)]">Italy & EU · Worldwide on request</div>
               </div>
             </div>
-            
+
             <div class="flex items-start gap-3">
               <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
@@ -186,19 +192,33 @@ const statusLabels = {
         <div class="glass-card">
           <h3 class="text-2xl font-bold mb-6">2026 Tour Dates</h3>
           <div class="space-y-3">
-            {tour.dates.map(show => (
-              <div class="flex items-center justify-between p-3 rounded-xl hover:bg-white/5 transition-colors">
-                <div>
-                  <div class="font-semibold">{show.venue}</div>
-                  <div class="text-sm text-[var(--text-secondary)]">{show.city} · {show.date}</div>
+            {tour.dates.map((show) => (
+              <div class="flex items-center justify-between gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors">
+                <div class="min-w-0">
+                  <div class="font-semibold truncate">{show.venue}</div>
+                  <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
                 </div>
-                <span class={`text-sm font-semibold ${statusColors[show.status]}`}>
-                  {statusLabels[show.status]}
-                </span>
+
+                <div class="flex items-center gap-3 shrink-0">
+                  {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
+                    <a
+                      href={show.ticketsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="px-3 py-1.5 rounded-lg border border-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/15 hover:bg-[var(--accent-primary)]/25 text-[var(--accent-primary)] text-sm font-bold transition-colors"
+                    >
+                      Ticket
+                    </a>
+                  )}
+                  <span class={`text-sm font-semibold ${statusColors[show.status]}`}>
+                    {statusLabels[show.status]}
+                  </span>
+
+                </div>
               </div>
             ))}
           </div>
-          
+
           <div class="mt-6 p-4 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20">
             <p class="text-sm">
               <span class="font-semibold text-[var(--accent-primary)]">EU Mini-Tour 2026:</span>
@@ -224,22 +244,47 @@ const statusLabels = {
   </div>
 </section>
 
-<script>
+<script is:inline>
   const form = document.querySelector('[data-booking-form]');
   
-  form?.addEventListener('submit', (e) => {
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    // Add success animation
     const button = form.querySelector('button[type="submit"]');
-    if (button) {
-      button.textContent = 'Request Sent!';
-      button.classList.add('bg-green-500');
+    const originalText = button.textContent;
+    
+    // Feedback visivo
+    button.textContent = 'Sending...';
+    button.disabled = true;
+    
+    try {
+      const formData = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (response.ok) {
+        button.textContent = '✓ Sent!';
+        button.classList.add('bg-green-500');
+        form.reset();
+        
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.classList.remove('bg-green-500');
+          button.disabled = false;
+        }, 3000);
+      } else {
+        throw new Error('Failed to send');
+      }
+    } catch (error) {
+      button.textContent = '✗ Error - Try again';
+      button.classList.add('bg-red-500');
       
       setTimeout(() => {
-        button.textContent = 'Send Request';
-        button.classList.remove('bg-green-500');
-        form.reset();
+        button.textContent = originalText;
+        button.classList.remove('bg-red-500');
+        button.disabled = false;
       }, 3000);
     }
   });

@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+
+import live01 from '../assets/foto_live_01.jpeg';
+import live02 from '../assets/foto_live_02.jpeg';
+import live03 from '../assets/foto_live_03.jpeg';
+import live04 from '../assets/foto_live_04.jpeg';
+import live05 from '../assets/foto_live_05.jpeg';
+import live06 from '../assets/foto_live_06.jpeg';
+import live07 from '../assets/foto_live_07.jpeg';
+import live08 from '../assets/foto_live_08.jpeg';
+import live09 from '../assets/foto_live_09.jpeg';
+import live10 from '../assets/foto_live_10.jpeg';
+
+import liveVideo from '../assets/live_video.mp4';
+
+// opzionale: poster del video se lo hai
+
+const livePhotos = [
+  { src: live01, alt: 'Groove at Home live 01' },
+  { src: live02, alt: 'Groove at Home live 02' },
+  { src: live03, alt: 'Groove at Home live 03' },
+  { src: live04, alt: 'Groove at Home live 04' },
+  { src: live05, alt: 'Groove at Home live 05' },
+  { src: live06, alt: 'Groove at Home live 06' },
+  { src: live07, alt: 'Groove at Home live 07' },
+  { src: live08, alt: 'Groove at Home live 08' },
+  { src: live09, alt: 'Groove at Home live 09' },
+  { src: live10, alt: 'Groove at Home live 10' },
+];
+---
+
+<section id="live" class="relative py-24 overflow-hidden">
+  <!-- soft glow -->
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute -top-24 left-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
+      style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
+    <div class="absolute -bottom-24 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
+      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+  </div>
+
+  <div class="relative container-max px-6 md:px-12 lg:px-20 reveal">
+    <!-- Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-[var(--accent-primary)] text-4xl md:text-5xl font-black mb-2">Live Show</h2>
+      <p class="text-lg md:text-xl text-[var(--text-secondary)]">On Stage Energy</p>
+    </div>
+
+    <!-- Layout: video + mosaico -->
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-10 items-start">
+      <!-- Video verticale (sticky su desktop) -->
+      <div class="relative">
+        <div class="lg:sticky lg:top-24 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <div class="relative pt-[177.78%] bg-black"> <!-- 9:16 -->
+            <video
+              src={liveVideo}
+              class="absolute inset-0 w-full h-full object-cover"
+              controls
+              playsinline
+              preload="metadata"
+            ></video>
+          </div>
+        </div>
+        <p class="mt-3 text-sm text-[var(--text-tertiary)] text-center lg:text-left">
+          Live vertical cut — play directly here.
+        </p>
+      </div>
+
+      <!-- Mosaico foto: masonry con CSS columns -->
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:balance]">
+        {livePhotos.map((ph) => (
+          <div class="mb-4 break-inside-avoid rounded-2xl overflow-hidden shadow-xl group">
+            <Image
+              src={ph.src}
+              alt={ph.alt}
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="w-full h-auto block transition-transform duration-300 group-hover:scale-[1.02]"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
