@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import bandPhoto from '../assets/band_photo-min.jpg';
 import bandLogo from '../assets/Groove_transparent_logo.png';
+import jacobComment from '../assets/jacob_comment.jpg';
 
 interface Props {
   metrics: {
@@ -97,6 +98,34 @@ const { metrics } = Astro.props;
           <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.engagement}%</div>
           <div class="text-sm font-bold uppercase tracking-wider metric-label">Engagement</div>
         </div>
+      </div>
+    </div>
+
+    <!-- Jacob Collier Endorsement -->
+    <div class="fade-in mb-8 mx-auto max-w-md" style="animation-delay: 0.7s">
+      <div class="glass-card p-6 rounded-3xl border-2 border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)]/60 transition-all duration-300 hover:scale-105">
+        <div class="text-xs font-bold text-[var(--accent-primary)] uppercase tracking-wider mb-3 flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Approved by
+        </div>
+        
+        <!-- Immagine del commento -->
+        <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <Image 
+            src={jacobComment}
+            alt="Jacob Collier comment on Groove at Home"
+            class="w-full h-auto"
+            loading="eager"
+            quality={95}
+            format="webp"
+          />
+        </div>
+        
+        <p class="text-xs text-[var(--text-tertiary)] mt-3 italic">
+          5× Grammy Winner Jacob Collier praised our arrangement
+        </p>
       </div>
     </div>
 
