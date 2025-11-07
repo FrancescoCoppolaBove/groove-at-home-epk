@@ -4,27 +4,28 @@ const { reels = [] } = Astro.props;
 
 <section id="videos" class="py-16 md:py-24">
   <div class="container-max section-padding mx-auto px-4">
-    <!-- Header coerente con MusicSection -->
+    <!-- Header -->
     <div class="text-center mb-12 reveal">
-      <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">
-        <span class="gradient-text">Video • Reels in evidenza</span>
+      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
+        Watch Us
+      </span>
+      <h2 class="text-3xl md:text-5xl font-black mb-4">
+        <span class="gradient-text">Featured Reels</span>
       </h2>
-      <p class="text-[var(--text-secondary)] max-w-2xl mx-auto">
-        Una selezione dei nostri reel più rappresentativi: collaborazioni, live e arrangiamenti.
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
+        Highlights from our collaborations, live performances, and unique arrangements
       </p>
     </div>
 
-    <!-- Griglia con reveal + min-width per evitare schiacciamenti -->
+    <!-- Grid responsive -->
     <div
-      class="reveal grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(360px,1fr))] sm:[grid-template-columns:repeat(auto-fit,minmax(326px,1fr))]"
+      class="reveal grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
       style="animation-delay:.15s"
     >
       {reels.map((url) => (
         <article class="glass-card p-3 rounded-2xl flex justify-center">
-          <!-- Placeholder 9:16 per prevenire CLS e schiacciamento -->
-          <div class="w-full max-w-[540px] min-w-[360px] sm:min-w-[326px]">
+          <div class="w-full max-w-[540px]">
             <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl">
-              <!-- IG sostituirà questo blockquote con un iframe -->
               <blockquote
                 class="instagram-media absolute inset-0 w-full h-full"
                 data-instgrm-permalink={url}
@@ -32,7 +33,7 @@ const { reels = [] } = Astro.props;
                 style="background:#FFF; border:0; border-radius:12px; box-shadow:0 2px 18px rgba(0,0,0,.12); margin:0;"
               >
                 <a href={url} target="_blank" rel="noreferrer noopener" class="sr-only">
-                  Apri su Instagram
+                  Open on Instagram
                 </a>
               </blockquote>
             </div>
@@ -42,7 +43,6 @@ const { reels = [] } = Astro.props;
     </div>
   </div>
 
-  <!-- Carica embed.js una sola volta e processa dopo render -->
   <script is:inline>
     (function loadIG() {
       const SRC = "https://www.instagram.com/embed.js";

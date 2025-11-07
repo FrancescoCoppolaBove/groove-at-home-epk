@@ -14,24 +14,22 @@ import live10 from '../assets/foto_live_10.jpeg';
 
 import liveVideo from '../assets/live_video.mp4';
 
-// opzionale: poster del video se lo hai
-
 const livePhotos = [
-  { src: live01, alt: 'Groove at Home live 01' },
-  { src: live02, alt: 'Groove at Home live 02' },
-  { src: live03, alt: 'Groove at Home live 03' },
-  { src: live04, alt: 'Groove at Home live 04' },
-  { src: live05, alt: 'Groove at Home live 05' },
-  { src: live06, alt: 'Groove at Home live 06' },
-  { src: live07, alt: 'Groove at Home live 07' },
-  { src: live08, alt: 'Groove at Home live 08' },
-  { src: live09, alt: 'Groove at Home live 09' },
-  { src: live10, alt: 'Groove at Home live 10' },
+  { src: live01, alt: 'Groove at Home live performance 01' },
+  { src: live02, alt: 'Groove at Home live performance 02' },
+  { src: live03, alt: 'Groove at Home live performance 03' },
+  { src: live04, alt: 'Groove at Home live performance 04' },
+  { src: live05, alt: 'Groove at Home live performance 05' },
+  { src: live06, alt: 'Groove at Home live performance 06' },
+  { src: live07, alt: 'Groove at Home live performance 07' },
+  { src: live08, alt: 'Groove at Home live performance 08' },
+  { src: live09, alt: 'Groove at Home live performance 09' },
+  { src: live10, alt: 'Groove at Home live performance 10' },
 ];
 ---
 
-<section id="live" class="relative py-24 overflow-hidden">
-  <!-- soft glow -->
+<section id="live" class="relative py-20 md:py-24 overflow-hidden">
+  <!-- Soft glow background -->
   <div class="pointer-events-none absolute inset-0">
     <div class="absolute -top-24 left-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
       style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
@@ -39,19 +37,27 @@ const livePhotos = [
       style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
   </div>
 
-  <div class="relative container-max px-6 md:px-12 lg:px-20 reveal">
+  <div class="relative container-max px-4 sm:px-6 md:px-12 lg:px-20 reveal">
     <!-- Header -->
-    <div class="text-center mb-12">
-      <h2 class="text-[var(--accent-primary)] text-4xl md:text-5xl font-black mb-2">Live Show</h2>
-      <p class="text-lg md:text-xl text-[var(--text-secondary)]">On Stage Energy</p>
+    <div class="text-center mb-10 md:mb-12">
+      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
+        Experience Us Live
+      </span>
+      <h2 class="text-3xl md:text-5xl font-black mb-3">
+        <span class="gradient-text">On Stage Energy</span>
+      </h2>
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
+        Feel the groove, the energy, and the connection with our audience
+      </p>
     </div>
 
-    <!-- Layout: video + mosaico -->
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-10 items-start">
-      <!-- Video verticale (sticky su desktop) -->
-      <div class="relative">
+    <!-- Layout: video + gallery -->
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-8 lg:gap-12 items-start">
+      
+      <!-- Video vertical (sticky on desktop) -->
+      <div class="relative mx-auto w-full max-w-md lg:max-w-none">
         <div class="lg:sticky lg:top-24 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <div class="relative pt-[177.78%] bg-black"> <!-- 9:16 -->
+          <div class="relative pt-[177.78%] bg-black"> <!-- 9:16 aspect ratio -->
             <video
               src={liveVideo}
               class="absolute inset-0 w-full h-full object-cover"
@@ -61,22 +67,22 @@ const livePhotos = [
             ></video>
           </div>
         </div>
-        <p class="mt-3 text-sm text-[var(--text-tertiary)] text-center lg:text-left">
-          Live vertical cut — play directly here.
+        <p class="mt-4 text-sm text-[var(--text-tertiary)] text-center">
+          Live performance highlights — press play to watch
         </p>
       </div>
 
-      <!-- Mosaico foto: masonry con CSS columns -->
-      <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:balance]">
+      <!-- Photo gallery: masonry layout -->
+      <div class="columns-1 sm:columns-2 md:columns-3 gap-3 md:gap-4 [column-fill:balance]">
         {livePhotos.map((ph) => (
-          <div class="mb-4 break-inside-avoid rounded-2xl overflow-hidden shadow-xl group">
+          <div class="mb-3 md:mb-4 break-inside-avoid rounded-xl md:rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
             <Image
               src={ph.src}
               alt={ph.alt}
               loading="lazy"
               quality={90}
               format="webp"
-              class="w-full h-auto block transition-transform duration-300 group-hover:scale-[1.02]"
+              class="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         ))}
