@@ -305,6 +305,12 @@
   }
 }
 
+@media (max-width: 640px) {
+  .mobile-limit-3 > *:nth-child(n + 4) {
+    display: none;
+  }
+}
+
 /* Custom font imports */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap');

@@ -16,7 +16,10 @@ interface Props {
 const { metrics } = Astro.props;
 ---
 
-<section id="home" class="relative min-h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-24 lg:pt-28">
+<section 
+    id="home" 
+    class="relative min-h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-24 lg:pt-28 pb-28 sm:pb-20"
+  >
   <!-- Background Image with Parallax Effect -->
   <div class="absolute inset-0 z-0">
   <!-- DESKTOP IMAGE -->
@@ -102,7 +105,7 @@ const { metrics } = Astro.props;
     </div>
 
     <!-- Jacob Collier Endorsement -->
-    <div class="fade-in mb-8 mx-auto max-w-md" style="animation-delay: 0.7s">
+    <div  class="fade-in mb-8 sm:mb-8 mx-auto max-w-md" style="animation-delay: 0.7s">
       <div class="glass-card p-6 rounded-3xl border-2 border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)]/60 transition-all duration-300 hover:scale-105">
         <div class="text-xs font-bold text-[var(--accent-primary)] uppercase tracking-wider mb-3 flex items-center justify-center gap-2">
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -130,7 +133,7 @@ const { metrics } = Astro.props;
     </div>
 
     <!-- CTAs -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in" style="animation-delay: 0.8s">
+    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in mb-10 sm:mb-0" style="animation-delay: 0.8s">
       <a href="#booking" class="btn-primary">
         Book Us Now
       </a>
@@ -145,11 +148,11 @@ const { metrics } = Astro.props;
   </div>
 
   <!-- Scroll Indicator -->
-  <div class="scroll-indicator">
-    <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
-  </div>
+  <div class="scroll-indicator pointer-events-none absolute left-1/2 -translate-x-1/2 z-30">
+  <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+  </svg>
+</div>
 </section>
 
 <style>
@@ -229,7 +232,6 @@ const { metrics } = Astro.props;
     border-radius: 1rem;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    margin-top: 5rem;
   }
   
   .metric-card-hero:hover {
@@ -284,5 +286,20 @@ const { metrics } = Astro.props;
   .hero-image-mobile {
     display: block;
   }
+}
+
+:root {
+  /* gestisce la safe area (iPhone, ecc.) */
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Posiziona la freccia con respiro dal bordo e dalla safe area */
+.scroll-indicator {
+  bottom: calc(16px + var(--safe-bottom));
+}
+
+/* (Facoltativo) su schermi medi/grandi alza un filo la freccia */
+@media (min-width: 640px) {
+  .scroll-indicator { bottom: 24px; }
 }
 </style>

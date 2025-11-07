@@ -29,7 +29,8 @@ const livePhotos = [
 ---
 
 <section id="live" class="relative py-20 md:py-24 overflow-hidden">
-  <!-- Soft glow background -->
+
+  <!-- Soft glow -->
   <div class="pointer-events-none absolute inset-0">
     <div class="absolute -top-24 left-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
       style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
@@ -38,6 +39,7 @@ const livePhotos = [
   </div>
 
   <div class="relative container-max px-4 sm:px-6 md:px-12 lg:px-20 reveal">
+
     <!-- Header -->
     <div class="text-center mb-10 md:mb-12">
       <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
@@ -51,13 +53,14 @@ const livePhotos = [
       </p>
     </div>
 
-    <!-- Layout: video + gallery -->
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-8 lg:gap-12 items-start">
-      
-      <!-- Video vertical (sticky on desktop) -->
-      <div class="relative mx-auto w-full max-w-md lg:max-w-none">
+    <!-- Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-10 lg:gap-12 items-start">
+
+      <!-- VIDEO – always visible first on mobile, sticky only on desktop -->
+      <div class="relative mx-auto w-full max-w-md lg:max-w-none order-1 lg:order-none">
+
         <div class="lg:sticky lg:top-24 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <div class="relative pt-[177.78%] bg-black"> <!-- 9:16 aspect ratio -->
+          <div class="relative pt-[177.78%] bg-black">
             <video
               src={liveVideo}
               class="absolute inset-0 w-full h-full object-cover"
@@ -67,26 +70,154 @@ const livePhotos = [
             ></video>
           </div>
         </div>
-        <p class="mt-4 text-sm text-[var(--text-tertiary)] text-center">
+
+        <p class="mt-4 text-sm text-[var(--text-tertiary)] text-center lg:text-left">
           Live performance highlights — press play to watch
         </p>
+
       </div>
 
-      <!-- Photo gallery: masonry layout -->
-      <div class="columns-1 sm:columns-2 md:columns-3 gap-3 md:gap-4 [column-fill:balance]">
-        {livePhotos.map((ph) => (
-          <div class="mb-3 md:mb-4 break-inside-avoid rounded-xl md:rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-            <Image
-              src={ph.src}
-              alt={ph.alt}
-              loading="lazy"
-              quality={90}
-              format="webp"
-              class="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
-            />
+
+      <!-- GALLERY -->
+      <div class="order-2 lg:order-none">
+
+        <!-- ✅ DESKTOP — keep your exact masonry layout -->
+        <div class="hidden lg:block">
+          <div class="columns-1 sm:columns-2 md:columns-3 gap-3 md:gap-4 [column-fill:balance]">
+            {livePhotos.map((ph) => (
+              <div class="mb-3 md:mb-4 break-inside-avoid rounded-xl md:rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
+                <Image
+                  src={ph.src}
+                  alt={ph.alt}
+                  loading="lazy"
+                  quality={90}
+                  format="webp"
+                  class="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        <!-- ✅ MOBILE — auto-scrolling carousel -->
+        <div class="lg:hidden">
+          <div
+            id="live-carousel"
+            class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            tabindex="-1"
+          >
+            {livePhotos.map((ph) => (
+              <div class="min-w-[78%] snap-center shrink-0">
+                <div class="rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src={ph.src}
+                    alt={ph.alt}
+                    loading="lazy"
+                    quality={90}
+                    format="webp"
+                    class="w-full h-96 object-cover"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
+
   </div>
+
+  <!-- Auto-scroll carousel -->
+  <script is:inline>
+  (function () {
+    const track = document.getElementById('live-carousel');
+    if (!track) return;
+
+    const AUTOSCROLL_MS = 3500;
+    const VIS_THR = 0.5; // almeno 50% visibile
+    let timer = null;
+    let interacting = false;
+
+    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+
+    // calcola larghezza “slide” (card + gap)
+    const slideWidth = () => {
+      const first = track.querySelector(':scope > *');
+      if (!first) return 0;
+      const rect = first.getBoundingClientRect();
+      // gap-4 ≈ 16px
+      return rect.width + 16;
+    };
+
+    // è almeno al 50% visibile?
+    const isMostlyInView = (el) => {
+      const r = el.getBoundingClientRect();
+      const vw = window.innerWidth || document.documentElement.clientWidth;
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (!r.width || !r.height) return false;
+      const horiz = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0)) / r.width;
+      const vert  = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / r.height;
+      return horiz >= 0.6 && vert >= VIS_THR;
+    };
+
+    const next = () => {
+      if (prefersReduced) return;
+      if (document.hidden) return;
+      if (interacting) return;
+      if (!isMostlyInView(track)) return;
+
+      const w = slideWidth();
+      if (!w) return;
+
+      const idx = Math.round(track.scrollLeft / w);
+      const nextIdx = (idx + 1) % track.children.length;
+      track.scrollTo({ left: nextIdx * w, behavior: 'smooth' });
+    };
+
+    const start = () => {
+      stop();
+      if (!prefersReduced && window.innerWidth < 1024) {
+        timer = setInterval(next, AUTOSCROLL_MS);
+      }
+    };
+
+    const stop = () => {
+      if (timer) { clearInterval(timer); timer = null; }
+    };
+
+    // pausa su interazione
+    const pause = () => { interacting = true; stop(); };
+    const resume = () => {
+      interacting = false;
+      if (isMostlyInView(track)) start();
+    };
+
+    track.addEventListener('pointerdown', pause, { passive: true });
+    track.addEventListener('touchstart',  pause, { passive: true });
+    track.addEventListener('mouseenter',  pause, { passive: true });
+    track.addEventListener('pointerup',   resume, { passive: true });
+    track.addEventListener('touchend',    resume, { passive: true });
+    track.addEventListener('mouseleave',  resume, { passive: true });
+
+    // sospendi quando la tab non è visibile
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop(); else resume();
+    });
+
+    // ri-valuta su resize
+    let rAF;
+    const onResize = () => {
+      cancelAnimationFrame(rAF);
+      rAF = requestAnimationFrame(() => {
+        if (!interacting && isMostlyInView(track)) start();
+      });
+    };
+    window.addEventListener('resize', onResize);
+
+    // avvio iniziale
+    if (!prefersReduced) start();
+  })();
+</script>
+
 </section>
