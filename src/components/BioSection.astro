@@ -7,6 +7,15 @@ import session03 from '../assets/session_03.jpg';
 import session04 from '../assets/session_04.jpg';
 import session05 from '../assets/session_05.jpg';
 import session06 from '../assets/session_06.jpg';
+
+const images = [
+  { src: session01, alt: 'Studio session 01' },
+  { src: session02, alt: 'Recording take 02' },
+  { src: session03, alt: 'Behind the scenes 03' },
+  { src: session04, alt: 'Keys & rhythm 04' },
+  { src: session05, alt: 'Brass overdubs 05' },
+  { src: session06, alt: 'Control room 06' },
+];
 ---
 
 <section id="bio" class="relative py-20 md:py-24 overflow-hidden">
@@ -25,67 +34,114 @@ import session06 from '../assets/session_06.jpg';
       <p class="text-lg md:text-xl text-[var(--text-secondary)]">Our Story</p>
     </div>
 
-    <!-- Layout: su mobile SOLO testo; i collage compaiono da lg -->
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_minmax(680px,820px)_1fr] gap-10 items-start">
+    <!-- Layout: testo a sinistra, carosello a destra -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       
-      <!-- Collage sinistra (desktop) -->
-      <div class="relative hidden lg:block min-h-[720px]">
-        <div class="absolute top-0 left-6 w-[56%] rotate-[-4deg] hover:rotate-[-2deg] transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session01} alt="Studio session 01" class="w-full h-[240px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
-        </div>
-        <div class="absolute top-[180px] -left-4 w-[48%] rotate-[3deg] hover:rotate-[1deg] transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session02} alt="Recording take 02" class="w-full h-[220px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
-        </div>
-        <div class="absolute top-[360px] left-[22%] w-[58%] rotate-[-2deg] hover:rotate-0 transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session03} alt="Behind the scenes 03" class="w-full h-[260px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Testo (sempre visibile) -->
-      <div class="relative mx-auto max-w-3xl">
+      <!-- Testo (sinistra) -->
+      <div class="relative mx-auto max-w-2xl lg:max-w-none">
         <div class="prose prose-invert prose-lg max-w-none leading-[2.0]">
           <p><strong>Groove at Home</strong> is an Italian collective founded by drummer <strong>Francesco Coppola Bove</strong>, reimagining Italian and international songs through a vibrant blend of funk, soul, and nu-jazz.</p>
-          <p>Born as Francesco’s home-studio project, it quickly grew into a live ensemble known for deep grooves, tight musicianship, and a warm retro-modern aesthetic.</p>
+          <p>Born as Francesco's home-studio project, it quickly grew into a live ensemble known for deep grooves, tight musicianship, and a warm retro-modern aesthetic.</p>
           <p>The collective brings together musicians from across Italy, blending vintage funk energy with fresh, contemporary arrangements.</p>
-          <p>Alongside their reinterpretations, Groove at Home is now developing original music, several of which are already performed live and will be featured on their first studio album, scheduled for 2026.</p>
+          <p>Alongside their reinterpretations, Groove at Home is now developing original music, several of which are already performed live and will be featured on <strong>their first studio album</strong>, scheduled for 2026.</p>
           <p>The project has collaborated with acclaimed artists such as <strong>Francesca Tandoi</strong>, <strong>Mario Biondi</strong>, <strong>Arabella Rustico</strong> and many more, solidifying its presence in the soul-jazz scene.</p>
           <p>With over <strong>40,000 followers</strong> on Instagram and a <strong>collective of 100+ musicians</strong>, the group has built an engaged and international community around its sound.</p>
           <p>Their live shows are dynamic, soulful, and irresistibly groovy — a modern jam where musicians and audience move together as one.</p>
         </div>
       </div>
 
-      <!-- Collage destra (desktop) -->
-      <div class="relative hidden lg:block min-h-[760px]">
-        <div class="absolute top-2 right-5 w-[54%] rotate-[5deg] hover:rotate-[3deg] transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session04} alt="Keys & rhythm 04" class="w-full h-[210px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
+      <!-- Carosello immagini (destra) -->
+      <div class="relative">
+        <div class="bio-carousel relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-h-[600px]">
+          {images.map((img, index) => (
+            <div 
+              class={`carousel-slide absolute inset-0 transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+              data-slide-index={index}
+            >
+              <Image 
+                src={img.src} 
+                alt={img.alt} 
+                class="w-full h-full object-cover" 
+                loading={index === 0 ? 'eager' : 'lazy'}
+                quality={90} 
+                format="webp" 
+              />
+            </div>
+          ))}
         </div>
-        <div class="absolute top-[180px] right-[30%] w-[62%] rotate-[-3deg] hover:rotate-[-1deg] transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session05} alt="Brass overdubs 05" class="w-full h-[260px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
-        </div>
-        <div class="absolute top-[420px] right-4 w-[50%] rotate-[2deg] hover:rotate-0 transition-transform">
-          <div class="rounded-2xl overflow-hidden shadow-2xl">
-            <Image src={session06} alt="Control room 06" class="w-full h-[240px] object-cover" loading="lazy" quality={90} format="webp" />
-          </div>
+
+        <!-- Indicatori (opzionale) -->
+        <div class="flex justify-center gap-2 mt-6">
+          {images.map((_, index) => (
+            <button 
+              class="carousel-dot w-2 h-2 rounded-full bg-white/30 transition-all hover:bg-white/50"
+              data-dot-index={index}
+              aria-label={`Go to slide ${index + 1}`}
+            >
+            </button>
+          ))}
         </div>
       </div>
     </div>
-
-    <!-- 🔥 Nessuna foto su mobile: sezione rimossa -->
   </div>
 </section>
 
+<script>
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.carousel-dot');
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+  const interval = 4000; // Cambio immagine ogni 4 secondi
+
+  function showSlide(index) {
+    // Rimuovi active da tutti
+    slides.forEach(slide => slide.classList.remove('opacity-100'));
+    slides.forEach(slide => slide.classList.add('opacity-0'));
+    dots.forEach(dot => dot.classList.remove('bg-[var(--accent-primary)]', 'w-8'));
+    dots.forEach(dot => dot.classList.add('bg-white/30', 'w-2'));
+
+    // Attiva il corrente
+    slides[index].classList.remove('opacity-0');
+    slides[index].classList.add('opacity-100');
+    dots[index].classList.remove('bg-white/30', 'w-2');
+    dots[index].classList.add('bg-[var(--accent-primary)]', 'w-8');
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    showSlide(currentIndex);
+  }
+
+  // Auto-play
+  let autoplay = setInterval(nextSlide, interval);
+
+  // Click sui dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      showSlide(currentIndex);
+      
+      // Reset autoplay
+      clearInterval(autoplay);
+      autoplay = setInterval(nextSlide, interval);
+    });
+  });
+
+  // Pausa su hover (opzionale)
+  const carousel = document.querySelector('.bio-carousel');
+  carousel?.addEventListener('mouseenter', () => clearInterval(autoplay));
+  carousel?.addEventListener('mouseleave', () => {
+    autoplay = setInterval(nextSlide, interval);
+  });
+</script>
+
 <style>
-  /* hover micro-interaction per desktop */
-  #bio .rounded-2xl { transition: transform .25s ease, box-shadow .25s ease; }
-  #bio .rounded-2xl:hover { transform: translateY(-3px) scale(1.01); }
+  .carousel-dot {
+    transition: all 0.3s ease;
+  }
+  
+  .carousel-dot.active {
+    background: var(--accent-primary);
+    width: 2rem;
+  }
 </style>
