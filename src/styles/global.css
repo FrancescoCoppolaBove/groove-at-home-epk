@@ -84,8 +84,21 @@
     box-sizing: border-box;
   }
 
-  html {
-    scroll-behavior: smooth;
+  html,
+  body {
+    width: 100%;
+    overflow-x: clip; /* meglio di hidden, evita reflow su iOS */
+    position: relative;
+    overscroll-behavior-x: none; /* niente "elastico" orizzontale */
+    touch-action: pan-y; /* solo scroll verticale a livello pagina */
+  }
+
+  /* se qualche sezione sfora, taglia orizzontalmente */
+  main,
+  section,
+  .container-max {
+    max-width: 100%;
+    overflow-x: clip;
   }
 
   body {
@@ -267,13 +280,31 @@
 
   /* Navigation dot */
   .nav-dot {
-    @apply w-2 h-2 rounded-full bg-white/30 transition-all duration-300;
+    width: 10px;
+    height: 10px;
+    border-radius: 9999px;
+    background: #db7c26; /* molto più visibile */
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    mix-blend-mode: normal; /* disattiva blend che crea perdita contrasto */
   }
 
+  /* DOT ACTIVE */
   .nav-dot.active {
-    @apply w-8;
-    background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
-    box-shadow: 0 0 10px rgba(247, 181, 56, 0.5);
+    width: 36px;
+    background: #db7c26; /* il tuo arancione Funk retro */
+    box-shadow: 0 0 12px rgba(219, 124, 38, 0.6);
+    border: 1px solid #db7c26;
+  }
+
+  /* LABEL */
+  .nav-label {
+    color: #db7c26;
+  }
+  .nav-link:hover .nav-label {
+    color: #db7c26;
+    font-weight: 900;
+    text-transform: uppercase;
   }
 }
 

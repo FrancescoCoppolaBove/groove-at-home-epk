@@ -100,28 +100,52 @@ const livePhotos = [
         </div>
 
         <!-- ✅ MOBILE — auto-scrolling carousel -->
-        <div class="lg:hidden">
-          <div
-            id="live-carousel"
-            class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            tabindex="-1"
-          >
-            {livePhotos.map((ph) => (
-              <div class="min-w-[78%] snap-center shrink-0">
-                <div class="rounded-2xl overflow-hidden shadow-xl">
-                  <Image
-                    src={ph.src}
-                    alt={ph.alt}
-                    loading="lazy"
-                    quality={90}
-                    format="webp"
-                    class="w-full h-96 object-cover"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+        <!-- ✅ MOBILE — auto-scrolling carousel -->
+<div class="lg:hidden">
+  <div
+    id="live-carousel"
+    class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    tabindex="-1"
+  >
+    {livePhotos.map((ph) => (
+      <div class="min-w-[78%] snap-center shrink-0">
+        <div class="rounded-2xl overflow-hidden shadow-xl">
+          <Image
+            src={ph.src}
+            alt={ph.alt}
+            loading="lazy"
+            quality={90}
+            format="webp"
+            class="w-full h-96 object-cover"
+          />
         </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- ✅ HINT sotto al carosello (solo mobile) -->
+  <div
+    id="live-hint"
+    class="mt-2 flex items-center justify-center sm:hidden"
+    role="status"
+    aria-live="polite"
+  >
+    <span
+      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-white/10 text-[10.5px] font-semibold tracking-wide text-white/90 shadow-md transition-opacity duration-300"
+    >
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          d="M8 12h8M8 12l3 3M8 12l3-3" />
+      </svg>
+      <span class="uppercase">Swipte tro browse</span>
+      <span class="mx-1 opacity-60">•</span>
+      <span class="opacity-90">auto-slides</span>
+      <span class="flex items-center gap-1 ml-1 not-italic">
+        <span class="dot"></span><span class="dot delay-150"></span><span class="dot delay-300"></span>
+      </span>
+    </span>
+  </div>
+</div>
 
       </div>
     </div>
@@ -220,4 +244,21 @@ const livePhotos = [
   })();
 </script>
 
+
 </section>
+<style>
+.dot {
+  width: 4px; height: 4px; border-radius: 9999px;
+  background: rgba(255,255,255,.9);
+  display: inline-block;
+  animation: hint-pulse 1.2s infinite ease-in-out;
+  opacity: .9;
+}
+.dot.delay-150 { animation-delay: .15s; }
+.dot.delay-300 { animation-delay: .3s; }
+
+@keyframes hint-pulse {
+  0%, 100% { transform: translateY(0); opacity: .7; }
+  50%      { transform: translateY(-2px); opacity: 1; }
+}
+</style>
