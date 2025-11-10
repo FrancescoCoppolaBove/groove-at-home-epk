@@ -31,7 +31,7 @@ const statusLabels = {
 } as const;
 ---
 
-<section id="booking" class="py-24 bg-[var(--bg-secondary)]">
+<section id="booking" class="booking-section py-24 bg-[var(--bg-secondary)]">
   <div class="container-max section-padding">
     <!-- Section Header -->
     <div class="text-center mb-16 reveal">
@@ -46,198 +46,199 @@ const statusLabels = {
       </p>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-12">
+    <div class="booking-grid">
       <!-- Booking Form -->
-      <div class="reveal">
-  <div class="glass-card">
-    <h3 class="text-2xl font-bold mb-6">Request Booking</h3>
+      <div class="reveal booking-card-wrapper">
+        <div class="glass-card booking-card">
+          <h3 class="text-2xl font-bold mb-6">Request Booking</h3>
 
-    <form class="space-y-6" data-booking-form action="https://api.web3forms.com/submit" method="POST">
-  <!-- Campo nascosto con la tua Access Key -->
-  <input type="hidden" name="access_key" value="75d28099-114b-46f8-b209-c58ff4a6d96d">
-  
-  <!-- Campo nascosto per redirect dopo invio -->
-  <input type="hidden" name="redirect" value="https://tuosito.com/thank-you">
-  
-  <!-- Campo nascosto per l'email di destinazione -->
-  <input type="hidden" name="email" value="athomegroove@gmail.com">
-  
-  <!-- Campo nascosto per il subject personalizzato -->
-  <input type="hidden" name="subject" value="New Booking Request from Website">
-  
-  <div class="grid md:grid-cols-2 gap-4">
-    <div>
-      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-        Your Name *
-      </label>
-      <input
-        name="name"
-        type="text"
-        required
-        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-        placeholder="John Doe"
-      />
-    </div>
+          <form class="space-y-6" data-booking-form action="https://api.web3forms.com/submit" method="POST">
+            <!-- Campo nascosto con la tua Access Key -->
+            <input type="hidden" name="access_key" value="75d28099-114b-46f8-b209-c58ff4a6d96d">
+            
+            <!-- Campo nascosto per redirect dopo invio -->
+            <input type="hidden" name="redirect" value="https://tuosito.com/thank-you">
+            
+            <!-- Campo nascosto per l'email di destinazione -->
+            <input type="hidden" name="email" value="athomegroove@gmail.com">
+            
+            <!-- Campo nascosto per il subject personalizzato -->
+            <input type="hidden" name="subject" value="New Booking Request from Website">
+            
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+                  Your Name *
+                </label>
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+                  placeholder="John Doe"
+                />
+              </div>
 
-    <div>
-      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-        Email *
-      </label>
-      <input
-        name="from_email"
-        type="email"
-        required
-        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-        placeholder="john@example.com"
-      />
-    </div>
-  </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+                  Email *
+                </label>
+                <input
+                  name="from_email"
+                  type="email"
+                  required
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+                  placeholder="john@example.com"
+                />
+              </div>
+            </div>
 
-  <div class="grid md:grid-cols-2 gap-4">
-    <div>
-      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-        Event Date
-      </label>
-      <input
-        name="event_date"
-        type="date"
-        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-      />
-    </div>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+                  Event Date
+                </label>
+                <input
+                  name="event_date"
+                  type="date"
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+                />
+              </div>
 
-    <div>
-      <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-        Venue / Location
-      </label>
-      <input
-        name="venue"
-        type="text"
-        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
-        placeholder="Venue name and city"
-      />
-    </div>
-  </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+                  Venue / Location
+                </label>
+                <input
+                  name="venue"
+                  type="text"
+                  class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors"
+                  placeholder="Venue name and city"
+                />
+              </div>
+            </div>
 
-  <div>
-    <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-      Message
-    </label>
-    <textarea
-      name="message"
-      rows="4"
-      class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
-      placeholder="Tell us about your event..."
-    ></textarea>
-  </div>
+            <div>
+              <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
+                Message
+              </label>
+              <textarea
+                name="message"
+                rows="4"
+                class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
+                placeholder="Tell us about your event..."
+              ></textarea>
+            </div>
 
-  <!-- Honeypot per anti-spam -->
-  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            <!-- Honeypot per anti-spam -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-  <button type="submit" class="btn-primary w-full">
-    Send Request
-  </button>
-</form>
-  </div>
-</div>
+            <button type="submit" class="btn-primary w-full">
+              Send Request
+            </button>
+          </form>
+        </div>
+      </div>
 
       <!-- Tour Dates & Info -->
-      <div class="space-y-6 reveal" style="animation-delay: 0.2s">
-        <!-- Quick Info -->
-        <div class="glass-card">
-          <h3 class="text-2xl font-bold mb-6">Quick Info</h3>
-          <div class="space-y-4">
-            <div class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div>
-                <div class="font-semibold">Set Duration</div>
-                <div class="text-sm text-[var(--text-secondary)]">70-90 minutes</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-              <div>
-                <div class="font-semibold">Band Format</div>
-                <div class="text-sm text-[var(--text-secondary)]">6 musicians (expandable to 8)</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <div>
-                <div class="font-semibold">Availability</div>
-                <div class="text-sm text-[var(--text-secondary)]">Italy & EU · Worldwide on request</div>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-              </svg>
-              <div>
-                <div class="font-semibold">Genre</div>
-                <div class="text-sm text-[var(--text-secondary)]">Funk · Nu-Jazz · Soul · Modern Groove</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Upcoming Shows -->
-        <div class="glass-card">
-          <h3 class="text-2xl font-bold mb-6">2026 Tour Dates</h3>
-          <div class="space-y-3">
-            {tour.dates.map((show) => (
-              <div class="flex items-center justify-between gap-4 p-3 rounded-xl hover:bg-white/5 transition-colors">
+      <div class="reveal booking-card-wrapper" style="animation-delay: 0.2s">
+        <div class="space-y-6">
+          <!-- Quick Info -->
+          <div class="glass-card booking-card">
+            <h3 class="text-2xl font-bold mb-6">Quick Info</h3>
+            <div class="space-y-4">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
                 <div class="min-w-0">
-                  <div class="font-semibold truncate">{show.venue}</div>
-                  <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
-                </div>
-
-                <div class="flex items-center gap-3 shrink-0">
-                  {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
-                    <a
-                      href={show.ticketsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="px-3 py-1.5 rounded-lg border border-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/15 hover:bg-[var(--accent-primary)]/25 text-[var(--accent-primary)] text-sm font-bold transition-colors"
-                    >
-                      Ticket
-                    </a>
-                  )}
-                  <span class={`text-sm font-semibold ${statusColors[show.status]}`}>
-                    {statusLabels[show.status]}
-                  </span>
-
+                  <div class="font-semibold">Set Duration</div>
+                  <div class="text-sm text-[var(--text-secondary)]">70-90 minutes</div>
                 </div>
               </div>
-            ))}
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <div class="min-w-0">
+                  <div class="font-semibold">Band Format</div>
+                  <div class="text-sm text-[var(--text-secondary)]">6 musicians (expandable to 8)</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <div class="min-w-0">
+                  <div class="font-semibold">Availability</div>
+                  <div class="text-sm text-[var(--text-secondary)]">Italy & EU · Worldwide on request</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-[var(--accent-primary)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                </svg>
+                <div class="min-w-0">
+                  <div class="font-semibold">Genre</div>
+                  <div class="text-sm text-[var(--text-secondary)]">Funk · Nu-Jazz · Soul · Modern Groove</div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="mt-6 p-4 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20">
-            <p class="text-sm">
-              <span class="font-semibold text-[var(--accent-primary)]">EU Mini-Tour 2026:</span>
-              <span class="text-[var(--text-secondary)]"> Milan (BIKO) · London (Crazy Coqs) · Frankfurt (Das Wohnzimmer)</span>
-            </p>
-          </div>
-        </div>
+          <!-- Upcoming Shows -->
+          <div class="glass-card booking-card">
+            <h3 class="text-2xl font-bold mb-6">2026 Tour Dates</h3>
+            <div class="space-y-3">
+              {tour.dates.map((show) => (
+                <div class="tour-date-item">
+                  <div class="tour-date-info">
+                    <div class="font-semibold truncate">{show.venue}</div>
+                    <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
+                  </div>
 
-        <!-- Direct Contact -->
-        <div class="glass-card text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
-            <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
+                  <div class="tour-date-actions">
+                    {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
+                      <a
+                        href={show.ticketsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="ticket-btn"
+                      >
+                        Ticket
+                      </a>
+                    )}
+                    <span class={`tour-status ${statusColors[show.status]}`}>
+                      {statusLabels[show.status]}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div class="mt-6 p-4 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20">
+              <p class="text-sm">
+                <span class="font-semibold text-[var(--accent-primary)]">EU Mini-Tour 2026:</span>
+                <span class="text-[var(--text-secondary)]"> Milan (BIKO) · London (Crazy Coqs) · Frankfurt (Das Wohnzimmer)</span>
+              </p>
+            </div>
           </div>
-          <h4 class="text-xl font-bold mb-2">Direct Booking</h4>
-          <a href={`mailto:${email}`} class="text-[var(--accent-primary)] hover:underline font-semibold">
-            {email}
-          </a>
+
+          <!-- Direct Contact -->
+          <div class="glass-card booking-card direct-contact-card">
+            <div class="direct-contact-icon">
+              <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h4 class="text-xl font-bold mb-2">Direct Booking</h4>
+            <a href={`mailto:${email}`} class="text-[var(--accent-primary)] hover:underline font-semibold break-all">
+              {email}
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -289,3 +290,208 @@ const statusLabels = {
     }
   });
 </script>
+
+<style>
+  /* Base section */
+  .booking-section {
+    overflow-x: clip;
+    width: 100%;
+  }
+
+  /* Grid principale - desktop 2 colonne, mobile 1 colonna */
+  .booking-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    .booking-grid {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  /* Wrapper per ogni card */
+  .booking-card-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Card singola */
+  .booking-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Tour date item - flex responsive */
+  .tour-date-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem;
+    rounded: 0.75rem;
+    transition: background-color 0.2s;
+  }
+
+  .tour-date-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .tour-date-info {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .tour-date-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .ticket-btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(var(--accent-primary-rgb), 0.4);
+    background: rgba(var(--accent-primary-rgb), 0.15);
+    color: var(--accent-primary);
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: background-color 0.2s;
+  }
+
+  .ticket-btn:hover {
+    background: rgba(var(--accent-primary-rgb), 0.25);
+  }
+
+  .tour-status {
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* MOBILE OPTIMIZATIONS */
+  @media (max-width: 640px) {
+    .booking-section {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    .booking-grid {
+      gap: 2rem;
+      padding: 0;
+    }
+
+    .booking-card-wrapper {
+      width: 100%;
+      padding: 0;
+    }
+
+    .booking-card {
+      width: 100%;
+      max-width: 100%;
+      padding: 1.25rem;
+      margin: 0;
+    }
+
+    /* Tour dates su mobile - stack verticale se troppo stretto */
+    .tour-date-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .tour-date-info {
+      width: 100%;
+    }
+
+    .tour-date-actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    /* Assicura che testo lungo vada a capo */
+    .booking-card {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    /* Email lunghe */
+    .booking-card a[href^="mailto:"] {
+      word-break: break-all;
+    }
+
+    /* Form inputs su mobile */
+    .booking-card input,
+    .booking-card textarea {
+      font-size: 16px; /* Previene zoom su iOS */
+    }
+
+    /* Migliora touch targets */
+    .booking-card button,
+    .ticket-btn {
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+  }
+
+  /* Extra small devices */
+  @media (max-width: 360px) {
+    .booking-card {
+      padding: 1rem;
+    }
+
+    .tour-date-item {
+      padding: 0.5rem;
+    }
+
+    .booking-card h3 {
+      font-size: 1.5rem;
+    }
+  }
+
+  /* Migliora leggibilità su schermi piccoli */
+  @media (max-width: 640px) {
+    .booking-section .text-2xl {
+      font-size: 1.5rem;
+    }
+
+    .booking-section .text-sm {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Direct Contact Card - Perfect Centering */
+  .direct-contact-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .direct-contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, 
+      rgba(247, 181, 56, 0.2), 
+      rgba(195, 47, 39, 0.2)
+    );
+    margin-bottom: 1rem;
+  }
+
+  .direct-contact-icon svg {
+    display: block; /* Rimuove spazio extra sotto l'SVG */
+  }
+</style>

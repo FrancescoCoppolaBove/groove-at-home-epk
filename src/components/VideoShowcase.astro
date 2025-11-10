@@ -18,29 +18,29 @@ const { reels = [] } = Astro.props;
     </div>
 
     <!-- Grid responsive -->
-    <div
-      class="grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(360px,1fr))] sm:[grid-template-columns:repeat(auto-fit,minmax(326px,1fr))] mobile-limit-3"
-      style="animation-delay:.15s"
-    >
-      {reels.map((url) => (
-        <article class="glass-card p-3 rounded-2xl flex justify-center">
-          <div class="w-full max-w-[540px]">
-            <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl">
-              <blockquote
-                class="instagram-media absolute inset-0 w-full h-full"
-                data-instgrm-permalink={url}
-                data-instgrm-version="14"
-                style="background:#FFF; border:0; border-radius:12px; box-shadow:0 2px 18px rgba(0,0,0,.12); margin:0;"
-              >
-                <a href={url} target="_blank" rel="noreferrer noopener" class="sr-only">
-                  Open on Instagram
-                </a>
-              </blockquote>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+<div
+  class="grid gap-8 place-items-center sm:[grid-template-columns:repeat(auto-fit,minmax(326px,1fr))] mobile-limit-3"
+  style="animation-delay:.15s"
+>
+  {reels.map((url) => (
+    <article class="glass-card p-3 rounded-2xl w-full max-w-[540px] ig-wrap mx-auto">
+      <div class="w-full">
+        <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl">
+          <blockquote
+            class="instagram-media absolute inset-0 w-full h-full ig-embed"
+            data-instgrm-permalink={url}
+            data-instgrm-version="14"
+            style="background:#FFF; border:0; border-radius:12px; box-shadow:0 2px 18px rgba(0,0,0,.12); margin:0;"
+          >
+            <a href={url} target="_blank" rel="noreferrer noopener" class="sr-only">
+              Open on Instagram
+            </a>
+          </blockquote>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
   </div>
 
   <script is:inline>
@@ -59,3 +59,27 @@ const { reels = [] } = Astro.props;
     })();
   </script>
 </section>
+<style>
+  /* === IG embed hardening (mobile) === */
+.ig-wrap { margin-left: auto; margin-right: auto; }
+
+@media (max-width: 380px) {
+  /* Forza wrapper a stare dentro il viewport */
+  .ig-wrap { width: 92vw; }
+
+  /* Instagram inietta min/max width sul container: li superiamo */
+  .ig-wrap .instagram-media,
+  .ig-wrap .ig-embed,
+  .ig-wrap .instagram-media > * {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+/* Centra sempre gli articoli della griglia su mobile */
+@media (max-width: 640px) {
+  .mobile-limit-3 { justify-items: center; }
+}
+
+</style>
