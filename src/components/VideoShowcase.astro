@@ -1,20 +1,46 @@
 ---
 const { reels = [] } = Astro.props;
+
+function getEmbedUrl(postUrl: string): string {
+  const match = postUrl.match(/\/(reel|p)\/([A-Za-z0-9_-]+)/);
+  if (!match) return '';
+  const [, type, id] = match;
+  return `https://www.instagram.com/${type}/${id}/embed/`;
+}
 ---
 
-<section id="videos" class="py-16 md:py-24">
-  <div class="container-max section-padding mx-auto px-4">
+<section id="videos" class="relative py-16 md:py-24 overflow-hidden">
+
+  <!-- Soft glow -->
+  <div class="pointer-events-none absolute inset-0">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full blur-3xl opacity-[0.07]"
+      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+  </div>
+
+  <div class="relative z-10 container-max section-padding mx-auto px-4">
     <!-- Header -->
     <div class="text-center mb-12 reveal">
-      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
-        Watch Us
-      </span>
-      <h2 class="text-3xl md:text-5xl font-black mb-4">
-        <span class="gradient-text">Featured Reels</span>
+      <span class="section-eyebrow">Social Proof</span>
+      <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+        The Internet<br/>
+        <em class="gradient-text not-italic">Already Knows</em>
       </h2>
-      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-        Highlights from our collaborations, live performances, and unique arrangements
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mt-3">
+        From Grammy-winning collaborations to viral arrangements — our best Instagram moments, straight from the source.
       </p>
+      <a
+        href="https://instagram.com/grooveathome"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-[var(--accent-primary)] hover:text-white transition-colors duration-200"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+          <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
+          <circle cx="18.406" cy="5.594" r="1.44"/>
+        </svg>
+        @grooveathome — Follow for more
+      </a>
     </div>
 
     <!-- Grid responsive -->
@@ -23,63 +49,42 @@ const { reels = [] } = Astro.props;
   style="animation-delay:.15s"
 >
   {reels.map((url) => (
-    <article class="glass-card p-3 rounded-2xl w-full max-w-[540px] ig-wrap mx-auto">
-      <div class="w-full">
-        <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl">
-          <blockquote
-            class="instagram-media absolute inset-0 w-full h-full ig-embed"
-            data-instgrm-permalink={url}
-            data-instgrm-version="14"
-            style="background:#FFF; border:0; border-radius:12px; box-shadow:0 2px 18px rgba(0,0,0,.12); margin:0;"
-          >
-            <a href={url} target="_blank" rel="noreferrer noopener" class="sr-only">
-              Open on Instagram
-            </a>
-          </blockquote>
-        </div>
+    <article class="glass-card p-3 rounded-2xl w-full max-w-[326px] ig-wrap mx-auto">
+      <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-black">
+        <iframe
+          src={getEmbedUrl(url)}
+          class="absolute inset-0 w-full h-full border-0"
+          allowfullscreen
+          loading="lazy"
+          scrolling="no"
+          title="Instagram post"
+        />
       </div>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block text-center text-xs text-[var(--text-tertiary)] mt-2 hover:text-[var(--accent-primary)] transition-colors"
+      >
+        Open on Instagram ↗
+      </a>
     </article>
   ))}
 </div>
   </div>
 
-  <script is:inline>
-    (function loadIG() {
-      const SRC = "https://www.instagram.com/embed.js";
-      const process = () => window?.instgrm?.Embeds?.process?.();
-      if (![...document.scripts].some((s) => s.src === SRC)) {
-        const s = document.createElement("script");
-        s.async = true;
-        s.src = SRC;
-        s.onload = process;
-        document.head.appendChild(s);
-      } else {
-        process();
-      }
-    })();
-  </script>
 </section>
+
+<hr class="vintage-divider" />
+
 <style>
-  /* === IG embed hardening (mobile) === */
 .ig-wrap { margin-left: auto; margin-right: auto; }
 
 @media (max-width: 380px) {
-  /* Forza wrapper a stare dentro il viewport */
   .ig-wrap { width: 92vw; }
-
-  /* Instagram inietta min/max width sul container: li superiamo */
-  .ig-wrap .instagram-media,
-  .ig-wrap .ig-embed,
-  .ig-wrap .instagram-media > * {
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-  }
 }
 
-/* Centra sempre gli articoli della griglia su mobile */
 @media (max-width: 640px) {
   .mobile-limit-3 { justify-items: center; }
 }
-
 </style>

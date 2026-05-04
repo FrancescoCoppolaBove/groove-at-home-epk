@@ -31,19 +31,73 @@ const statusLabels = {
 } as const;
 ---
 
-<section id="booking" class="booking-section py-24 bg-[var(--bg-secondary)]">
-  <div class="container-max section-padding">
+<section id="booking" class="booking-section py-24 bg-[var(--bg-secondary)] relative overflow-hidden">
+
+  <!-- Ambient glows -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute -top-32 right-10 w-[500px] h-[500px] rounded-full blur-3xl opacity-10"
+      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+    <div class="absolute -bottom-32 left-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-10"
+      style="background: radial-gradient(closest-side, var(--accent-blue), transparent)"></div>
+  </div>
+
+  <div class="relative z-10 container-max section-padding">
+
     <!-- Section Header -->
-    <div class="text-center mb-16 reveal">
-      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
-        Book Us
-      </span>
-      <h2 class="text-4xl md:text-5xl font-black mb-4">
-        <span class="gradient-text">Bring The Groove</span>
+    <div class="text-center mb-14 reveal">
+      <span class="section-eyebrow">Book Us</span>
+      <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+        Bring the Groove<br/>
+        <em class="gradient-text not-italic">to Your Stage</em>
       </h2>
-      <p class="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-        Available for clubs, festivals, and private events across Italy & EU
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
+        From intimate jazz clubs to major festival stages — we tailor every performance to the venue, the crowd, and the moment.
       </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14 reveal-stagger reveal">
+
+      <div class="service-card service-card--yellow">
+        <div class="service-icon">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+          </svg>
+        </div>
+        <h4 class="service-title">Festivals</h4>
+        <p class="service-desc">A full live set built for outdoor stages and large crowds — high-energy, versatile, crowd-ready.</p>
+      </div>
+
+      <div class="service-card service-card--red">
+        <div class="service-icon">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+          </svg>
+        </div>
+        <h4 class="service-title">Club Nights</h4>
+        <p class="service-desc">Intimate sets that turn a room into a dance floor — groovy, tight, and impossible to ignore.</p>
+      </div>
+
+      <div class="service-card service-card--blue">
+        <div class="service-icon">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+          </svg>
+        </div>
+        <h4 class="service-title">Private Events</h4>
+        <p class="service-desc">Corporate events, gallery openings, exclusive parties — we bring the funk wherever the story needs it.</p>
+      </div>
+
+      <div class="service-card service-card--yellow">
+        <div class="service-icon">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+        </div>
+        <h4 class="service-title">Collaborations</h4>
+        <p class="service-desc">Guest artists, cross-genre projects, and studio collaborations — our 100+ network is your creative resource.</p>
+      </div>
+
     </div>
 
     <div class="booking-grid">
@@ -191,40 +245,58 @@ const statusLabels = {
 
           <!-- Upcoming Shows -->
           <div class="glass-card booking-card">
-            <h3 class="text-2xl font-bold mb-6">2026 Tour Dates</h3>
-            <div class="space-y-3">
-              {tour.dates.map((show) => (
-                <div class="tour-date-item">
-                  <div class="tour-date-info">
-                    <div class="font-semibold truncate">{show.venue}</div>
-                    <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
-                  </div>
+            <h3 class="text-2xl font-bold mb-6">Next Dates</h3>
 
-                  <div class="tour-date-actions">
-                    {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
-                      <a
-                        href={show.ticketsUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="ticket-btn"
-                      >
-                        Ticket
-                      </a>
-                    )}
-                    <span class={`tour-status ${statusColors[show.status]}`}>
-                      {statusLabels[show.status]}
-                    </span>
+            {tour.dates.length > 0 ? (
+              <div class="space-y-3">
+                {tour.dates.map((show) => (
+                  <div class="tour-date-item">
+                    <div class="tour-date-info">
+                      <div class="font-semibold truncate">{show.venue}</div>
+                      <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
+                    </div>
+
+                    <div class="tour-date-actions">
+                      {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
+                        <a
+                          href={show.ticketsUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="ticket-btn"
+                        >
+                          Ticket
+                        </a>
+                      )}
+                      <span class={`tour-status ${statusColors[show.status]}`}>
+                        {statusLabels[show.status]}
+                      </span>
+                    </div>
                   </div>
+                ))}
+              </div>
+            ) : (
+              <div class="next-dates-placeholder">
+                <div class="next-dates-icon">
+                  <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
                 </div>
-              ))}
-            </div>
-
-            <div class="mt-6 p-4 rounded-xl bg-[var(--accent-primary)]/10 border border-[var(--accent-primary)]/20">
-              <p class="text-sm">
-                <span class="font-semibold text-[var(--accent-primary)]">EU Mini-Tour 2026:</span>
-                <span class="text-[var(--text-secondary)]"> Milan (BIKO) · London (Crazy Coqs) · Frankfurt (Das Wohnzimmer)</span>
-              </p>
-            </div>
+                <p class="next-dates-headline">New dates coming soon</p>
+                <p class="next-dates-sub">Follow us to be the first to know about upcoming shows.</p>
+                <a
+                  href="https://instagram.com/grooveathome"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="next-dates-follow"
+                >
+                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
+                    <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
+                  </svg>
+                  @grooveathome on Instagram
+                </a>
+              </div>
+            )}
           </div>
 
           <!-- Direct Contact -->
@@ -292,7 +364,56 @@ const statusLabels = {
 </script>
 
 <style>
-  /* Base section */
+  /* ── Service cards ── */
+  .service-card {
+    padding: 1.5rem;
+    border-radius: 1.1rem;
+    border: 1.5px solid transparent;
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover { transform: translateY(-5px); }
+
+  .service-card--yellow { border-color: rgba(247,181,56,0.2); }
+  .service-card--yellow:hover { border-color: rgba(247,181,56,0.5); box-shadow: 0 16px 40px rgba(247,181,56,0.1); }
+
+  .service-card--red { border-color: rgba(195,47,39,0.2); }
+  .service-card--red:hover { border-color: rgba(195,47,39,0.5); box-shadow: 0 16px 40px rgba(195,47,39,0.1); }
+
+  .service-card--blue { border-color: rgba(30,74,138,0.2); }
+  .service-card--blue:hover { border-color: rgba(30,74,138,0.5); box-shadow: 0 16px 40px rgba(30,74,138,0.1); }
+
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.9rem;
+    background: rgba(247,181,56,0.12);
+    color: var(--accent-primary);
+  }
+
+  .service-card--red .service-icon  { background: rgba(195,47,39,0.12);  color: #e05050; }
+  .service-card--blue .service-icon { background: rgba(30,74,138,0.18);   color: #6aa0e0; }
+
+  .service-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .service-desc {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+
+  /* ── Base section ── */
   .booking-section {
     overflow-x: clip;
     width: 100%;
@@ -492,6 +613,61 @@ const statusLabels = {
   }
 
   .direct-contact-icon svg {
-    display: block; /* Rimuove spazio extra sotto l'SVG */
+    display: block;
+  }
+
+  /* ── Next Dates placeholder ── */
+  .next-dates-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.5rem 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .next-dates-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: rgba(247, 181, 56, 0.1);
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .next-dates-headline {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .next-dates-sub {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 22ch;
+  }
+
+  .next-dates-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.5rem 1.1rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(247, 181, 56, 0.3);
+    background: rgba(247, 181, 56, 0.08);
+    color: var(--accent-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .next-dates-follow:hover {
+    background: rgba(247, 181, 56, 0.16);
+    border-color: rgba(247, 181, 56, 0.55);
   }
 </style>

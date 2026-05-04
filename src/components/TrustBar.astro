@@ -1,0 +1,204 @@
+---
+/**
+ * TrustBar — Quick credibility strip between Hero and Bio.
+ * Horizontally scrolling (infinite marquee) on mobile, static grid on desktop.
+ */
+
+const badges = [
+  {
+    label: "40K+ Instagram",
+    sub: "Engaged Community",
+    color: "yellow",
+    icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/><path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/><circle cx="18.406" cy="5.594" r="1.44"/></svg>`
+  },
+  {
+    label: "5.75% Engagement",
+    sub: "Above Industry Avg",
+    color: "red",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>`
+  },
+  {
+    label: "Thomann Partner",
+    sub: "Official Brand Artist",
+    color: "blue",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>`
+  },
+  {
+    label: "Jacob Collier Approved",
+    sub: "5× Grammy Winner",
+    color: "yellow",
+    icon: `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>`
+  },
+  {
+    label: "EU Mini-Tour 2026",
+    sub: "Milan · London · Frankfurt",
+    color: "red",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`
+  },
+  {
+    label: "100+ Musicians",
+    sub: "Collective Network",
+    color: "blue",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`
+  },
+  {
+    label: "Album Coming 2026",
+    sub: "First Studio Record",
+    color: "yellow",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>`
+  },
+  {
+    label: "635K Monthly Reach",
+    sub: "Cross-Platform",
+    color: "red",
+    icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`
+  },
+];
+---
+
+<div class="trust-bar-section">
+  <!-- Static grid for desktop, infinite marquee for mobile -->
+
+  <!-- Desktop grid -->
+  <div class="trust-grid-desktop">
+    {badges.map(b => (
+      <div class={`trust-badge trust-badge--${b.color}`}>
+        <span class="trust-icon" set:html={b.icon} />
+        <span class="trust-text">
+          <span class="trust-label">{b.label}</span>
+          <span class="trust-sub">{b.sub}</span>
+        </span>
+      </div>
+    ))}
+  </div>
+
+  <!-- Mobile marquee -->
+  <div class="trust-marquee-wrap" aria-hidden="true">
+    <div class="trust-marquee">
+      {[...badges, ...badges].map(b => (
+        <div class={`trust-badge trust-badge--${b.color} flex-shrink-0`}>
+          <span class="trust-icon" set:html={b.icon} />
+          <span class="trust-text">
+            <span class="trust-label">{b.label}</span>
+            <span class="trust-sub">{b.sub}</span>
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
+
+<hr class="vintage-divider" />
+
+<style>
+.trust-bar-section {
+  background: var(--bg-secondary);
+  padding: 1.5rem 0;
+  overflow: hidden;
+}
+
+/* ── Desktop: wrapping flex grid ── */
+.trust-grid-desktop {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .trust-grid-desktop {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.25rem;
+    padding: 0 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .trust-marquee-wrap {
+    display: none;
+  }
+}
+
+/* ── Mobile: infinite marquee ── */
+.trust-marquee-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.trust-marquee {
+  display: flex;
+  gap: 0.75rem;
+  width: max-content;
+  animation: scroll-left 28s linear infinite;
+  padding: 0.25rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-marquee { animation: none; }
+}
+
+/* ── Individual badge ── */
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-size: 0.78rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+  cursor: default;
+}
+
+.trust-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* Color variants */
+.trust-badge--yellow {
+  background: rgba(247, 181, 56, 0.08);
+  border-color: rgba(247, 181, 56, 0.25);
+  color: var(--accent-primary);
+}
+.trust-badge--yellow:hover { border-color: rgba(247, 181, 56, 0.5); }
+
+.trust-badge--red {
+  background: rgba(195, 47, 39, 0.08);
+  border-color: rgba(195, 47, 39, 0.25);
+  color: #e05050;
+}
+.trust-badge--red:hover { border-color: rgba(195, 47, 39, 0.5); }
+
+.trust-badge--blue {
+  background: rgba(30, 74, 138, 0.12);
+  border-color: rgba(30, 74, 138, 0.30);
+  color: #6aa0e0;
+}
+.trust-badge--blue:hover { border-color: rgba(45, 107, 191, 0.55); }
+
+.trust-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.trust-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.trust-label {
+  font-weight: 700;
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.trust-sub {
+  font-size: 0.62rem;
+  opacity: 0.65;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+</style>

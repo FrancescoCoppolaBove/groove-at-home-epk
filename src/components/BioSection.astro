@@ -9,102 +9,190 @@ import session05 from '../assets/session_05.jpg';
 import session06 from '../assets/session_06.jpg';
 
 const images = [
-  { src: session01, alt: 'Studio session 01' },
-  { src: session02, alt: 'Recording take 02' },
-  { src: session03, alt: 'Behind the scenes 03' },
-  { src: session04, alt: 'Keys & rhythm 04' },
-  { src: session05, alt: 'Brass overdubs 05' },
-  { src: session06, alt: 'Control room 06' },
+  { src: session01, alt: 'Studio session' },
+  { src: session02, alt: 'Recording take' },
+  { src: session03, alt: 'Behind the scenes' },
+  { src: session04, alt: 'Keys & rhythm' },
+  { src: session05, alt: 'Brass overdubs' },
+  { src: session06, alt: 'Control room' },
 ];
 ---
 
-<section id="bio" class="relative py-20 md:py-24 overflow-hidden">
-  <!-- bagliori soft -->
+<section id="bio" class="relative py-20 md:py-28 overflow-hidden">
+
+  <!-- Ambient glows -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="absolute -top-32 right-10 w-[560px] h-[560px] rounded-full blur-3xl opacity-20"
+    <div class="absolute -top-40 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-15"
       style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
-    <div class="absolute -bottom-32 left-0 w-[560px] h-[560px] rounded-full blur-3xl opacity-20"
-      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+    <div class="absolute -bottom-40 left-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-15"
+      style="background: radial-gradient(closest-side, var(--accent-blue), transparent)"></div>
   </div>
 
   <div class="relative container-max px-6 md:px-12 lg:px-20">
-    <!-- Header -->
-    <div class="text-center mb-10 md:mb-12">
-      <h2 class="text-[var(--accent-primary)] text-4xl md:text-5xl font-black mb-2">Bio</h2>
-      <p class="text-lg md:text-xl text-[var(--text-secondary)]">Our Story</p>
+
+    <!-- Section header -->
+    <div class="text-center mb-14 reveal">
+      <span class="section-eyebrow">Our Story</span>
+      <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
+        Born from a Home Studio.<br/>
+        <em class="gradient-text not-italic">Built into a Movement.</em>
+      </h2>
     </div>
 
-    <!-- Layout: testo a sinistra, carosello a destra -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-      
-      <!-- Testo (sinistra) -->
-      <div class="relative mx-auto max-w-2xl lg:max-w-none">
-        <div class="prose prose-invert prose-lg max-w-none leading-[2.0]">
-          <p><strong>Groove at Home</strong> is an Italian collective founded by drummer <strong>Francesco Coppola Bove</strong>, reimagining Italian and international songs through a vibrant blend of funk, soul, and nu-jazz.</p>
-          <p>Born as Francesco's home-studio project, it quickly grew into a live ensemble known for deep grooves, tight musicianship, and a warm retro-modern aesthetic.</p>
-          <p>The collective brings together musicians from across Italy, blending vintage funk energy with fresh, contemporary arrangements.</p>
-          <p>Alongside their reinterpretations, Groove at Home is now developing original music, several of which are already performed live and will be featured on <strong>their first studio album</strong>, scheduled for 2026.</p>
-          <p>The project has collaborated with acclaimed artists such as <strong>Francesca Tandoi</strong>, <strong>Mario Biondi</strong>, <strong>Arabella Rustico</strong> and many more, solidifying its presence in the soul-jazz scene.</p>
-          <p>With over <strong>40,000 followers</strong> on Instagram and a <strong>collective of 100+ musicians</strong>, the group has built an engaged and international community around its sound.</p>
-          <p>Their live shows are dynamic, soulful, and irresistibly groovy — a modern jam where musicians and audience move together as one.</p>
-        </div>
-      </div>
+    <!-- Layout: text left, carousel right -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-      <!-- Carosello immagini (destra) -->
-      <div class="relative">
-        <div class="bio-carousel relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] max-h-[600px]">
-          {images.map((img, index) => (
-            <div 
-              class={`carousel-slide absolute inset-0 transition-opacity duration-1000 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
-              data-slide-index={index}
-            >
-              <Image 
-                src={img.src} 
-                alt={img.alt} 
-                class="w-full h-full object-cover" 
-                loading={index === 0 ? 'eager' : 'lazy'}
-                quality={90} 
-                format="webp" 
-              />
+      <!-- Origin story text -->
+      <div class="bio-text reveal" style="animation-delay: 0.1s">
+
+        <!-- Origin paragraph -->
+        <p class="bio-para bio-para--lead">
+          It started simply: a drummer, a home studio, and the idea of reimagining music
+          the way it should feel — raw, warm, alive.
+        </p>
+
+        <p class="bio-para">
+          <strong class="text-white">Francesco Coppola Bove</strong> founded <strong class="text-[var(--accent-primary)]">Groove at Home</strong> as
+          a home-recording project in the vein of the great Italian funk and soul tradition. What began as
+          a solo experiment quickly grew into something far bigger: a rotating collective of over
+          <strong class="text-white">100+ musicians</strong> — all bound by the same love of deep grooves,
+          honest playing, and music that moves people.
+        </p>
+
+        <p class="bio-para">
+          Today, Groove at Home is one of Italy's most exciting live acts in modern funk and nu-jazz.
+          We've collaborated with celebrated artists like
+          <strong class="text-[var(--accent-primary)]">Francesca Tandoi</strong>,
+          <strong class="text-[var(--accent-primary)]">Mario Biondi</strong>,
+          <strong class="text-[var(--accent-primary)]">Arabella Rustico</strong>,
+          and many more — building a presence that spans stages from Milan to London to Frankfurt.
+        </p>
+
+        <p class="bio-para">
+          We're not just a band. We're a community. A creative platform where musicians can explore, grow,
+          and connect with an audience that genuinely cares. With <strong class="text-white">40,000+ followers</strong>
+          on Instagram, a <strong class="text-white">5.75% engagement rate</strong> (well above industry average),
+          and a viral video that hit <strong class="text-white">416K views</strong>, we've built something that
+          resonates far beyond Italy.
+        </p>
+
+        <p class="bio-para bio-para--closing">
+          Our first studio album arrives in <strong class="text-[var(--accent-primary)]">2026</strong> — with several original tracks
+          already performed live. The groove is just getting started.
+        </p>
+
+        <!-- Bio stats row -->
+        <div class="bio-stats-row mt-8">
+          {[
+            { value: '2022', label: 'Founded' },
+            { value: '100+', label: 'Musicians' },
+            { value: '3', label: 'Countries' },
+            { value: '2026', label: 'First Album' },
+          ].map(s => (
+            <div class="bio-stat">
+              <div class="bio-stat-value">{s.value}</div>
+              <div class="bio-stat-label">{s.label}</div>
             </div>
           ))}
         </div>
 
-        <!-- Indicatori (opzionale) -->
-        <div class="flex justify-center gap-2 mt-6">
-          {images.map((_, index) => (
-            <button 
-              class="carousel-dot w-2 h-2 rounded-full bg-white/30 transition-all hover:bg-white/50"
-              data-dot-index={index}
-              aria-label={`Go to slide ${index + 1}`}
+      </div>
+
+      <!-- Cinematic carousel -->
+      <div class="bio-carousel-wrap reveal" style="animation-delay: 0.25s">
+
+        <!-- Main image frame -->
+        <div
+          class="bio-carousel relative rounded-2xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.7)] border border-white/10"
+          style="aspect-ratio: 4/5; max-height: 560px;"
+        >
+          {images.map((img, index) => (
+            <div
+              class={`carousel-slide absolute inset-0 ${index === 0 ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}
+              data-slide-index={index}
             >
-            </button>
+              <!-- Ken Burns on each active slide -->
+              <Image
+                src={img.src}
+                alt={img.alt}
+                class="carousel-img w-full h-full object-cover"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                quality={90}
+                format="webp"
+              />
+            </div>
+          ))}
+
+          <!-- Gradient overlay on image -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+
+          <!-- Corner accent -->
+          <div class="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-[var(--accent-primary)] opacity-60 rounded-tl-sm pointer-events-none"></div>
+          <div class="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-[var(--accent-primary)] opacity-60 rounded-br-sm pointer-events-none"></div>
+        </div>
+
+        <!-- Dots -->
+        <div class="flex justify-center gap-2 mt-5">
+          {images.map((_, index) => (
+            <button
+              class="carousel-dot w-2 h-2 rounded-full bg-white/25 transition-all duration-300 hover:bg-white/50"
+              data-dot-index={index}
+              aria-label={`Immagine ${index + 1}`}
+            />
           ))}
         </div>
+
+        <!-- Caption -->
+        <p class="text-center text-xs text-[var(--text-tertiary)] mt-3 italic carousel-caption">
+          Studio sessions &amp; backstage moments
+        </p>
+
       </div>
     </div>
   </div>
 </section>
 
+<hr class="vintage-divider" />
+
 <script>
+  /* ── Carousel with Ken Burns on active slide ── */
   const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.carousel-dot');
+  const dots   = document.querySelectorAll('.carousel-dot');
+  const imgs   = document.querySelectorAll('.carousel-img');
+
   let currentIndex = 0;
   const totalSlides = slides.length;
-  const interval = 4000; // Cambio immagine ogni 4 secondi
+  const INTERVAL = 4200;
 
-  function showSlide(index) {
-    // Rimuovi active da tutti
-    slides.forEach(slide => slide.classList.remove('opacity-100'));
-    slides.forEach(slide => slide.classList.add('opacity-0'));
-    dots.forEach(dot => dot.classList.remove('bg-[var(--accent-primary)]', 'w-8'));
-    dots.forEach(dot => dot.classList.add('bg-white/30', 'w-2'));
+  function showSlide(index: number) {
+    slides.forEach((slide, i) => {
+      const el = slide as HTMLElement;
+      el.classList.toggle('opacity-100', i === index);
+      el.classList.toggle('opacity-0',   i !== index);
+    });
 
-    // Attiva il corrente
-    slides[index].classList.remove('opacity-0');
-    slides[index].classList.add('opacity-100');
-    dots[index].classList.remove('bg-white/30', 'w-2');
-    dots[index].classList.add('bg-[var(--accent-primary)]', 'w-8');
+    dots.forEach((dot, i) => {
+      const el = dot as HTMLElement;
+      if (i === index) {
+        el.classList.remove('bg-white/25', 'w-2');
+        el.classList.add('bg-[var(--accent-primary)]', 'w-6');
+      } else {
+        el.classList.remove('bg-[var(--accent-primary)]', 'w-6');
+        el.classList.add('bg-white/25', 'w-2');
+      }
+    });
+
+    /* Ken Burns: restart animation on the active image */
+    imgs.forEach((img, i) => {
+      const el = img as HTMLElement;
+      if (i === index) {
+        el.style.animation = 'none';
+        void el.offsetHeight; // reflow
+        el.style.animation = 'ken-burns 8s ease-in-out forwards';
+      } else {
+        el.style.animation = 'none';
+      }
+    });
   }
 
   function nextSlide() {
@@ -112,36 +200,98 @@ const images = [
     showSlide(currentIndex);
   }
 
-  // Auto-play
-  let autoplay = setInterval(nextSlide, interval);
+  let autoplay = setInterval(nextSlide, INTERVAL);
 
-  // Click sui dots
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       currentIndex = index;
       showSlide(currentIndex);
-      
-      // Reset autoplay
       clearInterval(autoplay);
-      autoplay = setInterval(nextSlide, interval);
+      autoplay = setInterval(nextSlide, INTERVAL);
     });
   });
 
-  // Pausa su hover (opzionale)
   const carousel = document.querySelector('.bio-carousel');
   carousel?.addEventListener('mouseenter', () => clearInterval(autoplay));
-  carousel?.addEventListener('mouseleave', () => {
-    autoplay = setInterval(nextSlide, interval);
-  });
+  carousel?.addEventListener('mouseleave', () => { autoplay = setInterval(nextSlide, INTERVAL); });
+
+  // Initialise first slide
+  showSlide(0);
 </script>
 
 <style>
-  .carousel-dot {
-    transition: all 0.3s ease;
+/* ── Bio text ── */
+.bio-para {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--text-secondary);
+  margin-bottom: 1.1rem;
+}
+
+.bio-para--lead {
+  font-size: 1.2rem;
+  color: white;
+  font-style: italic;
+  border-left: 3px solid var(--accent-primary);
+  padding-left: 1rem;
+  margin-bottom: 1.4rem;
+  line-height: 1.75;
+}
+
+.bio-para--closing {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+/* ── Stats row ── */
+.bio-stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+}
+
+/* 2×2 on small screens */
+@media (max-width: 480px) {
+  .bio-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 1rem;
   }
-  
-  .carousel-dot.active {
-    background: var(--accent-primary);
-    width: 2rem;
-  }
+}
+
+.bio-stat {
+  text-align: center;
+}
+
+.bio-stat-value {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--accent-primary);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.bio-stat-label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+/* ── Carousel dot transition ── */
+.carousel-dot {
+  transition: all 0.3s ease;
+}
+
+/* ── Ken Burns on carousel image ── */
+.carousel-img {
+  animation: ken-burns 8s ease-in-out forwards;
+}
 </style>
