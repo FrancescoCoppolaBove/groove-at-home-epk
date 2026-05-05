@@ -16,290 +16,292 @@ interface Props {
 const { metrics } = Astro.props;
 ---
 
-<section 
-    id="home" 
-    class="relative min-h-screen flex items-start justify-center overflow-hidden pt-16 md:pt-24 lg:pt-28 pb-28 sm:pb-20"
-  >
-  <!-- Background Image with Parallax Effect -->
-  <div class="absolute inset-0 z-0">
-  <!-- DESKTOP IMAGE -->
-  <div class="hero-image-desktop absolute inset-0">
-    <Image 
-      src={bandPhoto} 
-      alt="Groove at Home Band" 
-      class="w-full h-full object-cover"
-      loading="eager"
-      quality={90}
-      format="webp"
-    />
+<section
+  id="home"
+  class="hero-section relative min-h-screen flex items-center justify-center overflow-hidden film-grain"
+>
+
+  <!-- ── Background: Ken Burns + parallax ── -->
+  <div class="hero-parallax-bg absolute inset-0 z-0" style="will-change: transform;">
+
+    <!-- Desktop -->
+    <div class="hero-img-desktop absolute inset-0">
+      <Image
+        src={bandPhoto}
+        alt="Groove at Home live"
+        class="hero-img-inner w-full h-full object-cover ken-burns"
+        loading="eager"
+        quality={90}
+        format="webp"
+      />
+    </div>
+
+    <!-- Mobile -->
+    <div class="hero-img-mobile absolute inset-0">
+      <Image
+        src={import('../assets/photo_session_vertical-min.jpg')}
+        alt="Groove at Home"
+        class="hero-img-inner w-full h-full object-cover ken-burns"
+        loading="eager"
+        quality={90}
+        format="webp"
+      />
+    </div>
+
+    <!-- Cinematic overlay -->
+    <div class="hero-overlay absolute inset-0"></div>
+    <!-- Vignette -->
+    <div class="hero-vignette absolute inset-0 pointer-events-none"></div>
   </div>
 
-  <!-- MOBILE IMAGE -->
-  <div class="hero-image-mobile absolute inset-0">
-    <Image 
-      src={import('../assets/photo_session_vertical-min.jpg')} 
-      alt="Groove at Home Band - Mobile" 
-      class="w-full h-full object-cover"
-      loading="eager"
-      quality={90}
-      format="webp"
-    />
-  </div>
+  <!-- ── Content ── -->
+  <div class="hero-content relative z-10 w-full container-max px-6 md:px-12 lg:px-20 pt-20 md:pt-28 pb-28 text-center">
 
-  <div class="hero-overlay absolute inset-0"></div>
-</div>
-
-  <!-- Content -->
-  <div class="relative z-10 container-max px-6 md:px-12 lg:px-20 text-center">
-    <!-- Logo Animation -->
-    <div class="mb-8 fade-in">
-      <div class="inline-flex items-center justify-center w-32 h-32 rounded-full logo-container floating">
-        <Image 
-          src={bandLogo} 
-          alt="Groove at Home Logo" 
-          class="w-24 h-24 object-contain"
+    <!-- Logo -->
+    <div class="hero-item" style="--delay: 0s">
+      <div class="inline-flex items-center justify-center w-28 h-28 md:w-32 md:h-32 rounded-full logo-ring floating mb-8">
+        <Image
+          src={bandLogo}
+          alt="Groove at Home Logo"
+          class="w-20 h-20 md:w-24 md:h-24 object-contain"
           loading="eager"
           quality={90}
         />
       </div>
     </div>
 
-    <!-- Title -->
-    <h1 class="text-6xl md:text-7xl lg:text-8xl font-black mb-4 fade-in" style="animation-delay: 0.2s">
-      <span class="gradient-text">Groove at Home</span>
-    </h1>
-    
-    <!-- Tagline with better contrast -->
-    <div class="tagline-container mb-12 fade-in max-w-3xl mx-auto" style="animation-delay: 0.4s">
-      <p class="text-xl md:text-2xl font-semibold">
-        Italian Funk/Nu-Jazz Collective · Modern Grooves
+    <!-- Eyebrow -->
+    <div class="hero-item" style="--delay: 0.1s">
+      <div class="flex justify-center mb-5">
+        <span class="eyebrow-tag">Funk · Nu-Jazz · Soul · Italia → World</span>
+      </div>
+    </div>
+
+    <!-- Main Headline -->
+    <div class="hero-item" style="--delay: 0.25s">
+      <h1 class="hero-headline font-playfair mb-6">
+        <span class="block text-white/95 leading-none">Italian Funk.</span>
+        <span class="block gradient-text italic leading-none">No Compromises.</span>
+      </h1>
+    </div>
+
+    <!-- Subheadline — artistic, no social numbers -->
+    <div class="hero-item" style="--delay: 0.4s">
+      <p class="hero-sub max-w-2xl mx-auto mb-10">
+        Born in a home studio. Grown into an international collective.
+        Italian funk and nu-jazz played the way it was always meant to feel
+        — <em>raw, soulful, and alive</em>.
       </p>
     </div>
 
-    <!-- Floating Metrics with improved readability -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 fade-in" style="animation-delay: 0.6s">
-      <div class="metric-card-hero group">
-        <div class="relative z-10">
-          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.instagram}</div>
-          <div class="text-sm font-bold uppercase tracking-wider metric-label">Instagram</div>
-        </div>
-      </div>
-      <div class="metric-card-hero group">
-        <div class="relative z-10">
-          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.musicians}</div>
-          <div class="text-sm font-bold uppercase tracking-wider metric-label">Musicians</div>
-        </div>
-      </div>
-      <div class="metric-card-hero group">
-        <div class="relative z-10">
-          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.viral}</div>
-          <div class="text-sm font-bold uppercase tracking-wider metric-label">Top Video</div>
-        </div>
-      </div>
-      <div class="metric-card-hero group">
-        <div class="relative z-10">
-          <div class="text-3xl md:text-4xl font-black metric-number mb-1">{metrics.engagement}%</div>
-          <div class="text-sm font-bold uppercase tracking-wider metric-label">Engagement</div>
-        </div>
-      </div>
-    </div>
-
     <!-- Jacob Collier Endorsement -->
-    <div  class="fade-in mb-8 sm:mb-8 mx-auto max-w-md" style="animation-delay: 0.7s">
-      <div class="glass-card p-6 rounded-3xl border-2 border-[var(--accent-primary)]/40 hover:border-[var(--accent-primary)]/60 transition-all duration-300 hover:scale-105">
-        <div class="text-xs font-bold text-[var(--accent-primary)] uppercase tracking-wider mb-3 flex items-center justify-center gap-2">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+    <div class="hero-item mx-auto max-w-xs sm:max-w-sm mb-10" style="--delay: 0.55s">
+      <div class="jacob-card-hero">
+        <div class="jacob-header">
+          <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
           </svg>
-          Approved by
+          <span>Riconoscimento da Jacob Collier</span>
         </div>
-        
-        <!-- Immagine del commento -->
-        <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <Image 
+        <div class="rounded-xl overflow-hidden shadow-2xl border border-white/10 hover:border-[var(--accent-primary)]/40 transition-colors duration-300">
+          <Image
             src={jacobComment}
             alt="Jacob Collier comment on Groove at Home"
-            class="w-full h-auto"
+            class="w-full h-auto block"
             loading="eager"
             quality={95}
             format="webp"
           />
         </div>
-        
-        <p class="text-xs text-[var(--text-tertiary)] mt-3 italic">
-          5× Grammy Winner Jacob Collier praised our arrangement
-        </p>
+        <p class="text-[10px] text-white/40 mt-2 italic">5× Grammy Winner Jacob Collier ha elogiato il nostro arrangiamento</p>
       </div>
     </div>
 
     <!-- CTAs -->
-    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in mb-10 sm:mb-0" style="animation-delay: 0.8s">
-      <a href="#booking" class="btn-primary">
-        Book Us Now
-      </a>
-      <a href="#music" class="btn-glass-hero">
-        <svg class="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-        </svg>
-        Watch & Listen
-      </a>
+    <div class="hero-item" style="--delay: 0.65s">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#booking" class="btn-primary text-base md:text-lg px-10 py-4 font-bold">
+          Book for Your Stage
+        </a>
+        <a href="#music" class="btn-ghost-hero text-base md:text-lg px-10 py-4">
+          <svg class="w-5 h-5 mr-2 inline-block flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          Experience the Sound
+        </a>
+      </div>
     </div>
+
+  </div><!-- /hero-content -->
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator pointer-events-none z-30">
+    <svg class="w-6 h-6 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
   </div>
 
-  <!-- Scroll Indicator -->
-  <div class="scroll-indicator pointer-events-none absolute left-1/2 -translate-x-1/2 z-30">
-  <svg class="w-6 h-6 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-  </svg>
-</div>
 </section>
 
+<hr class="vintage-divider" />
+
 <style>
-  @keyframes fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  @keyframes subtle-zoom {
-    from {
-      transform: scale(1.1);
-    }
-    to {
-      transform: scale(1.15);
-    }
-  }
-  
-  .fade-in {
-    opacity: 0;
-    animation: fade-in-up 0.8s ease-out forwards;
-  }
-  
-  .hero-image-container {
-    animation: subtle-zoom 20s ease-in-out alternate infinite;
-  }
-  
-  .hero-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(10, 10, 15, 0.5) 0%,
-      rgba(10, 10, 15, 0.7) 50%,
-      rgba(10, 10, 15, 0.85) 100%
-    );
-  }
-  
-  /* Logo container with transparent center and colored border */
-  .logo-container {
-    border: 3px solid;
-    border-color: var(--accent-primary);
-    background: transparent;
-    position: relative;
-    overflow: visible;
-  }
-  
-  .logo-container::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
-    z-index: -1;
-    opacity: 0.8;
-  }
-  
-  /* Tagline with backdrop for better readability */
-  .tagline-container {
-    /* padding: 1rem 2rem;
-    border-radius: 100px;
-    border: 1px solid rgba(247, 181, 56, 0.2); */
-  }
-  
-  .tagline-container p {
-    color: var(--accent-primary);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Improved metric cards for hero */
-  .metric-card-hero {
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(247, 181, 56, 0.3);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
-  }
-  
-  .metric-card-hero:hover {
-    transform: translateY(-5px) scale(1.05);
-    border-color: var(--accent-primary);
-    cursor:default;
-  }
-  
-  .metric-number {
-    color: var(--accent-primary);
-    text-shadow: 0 2px 20px rgba(247, 181, 56, 0.5);
-  }
-  
-  .metric-label {
-    color: rgba(255, 255, 255, 0.9);
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  }
-  
-  /* Better glass button for hero */
-  .btn-glass-hero {
-    background: rgba(10, 10, 15, 0.7);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(247, 181, 56, 0.4);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 9999px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-  }
-  
-  .btn-glass-hero:hover {
-    background: rgba(247, 181, 56, 0.2);
-    border-color: var(--accent-primary);
-    transform: translateY(-2px);
-  }
+.hero-section { background: var(--bg-primary); }
 
- .hero-image-desktop {
-  display: block;
-}
+/* ── Background responsive ── */
+.hero-img-desktop { display: block; }
+.hero-img-mobile  { display: none;  }
 
-.hero-image-mobile {
-  display: none;
-}
-
-/* Mobile: usa l'immagine verticale */
 @media (max-width: 640px) {
-  .hero-image-desktop {
-    display: none;
-  }
-  .hero-image-mobile {
-    display: block;
-  }
+  .hero-img-desktop { display: none;  }
+  .hero-img-mobile  { display: block; }
 }
 
-:root {
-  /* gestisce la safe area (iPhone, ecc.) */
-  --safe-bottom: env(safe-area-inset-bottom, 0px);
+/* ── Overlays ── */
+.hero-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 15, 0.30) 0%,
+    rgba(10, 10, 15, 0.60) 45%,
+    rgba(10, 10, 15, 0.90) 100%
+  );
 }
 
-/* Posiziona la freccia con respiro dal bordo e dalla safe area */
-.scroll-indicator {
-  bottom: calc(16px + var(--safe-bottom));
+.hero-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 35%,
+    rgba(10, 10, 15, 0.65) 100%
+  );
 }
 
-/* (Facoltativo) su schermi medi/grandi alza un filo la freccia */
+/* ── Hero items — staggered entrance ── */
+.hero-item {
+  opacity: 0;
+  animation: fade-in-up 0.85s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+
+/* ── Eyebrow ── */
+.eyebrow-tag {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(247, 181, 56, 0.35);
+  background: rgba(247, 181, 56, 0.08);
+  color: var(--accent-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Headline ── */
+.hero-headline {
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+}
+
+/* ── Subheadline ── */
+.hero-sub {
+  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-sub em {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ── Logo ring ── */
+.logo-ring {
+  border: 2.5px solid var(--accent-primary);
+  background: rgba(10, 10, 15, 0.45);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 30px rgba(247, 181, 56, 0.28), inset 0 0 20px rgba(247, 181, 56, 0.04);
+}
+
+/* ── Jacob card ── */
+.jacob-card-hero {
+  backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(247, 181, 56, 0.32);
+  border-radius: 1.25rem;
+  padding: 1.1rem;
+  background: rgba(10, 10, 15, 0.62);
+  transition: all 0.35s ease;
+}
+
+.jacob-card-hero:hover {
+  transform: scale(1.02);
+  border-color: rgba(247, 181, 56, 0.58);
+  box-shadow: 0 0 30px rgba(247, 181, 56, 0.18);
+}
+
+.jacob-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  margin-bottom: 0.65rem;
+}
+
+/* ── Ghost CTA ── */
+.btn-ghost-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  border: 2px solid rgba(247, 181, 56, 0.32);
+  background: rgba(10, 10, 15, 0.55);
+  backdrop-filter: blur(10px);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost-hero:hover {
+  background: rgba(247, 181, 56, 0.14);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(247, 181, 56, 0.18);
+}
+
+/* ── Scroll indicator ── */
+:root { --safe-bottom: env(safe-area-inset-bottom, 0px); }
+
+.scroll-indicator { bottom: calc(16px + var(--safe-bottom)); }
+
 @media (min-width: 640px) {
-  .scroll-indicator { bottom: 24px; }
+  .scroll-indicator { bottom: 28px; }
 }
 </style>
+
+<script>
+  /* ── Parallax: background at 38% scroll speed ── */
+  const heroBg = document.querySelector('.hero-parallax-bg') as HTMLElement | null;
+  if (heroBg) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (window.scrollY < window.innerHeight * 1.2) {
+            heroBg.style.transform = `translateY(${window.scrollY * 0.38}px)`;
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>

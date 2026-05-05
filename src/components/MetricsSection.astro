@@ -1,9 +1,9 @@
 ---
 interface Props {
   stats: {
-    followers: { value: string; label: string; growth: string };
-    engagement: { value: string; label: string; detail: string };
-    reach: { value: string; label: string; platforms: string[] };
+    followers:   { value: string; label: string; growth: string };
+    engagement:  { value: string; label: string; detail: string };
+    reach:       { value: string; label: string; platforms: string[] };
     partnership: { value: string; label: string; detail: string };
   };
 }
@@ -12,128 +12,114 @@ const { stats } = Astro.props;
 ---
 
 <section id="metrics" class="relative py-24 overflow-hidden">
-  <!-- Background Pattern -->
-  <div class="absolute inset-0 opacity-10">
-    <div class="absolute top-0 left-0 w-96 h-96 bg-[var(--accent-primary)] rounded-full filter blur-3xl"></div>
-    <div class="absolute bottom-0 right-0 w-96 h-96 bg-[var(--accent-secondary)] rounded-full filter blur-3xl"></div>
+
+  <!-- Background atmosphere -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] opacity-10 rounded-full blur-3xl"
+      style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] opacity-10 rounded-full blur-3xl"
+      style="background: radial-gradient(closest-side, var(--accent-blue), transparent)"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] opacity-5 rounded-full blur-3xl"
+      style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
   </div>
 
   <div class="relative z-10 container-max section-padding">
-    <!-- Section Header -->
+
+    <!-- Section header -->
     <div class="text-center mb-16 reveal">
-      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
-        Why Book Us
-      </span>
-      <h2 class="text-4xl md:text-5xl font-black mb-4">
-        <span class="gradient-text">Numbers That Matter</span>
+      <span class="section-eyebrow">Impact in Numbers</span>
+      <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+        A Project<br/>
+        <em class="gradient-text not-italic">in Motion</em>
       </h2>
-      <p class="text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-        Real impact, measurable results, engaged community
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mt-4">
+        Growth is the proof. These numbers tell the story of a project that is building — fast and with intention.
       </p>
     </div>
 
     <!-- Stats Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
-      <!-- Total Followers -->
-      <div class="glass-card group hover:scale-105 transition-transform duration-300">
-        <div class="flex items-start justify-between mb-4">
-          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
-            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <span class="text-xs text-green-400 font-semibold">+{stats.followers.growth}</span>
-        </div>
-        <div class="text-4xl font-black gradient-text mb-2 counter" data-target={stats.followers.value}>
-          {stats.followers.value}
-        </div>
-        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
-          {stats.followers.label}
-        </div>
-      </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5 reveal-stagger reveal mb-16">
 
-      <!-- Engagement Rate -->
-      <div class="glass-card group hover:scale-105 transition-transform duration-300">
-        <div class="flex items-start justify-between mb-4">
-          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
-            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-            </svg>
-          </div>
-          <span class="text-xs text-[var(--text-tertiary)]">{stats.engagement.detail}</span>
-        </div>
-        <div class="text-4xl font-black gradient-text mb-2">
-          {stats.engagement.value}
-        </div>
-        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
-          {stats.engagement.label}
-        </div>
-      </div>
-
-      <!-- Monthly Reach -->
-      <div class="glass-card group hover:scale-105 transition-transform duration-300">
-        <div class="flex items-start justify-between mb-4">
-          <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
-            <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-            </svg>
-          </div>
-          <div class="flex gap-1">
-            {stats.reach.platforms.map(platform => (
-              <span class="w-2 h-2 rounded-full bg-[var(--accent-primary)]"></span>
-            ))}
-          </div>
-        </div>
-        <div class="text-4xl font-black gradient-text mb-2">
-          {stats.reach.value}
-        </div>
-        <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
-          {stats.reach.label}
-        </div>
-      </div>
-
-      <!-- Official Partnership -->
-<div class="glass-card group hover:scale-105 transition-transform duration-300">
-  <div class="flex items-start justify-between mb-4">
-    <div class="p-3 rounded-xl bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20">
-      <svg class="w-6 h-6 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M3 7h18M3 12h18M3 17h18" />
-      </svg>
-    </div>
-    <span class="text-xs text-[var(--accent-primary)] font-semibold">
-      {stats.partnership.detail}
-    </span>
-  </div>
-
-  <div class="text-3xl font-black gradient-text mb-2">
-    {stats.partnership.value}
-  </div>
-  <div class="text-[var(--text-tertiary)] text-sm uppercase tracking-wider">
-    {stats.partnership.label}
-  </div>
-</div>
-    </div>
-
-    <!-- Value Props -->
-    <div class="mt-16 grid md:grid-cols-3 gap-6 reveal">
-      <div class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
-          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+      <!-- Followers -->
+      <div class="stat-card stat-card--yellow group">
+        <div class="stat-card-icon stat-icon--yellow">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold mb-2">High Energy Performance</h3>
-        <p class="text-[var(--text-secondary)]">
-          70-90 minutes of non-stop funk grooves that keep the crowd moving
+        <span class="stat-growth text-green-400">+{stats.followers.growth}</span>
+        <div class="stat-value gradient-text counter" data-target={stats.followers.value}>
+          {stats.followers.value}
+        </div>
+        <div class="stat-label">{stats.followers.label}</div>
+        <p class="stat-desc">Followers across social platforms — and growing every week</p>
+      </div>
+
+      <!-- Engagement -->
+      <div class="stat-card stat-card--red group">
+        <div class="stat-card-icon stat-icon--red">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+          </svg>
+        </div>
+        <span class="stat-growth text-[var(--accent-primary)]">{stats.engagement.detail}</span>
+        <div class="stat-value gradient-text">{stats.engagement.value}</div>
+        <div class="stat-label">{stats.engagement.label}</div>
+        <p class="stat-desc">One of the highest engagement rates in Italian funk/jazz on Instagram</p>
+      </div>
+
+      <!-- Reach -->
+      <div class="stat-card stat-card--blue group">
+        <div class="stat-card-icon stat-icon--blue">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+          </svg>
+        </div>
+        <div class="flex gap-1 h-4">
+          {stats.reach.platforms.map((_) => (
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent-blue-mid)] mt-1"></span>
+          ))}
+        </div>
+        <div class="stat-value gradient-text">{stats.reach.value}</div>
+        <div class="stat-label">{stats.reach.label}</div>
+        <p class="stat-desc">{stats.reach.platforms.join(' · ')} — organic reach with real audiences</p>
+      </div>
+
+      <!-- Partnership -->
+      <div class="stat-card stat-card--yellow group">
+        <div class="stat-card-icon stat-icon--yellow">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+          </svg>
+        </div>
+        <span class="stat-growth text-[var(--accent-primary)]">{stats.partnership.detail}</span>
+        <div class="stat-value gradient-text text-2xl">{stats.partnership.value}</div>
+        <div class="stat-label">{stats.partnership.label}</div>
+        <p class="stat-desc">Official Thomann artist — Europe's largest music retailer trusts the Groove</p>
+      </div>
+
+    </div>
+
+    <!-- Three value pillars -->
+    <div class="grid md:grid-cols-3 gap-6 reveal">
+
+      <div class="pillar-card">
+        <div class="pillar-icon pillar-icon--yellow">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <h3 class="pillar-title">High-Energy Live Show</h3>
+        <p class="pillar-desc">
+          70–90 minutes of pure funk energy — a show that moves every person in the room, every night.
         </p>
       </div>
-      
-      <div class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
-          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+
+      <div class="pillar-card">
+        <div class="pillar-icon pillar-icon--red">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
           </svg>
         </div>
         <h3 class="text-xl font-bold mb-2">120+ Musicians Network</h3>
@@ -141,62 +127,165 @@ const { stats } = Astro.props;
           Part of Italy's largest funk collective with top-tier musicians
         </p>
       </div>
-      
-      <div class="text-center">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[var(--accent-primary)]/20 to-[var(--accent-secondary)]/20 mb-4">
-          <svg class="w-8 h-8 text-[var(--accent-primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+
+      <div class="pillar-card">
+        <div class="pillar-icon pillar-icon--blue">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
           </svg>
         </div>
-        <h3 class="text-xl font-bold mb-2">Viral Content Creators</h3>
-        <p class="text-[var(--text-secondary)]">
-          Proven social media presence with content reaching millions
+        <h3 class="pillar-title">Viral Content Power</h3>
+        <p class="pillar-desc">
+          A proven social presence that turns events into content — 416K top video, 635K monthly reach.
         </p>
       </div>
+
     </div>
   </div>
 </section>
 
+<hr class="vintage-divider" />
+
 <script>
-  // Animated counter
   const counters = document.querySelectorAll('.counter');
-  const speed = 200;
-  
+
   const countUp = (counter: Element) => {
     const target = counter.getAttribute('data-target');
     if (!target) return;
-    
-    const numericTarget = parseInt(target.replace(/\D/g, ''));
+    const num = parseInt(target.replace(/\D/g, ''));
     const suffix = target.replace(/[0-9]/g, '');
     let count = 0;
-    const increment = numericTarget / speed;
-    
-    const updateCount = () => {
+    const increment = num / 180;
+    const update = () => {
       count += increment;
-      if (count < numericTarget) {
+      if (count < num) {
         counter.textContent = Math.ceil(count) + suffix;
-        requestAnimationFrame(updateCount);
+        requestAnimationFrame(update);
       } else {
         counter.textContent = target;
       }
     };
-    
-    updateCount();
+    update();
   };
-  
-  const observerCallback = (entries: IntersectionObserverEntry[]) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        countUp(entry.target);
-      }
-    });
-  };
-  
-  const observer = new IntersectionObserver(observerCallback, {
-    threshold: 0.5
-  });
-  
-  counters.forEach(counter => {
-    observer.observe(counter);
-  });
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) countUp(e.target); });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => obs.observe(c));
 </script>
+
+<style>
+/* ── Stat cards ── */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  padding: 1.75rem;
+  border: 1.5px solid transparent;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px) scale(1.01);
+}
+
+.stat-card--yellow:hover { border-color: rgba(247,181,56,0.45); box-shadow: 0 20px 50px rgba(247,181,56,0.12); }
+.stat-card--red:hover    { border-color: rgba(195,47,39,0.45);  box-shadow: 0 20px 50px rgba(195,47,39,0.12); }
+.stat-card--blue:hover   { border-color: rgba(30,74,138,0.45);  box-shadow: 0 20px 50px rgba(30,74,138,0.12); }
+
+/* Card icon */
+.stat-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat-icon--yellow { background: rgba(247,181,56,0.15); color: var(--accent-primary); }
+.stat-icon--red    { background: rgba(195,47,39,0.15);  color: #e05050; }
+.stat-icon--blue   { background: rgba(30,74,138,0.18);  color: #6aa0e0; }
+
+/* Growth badge */
+.stat-growth {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Stat value */
+.stat-value {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Stat label */
+.stat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+/* Stat description */
+.stat-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: 0.35rem;
+}
+
+/* ── Pillar cards ── */
+.pillar-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(247,181,56,0.25);
+}
+
+.pillar-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+}
+
+.pillar-icon--yellow { background: rgba(247,181,56,0.15); color: var(--accent-primary); }
+.pillar-icon--red    { background: rgba(195,47,39,0.15);  color: #e05050; }
+.pillar-icon--blue   { background: rgba(30,74,138,0.18);  color: #6aa0e0; }
+
+.pillar-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.6rem;
+}
+
+.pillar-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+</style>

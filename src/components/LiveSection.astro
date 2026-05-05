@@ -1,264 +1,379 @@
 ---
 import { Image } from 'astro:assets';
 
-import live01 from '../assets/foto_live_01.jpeg';
-import live02 from '../assets/foto_live_02.jpeg';
-import live03 from '../assets/foto_live_03.jpeg';
-import live04 from '../assets/foto_live_04.jpeg';
-import live05 from '../assets/foto_live_05.jpeg';
-import live06 from '../assets/foto_live_06.jpeg';
-import live07 from '../assets/foto_live_07.jpeg';
-import live08 from '../assets/foto_live_08.jpeg';
-import live09 from '../assets/foto_live_09.jpeg';
-import live10 from '../assets/foto_live_10.jpeg';
+import live01 from '../assets/foto_live_01_v.jpeg';
+import live02 from '../assets/foto_live_02_v.jpeg';
+import live03 from '../assets/foto_live_03_v.jpeg';
+import live04 from '../assets/foto_live_04_h.jpeg';
+import live05 from '../assets/foto_live_05_v.jpg';
+import live06 from '../assets/foto_live_06_h.jpeg';
+import live07 from '../assets/foto_live_07_v.jpeg';
+import live08 from '../assets/foto_live_08_v.jpg';
+import live09 from '../assets/foto_live_09_v.jpeg';
+import live10 from '../assets/foto_live_10_v.jpeg';
+import live11 from '../assets/foto_live_11_v.jpg';
+import live12 from '../assets/foto_live_12_h.jpg';
+import live13 from '../assets/foto_live_13_v.jpg';
+import live14 from '../assets/foto_live_14_v.jpg';
 
 import liveVideo from '../assets/live_video.mp4';
+import liveVideo1 from '../assets/live_video_1.mp4';
+import liveVideo2 from '../assets/live_video_2.mp4';
+
+// ═══════════════════════════════════════════════════════════
+//  HOW TO ADD MORE VIDEOS
+//  ─────────────────────
+//  1. Drop your .mp4 in src/assets/  (e.g. live_video_2.mp4)
+//  2. Import it above:
+//       import liveVideo2 from '../assets/live_video_2.mp4';
+//  3. Add an entry below and set type to 'local'.
+//
+//  For a YouTube video (just the ID, not the full URL):
+//  e.g. https://youtu.be/dQw4w9WgXcQ → ID is "dQw4w9WgXcQ"
+// ═══════════════════════════════════════════════════════════
+const videos = [
+  { type: 'local' as const, src: liveVideo,  label: 'Live Highlights' },
+  { type: 'local' as const, src: liveVideo1, label: 'Live Set' },
+  { type: 'local' as const, src: liveVideo2, label: 'On Stage' },
+  // { type: 'youtube' as const, src: 'VIDEO_ID_QUI', label: 'Festival Set' },
+];
 
 const livePhotos = [
-  { src: live01, alt: 'Groove at Home live performance 01' },
-  { src: live02, alt: 'Groove at Home live performance 02' },
-  { src: live03, alt: 'Groove at Home live performance 03' },
-  { src: live04, alt: 'Groove at Home live performance 04' },
-  { src: live05, alt: 'Groove at Home live performance 05' },
-  { src: live06, alt: 'Groove at Home live performance 06' },
-  { src: live07, alt: 'Groove at Home live performance 07' },
-  { src: live08, alt: 'Groove at Home live performance 08' },
-  { src: live09, alt: 'Groove at Home live performance 09' },
-  { src: live10, alt: 'Groove at Home live performance 10' },
+  { src: live01, alt: 'On stage performance',    orient: 'v' },
+  { src: live02, alt: 'Groove at Home live',      orient: 'v' },
+  { src: live03, alt: 'Live performance energy',  orient: 'v' },
+  { src: live04, alt: 'Stage moments',            orient: 'h' },
+  { src: live05, alt: 'Band on stage',            orient: 'v' },
+  { src: live06, alt: 'Live performance',         orient: 'h' },
+  { src: live07, alt: 'Live performance',         orient: 'v' },
+  { src: live08, alt: 'Live performance',         orient: 'v' },
+  { src: live09, alt: 'Live performance',         orient: 'v' },
+  { src: live10, alt: 'Live performance',         orient: 'v' },
+  { src: live11, alt: 'Live performance',         orient: 'v' },
+  { src: live12, alt: 'Live performance',         orient: 'h' },
+  { src: live13, alt: 'Live performance',         orient: 'v' },
+  { src: live14, alt: 'Live performance',         orient: 'v' },
 ];
 ---
 
-<section id="live" class="relative py-20 md:py-24 overflow-hidden">
+<section id="live" class="relative py-20 md:py-28 overflow-hidden">
 
-  <!-- Soft glow -->
+  <!-- Atmosphere glows -->
   <div class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-24 left-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
+    <div class="absolute -top-32 left-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-10"
       style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
-    <div class="absolute -bottom-24 right-0 w-[520px] h-[520px] rounded-full blur-3xl opacity-20"
+    <div class="absolute -bottom-32 right-0 w-[600px] h-[600px] rounded-full blur-3xl opacity-10"
       style="background: radial-gradient(closest-side, var(--accent-primary), transparent)"></div>
   </div>
 
-  <div class="relative container-max px-4 sm:px-6 md:px-12 lg:px-20 reveal">
+  <div class="relative container-max px-4 sm:px-6 md:px-12 lg:px-20">
 
     <!-- Header -->
-    <div class="text-center mb-10 md:mb-12">
-      <span class="text-[var(--accent-primary)] font-bold text-sm uppercase tracking-wider mb-4 block">
-        Experience Us Live
-      </span>
-      <h2 class="text-3xl md:text-5xl font-black mb-3">
-        <span class="gradient-text">On Stage Energy</span>
+    <div class="text-center mb-12 md:mb-16 reveal">
+      <span class="section-eyebrow">Experience Us Live</span>
+      <h2 class="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
+        On Stage.<br/>
+        <em class="gradient-text not-italic">Full Energy.</em>
       </h2>
-      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-        Feel the groove, the energy, and the connection with our audience
+      <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mt-3">
+        Every performance is a deep, soulful, irresistible experience — where the crowd and the band move as one.
       </p>
     </div>
 
-    <!-- Layout -->
-    <div class="grid grid-cols-1 lg:grid-cols-[minmax(280px,380px)_1fr] gap-10 lg:gap-12 items-start">
-
-      <!-- VIDEO – always visible first on mobile, sticky only on desktop -->
-      <div class="relative mx-auto w-full max-w-md lg:max-w-none order-1 lg:order-none">
-
-        <div class="lg:sticky lg:top-24 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-          <div class="relative pt-[177.78%] bg-black">
-            <video
-              src={liveVideo}
-              class="absolute inset-0 w-full h-full object-cover"
-              controls
-              playsinline
-              preload="metadata"
-            ></video>
-          </div>
-        </div>
-
-        <p class="mt-4 text-sm text-[var(--text-tertiary)] text-center lg:text-left">
-          Live performance highlights — press play to watch
-        </p>
-
-      </div>
-
-
-      <!-- GALLERY -->
-      <div class="order-2 lg:order-none">
-
-        <!-- ✅ DESKTOP — keep your exact masonry layout -->
-        <div class="hidden lg:block">
-          <div class="columns-1 sm:columns-2 md:columns-3 gap-3 md:gap-4 [column-fill:balance]">
-            {livePhotos.map((ph) => (
-              <div class="mb-3 md:mb-4 break-inside-avoid rounded-xl md:rounded-2xl overflow-hidden shadow-xl group cursor-pointer">
-                <Image
-                  src={ph.src}
-                  alt={ph.alt}
-                  loading="lazy"
-                  quality={90}
-                  format="webp"
-                  class="w-full h-auto block transition-transform duration-300 group-hover:scale-105"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <!-- ✅ MOBILE — auto-scrolling carousel -->
-        <!-- ✅ MOBILE — auto-scrolling carousel -->
-<div class="lg:hidden">
-  <div
-    id="live-carousel"
-    class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-    tabindex="-1"
-  >
-    {livePhotos.map((ph) => (
-      <div class="min-w-[78%] snap-center shrink-0">
-        <div class="rounded-2xl overflow-hidden shadow-xl">
-          <Image
-            src={ph.src}
-            alt={ph.alt}
-            loading="lazy"
-            quality={90}
-            format="webp"
-            class="w-full h-96 object-cover"
-          />
-        </div>
-      </div>
-    ))}
-  </div>
-
-  <!-- ✅ HINT sotto al carosello (solo mobile) -->
-  <div
-    id="live-hint"
-    class="mt-2 flex items-center justify-center sm:hidden"
-    role="status"
-    aria-live="polite"
-  >
-    <span
-      class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/45 backdrop-blur-sm border border-white/10 text-[10.5px] font-semibold tracking-wide text-white/90 shadow-md transition-opacity duration-300"
+    <!-- ── VIDEO GRID ── -->
+    <div
+      class={`live-video-grid live-video-grid--${videos.length} reveal mb-14 md:mb-20`}
     >
-      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-        <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          d="M8 12h8M8 12l3 3M8 12l3-3" />
-      </svg>
-      <span class="uppercase">Swipte to browse</span>
-      <span class="mx-1 opacity-60">•</span>
-      <span class="opacity-90">auto-slides</span>
-      <span class="flex items-center gap-1 ml-1 not-italic">
-        <span class="dot"></span><span class="dot delay-150"></span><span class="dot delay-300"></span>
-      </span>
-    </span>
-  </div>
-</div>
+      {videos.map((v) => (
+        <div class="live-video-card">
+          {v.type === 'local' ? (
+            <div class="live-video-frame">
+              <video
+                src={v.src}
+                class="absolute inset-0 w-full h-full object-cover"
+                controls
+                playsinline
+                preload="metadata"
+              />
+            </div>
+          ) : (
+            <div class="live-video-frame">
+              <iframe
+                src={`https://www.youtube.com/embed/${v.src}?rel=0`}
+                class="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"
+                title={v.label}
+              />
+            </div>
+          )}
+          {v.label && (
+            <p class="live-video-label">{v.label}</p>
+          )}
+        </div>
+      ))}
+    </div>
 
+    <!-- ── PHOTO GALLERY — DESKTOP: cinematic editorial grid ── -->
+    <div class="hidden lg:block reveal">
+      <div class="photo-count-badge mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        {livePhotos.length} shots from the stage
+      </div>
+
+      <div class="photo-editorial-grid">
+        {livePhotos.map((ph) => (
+          <div class={`photo-cell photo-cell--${ph.orient}`}>
+            <Image
+              src={ph.src}
+              alt={ph.alt}
+              loading="lazy"
+              quality={90}
+              format="webp"
+              class="w-full h-full object-cover transition-all duration-500 group-hover:scale-[1.06]"
+            />
+            <div class="photo-cell-overlay"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── PHOTO GALLERY — MOBILE: auto-scrolling carousel ── -->
+    <div class="lg:hidden reveal">
+      <div
+        id="live-carousel"
+        class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-3
+               [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        tabindex="-1"
+      >
+        {livePhotos.map((ph) => (
+          <div class="min-w-[80%] sm:min-w-[60%] snap-center shrink-0">
+            <div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+              <Image
+                src={ph.src}
+                alt={ph.alt}
+                loading="lazy"
+                quality={90}
+                format="webp"
+                class="w-full h-80 sm:h-96 object-cover"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Swipe hint -->
+      <div class="mt-3 flex items-center justify-center">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/40 backdrop-blur-sm
+                      border border-white/10 text-[10.5px] font-semibold tracking-wide text-white/80">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              d="M8 12h8M8 12l3 3M8 12l3-3" />
+          </svg>
+          Scorri per vedere di più
+          <span class="flex items-center gap-1 ml-1">
+            <span class="dot"></span><span class="dot delay-150"></span><span class="dot delay-300"></span>
+          </span>
+        </span>
       </div>
     </div>
 
   </div>
+</section>
 
-  <!-- Auto-scroll carousel -->
-  <script is:inline>
-  (function () {
-    const track = document.getElementById('live-carousel');
-    if (!track) return;
+<hr class="vintage-divider" />
 
-    const AUTOSCROLL_MS = 3500;
-    const VIS_THR = 0.5; // almeno 50% visibile
-    let timer = null;
-    let interacting = false;
+<!-- Mobile carousel auto-scroll -->
+<script is:inline>
+(function () {
+  const track = document.getElementById('live-carousel');
+  if (!track) return;
 
-    const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  const DELAY = 3500;
+  const prefersReduced = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  let timer = null;
+  let paused = false;
 
-    // calcola larghezza “slide” (card + gap)
-    const slideWidth = () => {
-      const first = track.querySelector(':scope > *');
-      if (!first) return 0;
-      const rect = first.getBoundingClientRect();
-      // gap-4 ≈ 16px
-      return rect.width + 16;
-    };
+  const slideWidth = () => {
+    const first = track.querySelector(':scope > *');
+    if (!first) return 0;
+    return first.getBoundingClientRect().width + 16; /* gap-4 */
+  };
 
-    // è almeno al 50% visibile?
-    const isMostlyInView = (el) => {
-      const r = el.getBoundingClientRect();
-      const vw = window.innerWidth || document.documentElement.clientWidth;
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (!r.width || !r.height) return false;
-      const horiz = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0)) / r.width;
-      const vert  = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / r.height;
-      return horiz >= 0.6 && vert >= VIS_THR;
-    };
+  const isInView = (el) => {
+    const r = el.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight;
+    const h = Math.max(0, Math.min(r.right, vw) - Math.max(r.left, 0)) / r.width;
+    const v = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0)) / r.height;
+    return h >= 0.6 && v >= 0.5;
+  };
 
-    const next = () => {
-      if (prefersReduced) return;
-      if (document.hidden) return;
-      if (interacting) return;
-      if (!isMostlyInView(track)) return;
+  const next = () => {
+    if (prefersReduced || paused || document.hidden || !isInView(track)) return;
+    const w = slideWidth(); if (!w) return;
+    const idx = Math.round(track.scrollLeft / w);
+    track.scrollTo({ left: ((idx + 1) % track.children.length) * w, behavior: 'smooth' });
+  };
 
-      const w = slideWidth();
-      if (!w) return;
+  const start = () => { if (!prefersReduced && window.innerWidth < 1024) timer = setInterval(next, DELAY); };
+  const stop  = () => { if (timer) { clearInterval(timer); timer = null; } };
 
-      const idx = Math.round(track.scrollLeft / w);
-      const nextIdx = (idx + 1) % track.children.length;
-      track.scrollTo({ left: nextIdx * w, behavior: 'smooth' });
-    };
-
-    const start = () => {
-      stop();
-      if (!prefersReduced && window.innerWidth < 1024) {
-        timer = setInterval(next, AUTOSCROLL_MS);
-      }
-    };
-
-    const stop = () => {
-      if (timer) { clearInterval(timer); timer = null; }
-    };
-
-    // pausa su interazione
-    const pause = () => { interacting = true; stop(); };
-    const resume = () => {
-      interacting = false;
-      if (isMostlyInView(track)) start();
-    };
-
-    track.addEventListener('pointerdown', pause, { passive: true });
-    track.addEventListener('touchstart',  pause, { passive: true });
-    track.addEventListener('mouseenter',  pause, { passive: true });
-    track.addEventListener('pointerup',   resume, { passive: true });
-    track.addEventListener('touchend',    resume, { passive: true });
-    track.addEventListener('mouseleave',  resume, { passive: true });
-
-    // sospendi quando la tab non è visibile
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) stop(); else resume();
-    });
-
-    // ri-valuta su resize
-    let rAF;
-    const onResize = () => {
-      cancelAnimationFrame(rAF);
-      rAF = requestAnimationFrame(() => {
-        if (!interacting && isMostlyInView(track)) start();
-      });
-    };
-    window.addEventListener('resize', onResize);
-
-    // avvio iniziale
-    if (!prefersReduced) start();
-  })();
+  track.addEventListener('pointerdown', () => { paused = true;  stop();  }, { passive: true });
+  track.addEventListener('pointerup',   () => { paused = false; start(); }, { passive: true });
+  track.addEventListener('touchstart',  () => { paused = true;  stop();  }, { passive: true });
+  track.addEventListener('touchend',    () => { paused = false; start(); }, { passive: true });
+  document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+  start();
+})();
 </script>
 
-
-</section>
 <style>
+/* ── Video grid ── */
+.live-video-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+/* 1 video → centered, portrait */
+.live-video-grid--1 {
+  grid-template-columns: 1fr;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 2 videos → side by side */
+.live-video-grid--2 {
+  grid-template-columns: 1fr 1fr;
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 3 videos → three columns */
+.live-video-grid--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* On mobile, always stack */
+@media (max-width: 640px) {
+  .live-video-grid--2,
+  .live-video-grid--3 {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .live-video-grid--3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Individual video card */
+.live-video-card {
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: #000;
+}
+
+.live-video-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(247, 181, 56, 0.1);
+  border-color: rgba(247, 181, 56, 0.2);
+}
+
+.live-video-frame {
+  position: relative;
+  padding-top: 177.78%; /* 9:16 portrait */
+}
+
+.live-video-label {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  padding: 0.65rem 0.5rem;
+}
+
+/* ── Desktop editorial photo grid ── */
+.photo-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+
+.photo-editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 220px;
+  grid-auto-flow: row dense;
+  gap: 8px;
+}
+
+.photo-cell {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  cursor: pointer;
+}
+
+/* Vertical photo → narrow & tall (1 col × 2 rows) */
+.photo-cell--v { grid-column: span 1; grid-row: span 2; }
+
+/* Horizontal photo → wide & short (2 cols × 1 row) */
+.photo-cell--h { grid-column: span 2; grid-row: span 1; }
+
+.photo-cell-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,15,0.5) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.photo-cell:hover .photo-cell-overlay {
+  opacity: 1;
+}
+
+.photo-cell img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
+}
+
+.photo-cell:hover img {
+  transform: scale(1.07);
+  filter: brightness(1.08) contrast(1.05);
+}
+
+/* ── Carousel dots ── */
 .dot {
-  width: 4px; height: 4px; border-radius: 9999px;
-  background: rgba(255,255,255,.9);
+  width: 4px; height: 4px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,.85);
   display: inline-block;
   animation: hint-pulse 1.2s infinite ease-in-out;
-  opacity: .9;
 }
 .dot.delay-150 { animation-delay: .15s; }
-.dot.delay-300 { animation-delay: .3s; }
+.dot.delay-300 { animation-delay: .30s; }
 
 @keyframes hint-pulse {
-  0%, 100% { transform: translateY(0); opacity: .7; }
-  50%      { transform: translateY(-2px); opacity: 1; }
+  0%, 100% { transform: translateY(0); opacity: .6; }
+  50%       { transform: translateY(-2px); opacity: 1; }
 }
 </style>
