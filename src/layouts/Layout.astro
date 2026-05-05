@@ -1,17 +1,51 @@
 ---
 import "../styles/global.css";
 
+// Update this when the production domain is confirmed
+const SITE_URL = "https://grooveathome.com";
+
 interface Props {
   title?: string;
   description?: string;
+  keywords?: string;
   lang?: "it" | "en";
+  ogImage?: string;
+  canonical?: string;
 }
 
 const {
-  title = "Groove at Home — Modern Funk Collective",
-  description = "Italian funk/nu-jazz collective delivering modern grooves. 40K+ followers, viral content, unforgettable live shows.",
-  lang = "en"
+  title = "Groove at Home — Italian Funk & Nu-Jazz Collective",
+  description = "Groove at Home is an Italian funk & nu-jazz collective with 40K+ followers, 635K monthly reach and 100+ musicians. Available for live shows across Europe.",
+  keywords = "Italian funk band, funk collective Italy, nu-jazz Italy, Italian soul band, live funk band Europe, groove collective, book live band Italy, funk jazz live band, Italian musicians, funky live music",
+  lang = "en",
+  ogImage = `${SITE_URL}/android-chrome-512x512.png`,
+  canonical = SITE_URL,
 } = Astro.props;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "Groove at Home",
+  "url": SITE_URL,
+  "description": description,
+  "genre": ["Funk", "Nu-Jazz", "Soul", "R&B", "Jazz Fusion"],
+  "foundingLocation": {
+    "@type": "Place",
+    "addressCountry": "IT",
+    "name": "Italy"
+  },
+  "sameAs": [
+    "https://instagram.com/grooveathome",
+    "https://tiktok.com/@grooveathome",
+    "https://youtube.com/@grooveathome",
+    "https://open.spotify.com/intl-it/artist/4HQd9KulsgMrdOL9kwP4re"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "athomegroove@gmail.com",
+    "contactType": "booking"
+  }
+};
 ---
 
 <!DOCTYPE html>
@@ -19,16 +53,34 @@ const {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Groove at Home" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#0a0a0f" />
-    
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Groove at Home" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/assets/og-image.jpg" />
-    
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Groove at Home — Italian Funk Collective" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="it_IT" />
+
+    <!-- Twitter / X Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Groove at Home — Italian Funk Collective" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -36,7 +88,13 @@ const {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-    
+
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
