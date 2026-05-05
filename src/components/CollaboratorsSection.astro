@@ -62,9 +62,44 @@ const collaborators: Collaborator[] = [
         ))}
       </div>
     </div>
+
+    <!-- Musician stats -->
+    <div class="mt-16 md:mt-20 reveal" style="animation-delay:.3s">
+      <p class="text-center text-sm uppercase tracking-widest text-[var(--text-secondary)] mb-8 font-semibold">
+        Musicians in our network
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-6 max-w-5xl mx-auto px-4">
+        {[
+          { count: "44", label: "Singers" },
+          { count: "22", label: "Keyboardists" },
+          { count: "20", label: "Bassists" },
+          { count: "16", label: "Guitarists" },
+          { count: "10", label: "Saxophonists" },
+          { count: "7",  label: "Trumpeters" },
+          { count: "2",  label: "Drummers" },
+        ].map(stat => (
+          <div class="stat-card text-center">
+            <span class="block text-3xl md:text-4xl font-bold gradient-text leading-none">{stat.count}</span>
+            <span class="block text-xs md:text-sm text-[var(--text-secondary)] mt-1 font-medium">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   </div>
 
   <style>
+    .stat-card {
+      padding: 1rem 0.5rem;
+      border-radius: 0.75rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+    .stat-card:hover {
+      border-color: rgba(247,181,56,0.3);
+      transform: translateY(-3px);
+    }
+
     .word-item {
       position: relative;
       display: inline-block;
