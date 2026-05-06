@@ -3,7 +3,7 @@ interface TourDate {
   date: string;
   venue: string;
   city: string;
-  status: 'confirmed' | 'available' | 'sold-out';
+  status: 'confirmed' | 'available' | 'sold-out' | 'past';
   /** Abilita il bottone Ticket accanto allo stato */
   ticketsEnabled?: boolean;
   /** URL pagina acquisto biglietti */
@@ -18,16 +18,21 @@ interface Props {
 
 const { email = 'athomegroove@gmail.com', tour } = Astro.props;
 
+const upcomingDates = tour.dates.filter(d => d.status !== 'past');
+const pastDates     = tour.dates.filter(d => d.status === 'past');
+
 const statusColors = {
   confirmed: 'text-green-400',
   available: 'text-[var(--accent-primary)]',
   'sold-out': 'text-red-400',
+  past:       'text-white/30',
 } as const;
 
 const statusLabels = {
   confirmed: 'Confirmed',
   available: 'Available',
   'sold-out': 'Sold Out',
+  past:       'Past',
 } as const;
 ---
 
@@ -247,23 +252,18 @@ const statusLabels = {
           <div class="glass-card booking-card">
             <h3 class="text-2xl font-bold mb-6">Next Dates</h3>
 
-            {tour.dates.length > 0 ? (
+            <!-- Upcoming dates -->
+            {upcomingDates.length > 0 ? (
               <div class="space-y-3">
-                {tour.dates.map((show) => (
+                {upcomingDates.map((show) => (
                   <div class="tour-date-item">
                     <div class="tour-date-info">
                       <div class="font-semibold truncate">{show.venue}</div>
                       <div class="text-sm text-[var(--text-secondary)] truncate">{show.city} · {show.date}</div>
                     </div>
-
                     <div class="tour-date-actions">
                       {show.status === 'confirmed' && show.ticketsEnabled && show.ticketsUrl && (
-                        <a
-                          href={show.ticketsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="ticket-btn"
-                        >
+                        <a href={show.ticketsUrl} target="_blank" rel="noopener noreferrer" class="ticket-btn">
                           Ticket
                         </a>
                       )}
@@ -283,18 +283,35 @@ const statusLabels = {
                 </div>
                 <p class="next-dates-headline">New dates coming soon</p>
                 <p class="next-dates-sub">Follow us to be the first to know about upcoming shows.</p>
-                <a
-                  href="https://instagram.com/grooveathome"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="next-dates-follow"
-                >
+                <a href="https://instagram.com/grooveathome" target="_blank" rel="noopener noreferrer" class="next-dates-follow">
                   <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/>
                     <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"/>
                   </svg>
                   @grooveathome on Instagram
                 </a>
+              </div>
+            )}
+
+            <!-- Past shows -->
+            {pastDates.length > 0 && (
+              <div class="past-shows-block">
+                <p class="past-shows-label">Past Shows</p>
+                <div class="space-y-1">
+                  {pastDates.map((show) => (
+                    <div class="tour-date-item tour-date-item--past">
+                      <div class="tour-date-info">
+                        <div class="font-semibold truncate text-white/50">{show.venue}</div>
+                        <div class="text-sm truncate text-white/30">{show.city} · {show.date}</div>
+                      </div>
+                      <div class="tour-date-actions">
+                        <svg class="w-4 h-4 text-white/25" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -614,6 +631,26 @@ const statusLabels = {
 
   .direct-contact-icon svg {
     display: block;
+  }
+
+  /* ── Past shows ── */
+  .past-shows-block {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .past-shows-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.25);
+    margin-bottom: 0.5rem;
+  }
+
+  .tour-date-item--past {
+    opacity: 0.6;
   }
 
   /* ── Next Dates placeholder ── */
