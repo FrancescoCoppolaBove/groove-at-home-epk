@@ -132,8 +132,10 @@ const livePhotos = [
               src={ph.src}
               alt={ph.alt}
               loading="lazy"
-              quality={90}
+              quality={75}
               format="webp"
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 25vw"
               class="w-full h-full object-cover transition-all duration-500 group-hover:scale-[1.06]"
             />
             <div class="photo-cell-overlay"></div>
@@ -157,8 +159,10 @@ const livePhotos = [
                 src={ph.src}
                 alt={ph.alt}
                 loading="lazy"
-                quality={90}
+                quality={75}
                 format="webp"
+                widths={[400, 700]}
+                sizes="(max-width: 640px) 80vw, 60vw"
                 class="w-full h-80 sm:h-96 object-cover"
               />
             </div>

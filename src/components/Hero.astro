@@ -31,8 +31,11 @@ const { metrics } = Astro.props;
         alt="Groove at Home live"
         class="hero-img-inner w-full h-full object-cover ken-burns"
         loading="eager"
-        quality={90}
+        fetchpriority="high"
+        quality={75}
         format="webp"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
       />
     </div>
 
@@ -43,8 +46,11 @@ const { metrics } = Astro.props;
         alt="Groove at Home"
         class="hero-img-inner w-full h-full object-cover ken-burns"
         loading="eager"
-        quality={90}
+        fetchpriority="high"
+        quality={75}
         format="webp"
+        widths={[640, 828]}
+        sizes="100vw"
       />
     </div>
 
@@ -65,7 +71,9 @@ const { metrics } = Astro.props;
           alt="Groove at Home Logo"
           class="w-20 h-20 md:w-24 md:h-24 object-contain"
           loading="eager"
-          quality={90}
+          width={96}
+          height={96}
+          quality={80}
         />
       </div>
     </div>

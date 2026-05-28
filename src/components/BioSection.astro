@@ -134,8 +134,10 @@ const images = [
                 alt={img.alt}
                 class="carousel-img w-full h-full object-cover"
                 loading={index === 0 ? 'eager' : 'lazy'}
-                quality={90}
+                quality={75}
                 format="webp"
+                widths={[400, 800]}
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
           ))}
