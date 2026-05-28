@@ -56,7 +56,7 @@ const statusLabels = {
         <em class="gradient-text not-italic">to Your Stage</em>
       </h2>
       <p class="text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto">
-        From intimate jazz clubs to major festival stages — we tailor every performance to the venue, the crowd, and the moment.
+        From Nocera Jazz to London's Crazy Coqs, we tailor every performance to the venue, the crowd, and the moment. Festivals, clubs, private events: the groove travels.
       </p>
     </div>
 
@@ -70,7 +70,7 @@ const statusLabels = {
           </svg>
         </div>
         <h4 class="service-title">Festivals</h4>
-        <p class="service-desc">A full live set built for outdoor stages and large crowds — high-energy, versatile, crowd-ready.</p>
+        <p class="service-desc">A full live set built for outdoor stages and large crowds. High-energy, versatile, crowd-ready.</p>
       </div>
 
       <div class="service-card service-card--red">
@@ -80,7 +80,7 @@ const statusLabels = {
           </svg>
         </div>
         <h4 class="service-title">Club Nights</h4>
-        <p class="service-desc">Intimate sets that turn a room into a dance floor — groovy, tight, and impossible to ignore.</p>
+        <p class="service-desc">Intimate sets that turn a room into a dance floor. Groovy, tight, and impossible to ignore.</p>
       </div>
 
       <div class="service-card service-card--blue">
@@ -90,7 +90,7 @@ const statusLabels = {
           </svg>
         </div>
         <h4 class="service-title">Private Events</h4>
-        <p class="service-desc">Corporate events, gallery openings, exclusive parties — we bring the funk wherever the story needs it.</p>
+        <p class="service-desc">Corporate events, gallery openings, exclusive parties. We bring the funk wherever the story needs it.</p>
       </div>
 
       <div class="service-card service-card--yellow">
@@ -100,7 +100,7 @@ const statusLabels = {
           </svg>
         </div>
         <h4 class="service-title">Collaborations</h4>
-        <p class="service-desc">Guest artists, cross-genre projects, and studio collaborations — our 100+ network is your creative resource.</p>
+        <p class="service-desc">Guest artists, cross-genre projects, and studio collaborations. Our 120+ network is your creative resource.</p>
       </div>
 
     </div>
@@ -179,20 +179,25 @@ const statusLabels = {
 
             <div>
               <label class="block text-sm font-semibold mb-2 text-[var(--text-secondary)]">
-                Message
+                Message *
               </label>
               <textarea
                 name="message"
                 rows="4"
+                required
                 class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-[var(--accent-primary)] focus:outline-none transition-colors resize-none"
                 placeholder="Tell us about your event..."
               ></textarea>
             </div>
 
-            <!-- Honeypot per anti-spam -->
+            <!-- Honeypot anti-spam -->
             <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 
-            <button type="submit" class="btn-primary w-full">
+            <button
+              type="submit"
+              disabled
+              class="btn-primary w-full booking-submit"
+            >
               Send Request
             </button>
           </form>
@@ -336,33 +341,46 @@ const statusLabels = {
 
 <script is:inline>
   const form = document.querySelector('[data-booking-form]');
-  
+  const button = form?.querySelector('.booking-submit');
+
+  // Required fields: name, email, message
+  const requiredFields = form
+    ? Array.from(form.querySelectorAll('input[required], textarea[required]'))
+    : [];
+
+  function checkForm() {
+    const allFilled = requiredFields.every(el => el.value.trim() !== '');
+    button.disabled = !allFilled;
+  }
+
+  requiredFields.forEach(el => el.addEventListener('input', checkForm));
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const button = form.querySelector('button[type="submit"]');
+
     const originalText = button.textContent;
-    
-    // Feedback visivo
+
     button.textContent = 'Sending...';
     button.disabled = true;
-    
+
     try {
       const formData = new FormData(form);
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData
       });
-      
+
       if (response.ok) {
         button.textContent = '✓ Sent!';
         button.classList.add('bg-green-500');
         form.reset();
-        
+        // After reset, re-check so button goes back to disabled
+        checkForm();
+
         setTimeout(() => {
           button.textContent = originalText;
           button.classList.remove('bg-green-500');
-          button.disabled = false;
+          checkForm();
         }, 3000);
       } else {
         throw new Error('Failed to send');
@@ -370,17 +388,24 @@ const statusLabels = {
     } catch (error) {
       button.textContent = '✗ Error - Try again';
       button.classList.add('bg-red-500');
-      
+
       setTimeout(() => {
         button.textContent = originalText;
         button.classList.remove('bg-red-500');
-        button.disabled = false;
+        checkForm();
       }, 3000);
     }
   });
 </script>
 
 <style>
+  /* ── Submit button disabled state ── */
+  .booking-submit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   /* ── Service cards ── */
   .service-card {
     padding: 1.5rem;

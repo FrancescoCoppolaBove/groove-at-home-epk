@@ -31,8 +31,11 @@ const { metrics } = Astro.props;
         alt="Groove at Home live"
         class="hero-img-inner w-full h-full object-cover ken-burns"
         loading="eager"
-        quality={90}
+        fetchpriority="high"
+        quality={75}
         format="webp"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
       />
     </div>
 
@@ -43,8 +46,11 @@ const { metrics } = Astro.props;
         alt="Groove at Home"
         class="hero-img-inner w-full h-full object-cover ken-burns"
         loading="eager"
-        quality={90}
+        fetchpriority="high"
+        quality={75}
         format="webp"
+        widths={[640, 828]}
+        sizes="100vw"
       />
     </div>
 
@@ -65,7 +71,9 @@ const { metrics } = Astro.props;
           alt="Groove at Home Logo"
           class="w-20 h-20 md:w-24 md:h-24 object-contain"
           loading="eager"
-          quality={90}
+          width={96}
+          height={96}
+          quality={80}
         />
       </div>
     </div>
@@ -88,9 +96,9 @@ const { metrics } = Astro.props;
     <!-- Subheadline — artistic, no social numbers -->
     <div class="hero-item" style="--delay: 0.4s">
       <p class="hero-sub max-w-2xl mx-auto mb-10">
-        Born in a home studio. Grown into an international collective.
-        Italian funk and nu-jazz played the way it was always meant to feel
-        — <em>raw, soulful, and alive</em>.
+        Born in a home studio. Now on jazz festival stages and club circuits
+        across Italy and Europe. Funk and nu-jazz played the way it was
+        always meant to feel: <em>raw, soulful, and alive</em>.
       </p>
     </div>
 
@@ -101,7 +109,7 @@ const { metrics } = Astro.props;
           <svg class="w-3.5 h-3.5 text-[var(--accent-primary)]" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
           </svg>
-          <span>Riconoscimento da Jacob Collier</span>
+          <span>Recognised by Jacob Collier</span>
         </div>
         <div class="rounded-xl overflow-hidden shadow-2xl border border-white/10 hover:border-[var(--accent-primary)]/40 transition-colors duration-300">
           <Image
@@ -113,7 +121,7 @@ const { metrics } = Astro.props;
             format="webp"
           />
         </div>
-        <p class="text-[10px] text-white/40 mt-2 italic">Jacob Collier ha commentato il nostro arrangiamento</p>
+        <p class="text-[10px] text-white/40 mt-2 italic">Jacob Collier commented on our arrangement</p>
       </div>
     </div>
 

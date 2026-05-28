@@ -48,46 +48,63 @@ const images = [
         <!-- Origin paragraph -->
         <p class="bio-para bio-para--lead">
           It started simply: a drummer, a home studio, and the idea of reimagining music
-          the way it should feel — raw, warm, alive.
+          the way it should feel: raw, warm, alive.
         </p>
 
         <p class="bio-para">
           <strong class="text-white">Francesco Coppola Bove</strong> founded <strong class="text-[var(--accent-primary)]">Groove at Home</strong> as
-          a home-recording project in the vein of the great Italian funk and soul tradition. What began as
+          a home-recording project rooted in funk, soul and nu-jazz, drawing from a global tradition. What began as
           a solo experiment quickly grew into something far bigger: a rotating collective of over
-          <strong class="text-white">100+ musicians</strong> — all bound by the same love of deep grooves,
+          <strong class="text-white">120+ musicians</strong>, all bound by the same love of deep grooves,
           honest playing, and music that moves people.
         </p>
 
         <p class="bio-para">
-          Today, Groove at Home is one of Italy's most exciting live acts in modern funk and nu-jazz.
-          We've collaborated with celebrated artists like
-          <strong class="text-[var(--accent-primary)]">Francesca Tandoi</strong>,
-          <strong class="text-[var(--accent-primary)]">Mario Biondi</strong>,
-          <strong class="text-[var(--accent-primary)]">Arabella Rustico</strong>,
-          and many more — building a presence that spans stages from Milan to London to Frankfurt.
+          In 2025 we made our festival debut at the
+          <strong class="text-white">Nocera Jazz Festival</strong>, on the same bill as
+          <strong class="text-[var(--accent-primary)]">Mario Biondi</strong> and
+          <strong class="text-[var(--accent-primary)]">Arabella Rustico</strong>.
+          That same year we worked in the studio with
+          <strong class="text-[var(--accent-primary)]">Francesca Tandoi</strong>, one of the most respected voices in European jazz.
+          In early 2026 we took the project across Europe: three nights at
+          <strong class="text-white">BIKO</strong> in Milan,
+          <strong class="text-white">Crazy Coqs</strong> in London, and
+          <strong class="text-white">Das Wohnzimmer</strong> in Wiesbaden. Sold-out rooms,
+          different cities, same reaction every night.
         </p>
 
         <p class="bio-para">
-          We're not just a band. We're a community. A creative platform where musicians can explore, grow,
-          and connect with an audience that genuinely cares. With <strong class="text-white">40,000+ followers</strong>
-          on Instagram, a <strong class="text-white">5.75% engagement rate</strong> (well above industry average),
-          and a viral video that hit <strong class="text-white">416K views</strong>, we've built something that
-          resonates far beyond Italy.
+          In the summer of 2026 we return to the festival circuit as part of
+          <strong class="text-[var(--accent-primary)]">Kroton Jazz Festival</strong>,
+          one of southern Italy's most established jazz stages, where names like
+          Andrea Di Battista and Vincent Garcia have headlined. Three nights,
+          one of the most prestigious lineups we've been part of.
+        </p>
+
+        <p class="bio-para">
+          From festival main stages to jazz club residencies, we bring the same obsessive
+          attention to sound, arrangement, and the room. Every set is a living thing: music that breathes, a band that listens, and an audience that leaves wanting more.
+        </p>
+
+        <p class="bio-para">
+          Off stage, the reach speaks for itself: <strong class="text-white">40,000+ followers</strong>
+          on Instagram, a <strong class="text-white">5.75% engagement rate</strong> well above industry
+          average, and a viral video at <strong class="text-white">416K views</strong>. A community
+          that travels with us, wherever the music goes.
         </p>
 
         <p class="bio-para bio-para--closing">
-          Our first studio album arrives in <strong class="text-[var(--accent-primary)]">2027</strong> — with several original tracks
-          already performed live. The groove is just getting started.
+          Our first studio album arrives in <strong class="text-[var(--accent-primary)]">2027</strong>,
+          with original tracks already road-tested live. The groove is just getting started.
         </p>
 
         <!-- Bio stats row -->
         <div class="bio-stats-row mt-8">
           {[
             { value: '2023', label: 'Founded' },
-            { value: '100+', label: 'Musicians' },
-            { value: '3', label: 'Countries' },
-            { value: '2027', label: 'First Originals Album' },
+            { value: '120+', label: 'Musicians' },
+            { value: '3', label: 'Countries Toured' },
+            { value: '20+', label: 'Live Shows' },
           ].map(s => (
             <div class="bio-stat">
               <div class="bio-stat-value">{s.value}</div>
@@ -117,8 +134,10 @@ const images = [
                 alt={img.alt}
                 class="carousel-img w-full h-full object-cover"
                 loading={index === 0 ? 'eager' : 'lazy'}
-                quality={90}
+                quality={75}
                 format="webp"
+                widths={[400, 800]}
+                sizes="(max-width: 1024px) 100vw, 40vw"
               />
             </div>
           ))}
@@ -137,7 +156,7 @@ const images = [
             <button
               class="carousel-dot w-2 h-2 rounded-full bg-white/25 transition-all duration-300 hover:bg-white/50"
               data-dot-index={index}
-              aria-label={`Immagine ${index + 1}`}
+              aria-label={`Photo ${index + 1}`}
             />
           ))}
         </div>
