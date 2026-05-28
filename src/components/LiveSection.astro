@@ -15,6 +15,8 @@ import live11 from '../assets/foto_live_11_v.jpg';
 import live12 from '../assets/foto_live_12_h.jpg';
 import live13 from '../assets/foto_live_13_v.jpg';
 import live14 from '../assets/foto_live_14_v.jpg';
+import live15 from '../assets/foto_live_15_h.jpg';
+import live16 from '../assets/foto_live_16_v.JPG';
 
 import liveVideo from '../assets/live_video.mp4';
 import liveVideo1 from '../assets/live_video_1.mp4';
@@ -38,21 +40,34 @@ const videos = [
   // { type: 'youtube' as const, src: 'VIDEO_ID_QUI', label: 'Festival Set' },
 ];
 
+// ─── Photo sequence is intentional ───────────────────────────────────────────
+// Dense-packing in a 4-column grid requires an even count of both portrait (v)
+// and landscape (h) photos.  The order below groups them as:
+//   block A (rows 1-2): 4v  |  block B (rows 3-4): 2v + 2h stacked
+//   block A (rows 5-6): 4v  |  block B (rows 7-8): 2v + 2h stacked
+// This guarantees a gapless 4×8 rectangle. Do not reorder without re-checking.
+// ─────────────────────────────────────────────────────────────────────────────
 const livePhotos = [
+  // Block A — rows 1-2
   { src: live01, alt: 'On stage performance',    orient: 'v' },
   { src: live02, alt: 'Groove at Home live',      orient: 'v' },
   { src: live03, alt: 'Live performance energy',  orient: 'v' },
-  { src: live04, alt: 'Stage moments',            orient: 'h' },
   { src: live05, alt: 'Band on stage',            orient: 'v' },
-  { src: live06, alt: 'Live performance',         orient: 'h' },
+  // Block B — rows 3-4
   { src: live07, alt: 'Live performance',         orient: 'v' },
   { src: live08, alt: 'Live performance',         orient: 'v' },
+  { src: live04, alt: 'Stage moments',            orient: 'h' },
+  { src: live06, alt: 'Live performance',         orient: 'h' },
+  // Block A — rows 5-6
   { src: live09, alt: 'Live performance',         orient: 'v' },
   { src: live10, alt: 'Live performance',         orient: 'v' },
   { src: live11, alt: 'Live performance',         orient: 'v' },
-  { src: live12, alt: 'Live performance',         orient: 'h' },
   { src: live13, alt: 'Live performance',         orient: 'v' },
+  // Block B — rows 7-8
   { src: live14, alt: 'Live performance',         orient: 'v' },
+  { src: live16, alt: 'Live performance',         orient: 'v' },
+  { src: live12, alt: 'Live performance',         orient: 'h' },
+  { src: live15, alt: 'Live performance',         orient: 'h' },
 ];
 ---
 
