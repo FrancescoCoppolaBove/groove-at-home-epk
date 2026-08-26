@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="Page Not Found — Groove at Home"
+  description="This page doesn't exist. Head back to Groove at Home's homepage for music, live dates, and booking info."
+>
+  <section class="not-found-section relative min-h-screen flex items-center justify-center overflow-hidden film-grain px-6">
+    <div class="pointer-events-none absolute inset-0">
+      <div class="absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-10"
+        style="background: radial-gradient(closest-side, var(--accent-secondary), transparent)"></div>
+      <div class="absolute -bottom-32 right-1/4 w-[500px] h-[500px] rounded-full blur-3xl opacity-10"
+        style="background: radial-gradient(closest-side, var(--accent-blue), transparent)"></div>
+    </div>
+
+    <div class="relative z-10 text-center max-w-xl">
+      <span class="section-eyebrow">404</span>
+      <h1 class="font-playfair text-5xl md:text-7xl font-bold text-white mb-5 leading-tight">
+        Wrong Stage.<br/>
+        <em class="gradient-text not-italic">No Show Here.</em>
+      </h1>
+      <p class="text-lg text-[var(--text-secondary)] mb-10">
+        This page doesn't exist. Maybe it got cut from the set — let's get you back to the music.
+      </p>
+      <a href="/" class="btn-primary text-base md:text-lg px-10 py-4 font-bold inline-block">
+        Back to Home
+      </a>
+    </div>
+  </section>
+</Layout>
