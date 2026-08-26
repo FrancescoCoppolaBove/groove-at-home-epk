@@ -1,0 +1,11 @@
+---
+import { ICON_INSTAGRAM_PATHS } from '../../lib/icons';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'w-5 h-5' } = Astro.props;
+---
+
+<svg class={className} fill="currentColor" viewBox="0 0 24 24" set:html={ICON_INSTAGRAM_PATHS} />

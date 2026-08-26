@@ -1,7 +1,6 @@
 ---
 import "../styles/global.css";
 
-// Update this when the production domain is confirmed
 const SITE_URL = "https://grooveathome.com";
 
 interface Props {
@@ -103,6 +102,8 @@ const jsonLd = {
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700;800;900&display=swap">
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
     <!-- Fixed Side Navigation (Desktop) -->
     <nav id="side-nav" class="fixed left-0 top-1/2 -translate-y-1/2 z-50 hidden lg:block">
       <div class="flex flex-col gap-8 p-4">
@@ -201,7 +202,7 @@ const jsonLd = {
     </div>
 
     <!-- Main Content -->
-    <main>
+    <main id="main-content">
       <slot />
     </main>
 
@@ -319,3 +320,22 @@ const jsonLd = {
     </script>
   </body>
 </html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--accent-primary);
+    color: var(--bg-primary);
+    font-weight: 700;
+    transition: top 0.2s ease;
+  }
+
+  .skip-link:focus {
+    top: 1rem;
+  }
+</style>
