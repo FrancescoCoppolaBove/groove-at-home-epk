@@ -18,8 +18,13 @@ interface Props {
 
 const { email = 'athomegroove@gmail.com', tour } = Astro.props;
 
-const upcomingDates = tour.dates.filter(d => d.status !== 'past');
-const pastDates     = tour.dates.filter(d => d.status === 'past');
+const parseDate = (d: string) => new Date(d).getTime();
+
+// Upcoming: soonest first. Past: most recent first (nearest to today → farthest).
+const upcomingDates = tour.dates.filter(d => d.status !== 'past')
+  .sort((a, b) => parseDate(a.date) - parseDate(b.date));
+const pastDates = tour.dates.filter(d => d.status === 'past')
+  .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
 const statusColors = {
   confirmed: 'text-green-400',

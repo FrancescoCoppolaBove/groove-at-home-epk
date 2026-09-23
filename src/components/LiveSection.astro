@@ -6,17 +6,21 @@ import live02 from '../assets/foto_live_02_v.jpeg';
 import live03 from '../assets/foto_live_03_v.jpeg';
 import live04 from '../assets/foto_live_04_h.jpeg';
 import live05 from '../assets/foto_live_05_v.jpg';
-import live06 from '../assets/foto_live_06_h.jpeg';
 import live07 from '../assets/foto_live_07_v.jpeg';
 import live08 from '../assets/foto_live_08_v.jpg';
-import live09 from '../assets/foto_live_09_v.jpeg';
 import live10 from '../assets/foto_live_10_v.jpeg';
 import live11 from '../assets/foto_live_11_v.jpg';
 import live12 from '../assets/foto_live_12_h.jpg';
 import live13 from '../assets/foto_live_13_v.jpg';
 import live14 from '../assets/foto_live_14_v.jpg';
 import live15 from '../assets/foto_live_15_h.jpg';
-import live16 from '../assets/foto_live_16_v.JPG';
+import live17 from '../assets/foto_live_17_h.jpg';
+import live20 from '../assets/foto_live_20_h.jpg';
+import live21 from '../assets/foto_live_21_h.jpg';
+import live22 from '../assets/foto_live_22_h.jpg';
+import live23 from '../assets/foto_live_23_h.jpg';
+import live25 from '../assets/foto_live_25_h.jpg';
+import live26 from '../assets/foto_live_26_h.jpg';
 
 import liveVideo from '../assets/live_video.mp4';
 import liveVideo1 from '../assets/live_video_1.mp4';
@@ -44,30 +48,36 @@ const videos = [
 // Dense-packing in a 4-column grid requires an even count of both portrait (v)
 // and landscape (h) photos.  The order below groups them as:
 //   block A (rows 1-2): 4v  |  block B (rows 3-4): 2v + 2h stacked
-//   block A (rows 5-6): 4v  |  block B (rows 7-8): 2v + 2h stacked
-// This guarantees a gapless 4×8 rectangle. Do not reorder without re-checking.
+//   block C (rows 5-6): 4v  |  block D (rows 7-8): 4h  |  block E (rows 9-10): 4h
+// This guarantees a gapless rectangle. Do not reorder without re-checking, and
+// if you add/remove photos, keep the v-count and the h-count each even.
 // ─────────────────────────────────────────────────────────────────────────────
 const livePhotos = [
   // Block A — rows 1-2
-  { src: live01, alt: 'On stage performance',    orient: 'v' },
-  { src: live02, alt: 'Groove at Home live',      orient: 'v' },
-  { src: live03, alt: 'Live performance energy',  orient: 'v' },
   { src: live05, alt: 'Band on stage',            orient: 'v' },
-  // Block B — rows 3-4
-  { src: live07, alt: 'Guitarist singing lead into the mic under warm stage light', orient: 'v' },
-  { src: live08, alt: 'Saxophonist adjusting the mic stand under warm red stage light', orient: 'v' },
-  { src: live04, alt: 'Stage moments',            orient: 'h' },
-  { src: live06, alt: 'Close-up of cymbals and guitar headstock under purple stage light', orient: 'h' },
-  // Block A — rows 5-6
-  { src: live09, alt: 'Saxophonist in a denim shirt playing under blue stage light', orient: 'v' },
-  { src: live10, alt: 'Bespectacled saxophonist playing tenor sax under purple-blue light', orient: 'v' },
   { src: live11, alt: 'Bassist playing a five-string bass on stage',  orient: 'v' },
-  { src: live13, alt: 'Saxophonist playing alto sax in a red-lit club', orient: 'v' },
-  // Block B — rows 7-8
+  { src: live02, alt: 'Groove at Home live',      orient: 'v' },
   { src: live14, alt: 'Keyboardist at the piano before a show at The Crazy Coqs', orient: 'v' },
-  { src: live16, alt: 'Drummer performing with in-ear monitors, close up',        orient: 'v' },
+  // Block B — rows 3-4
+  { src: live08, alt: 'Saxophonist adjusting the mic stand under warm red stage light', orient: 'v' },
+  { src: live03, alt: 'Live performance energy',  orient: 'v' },
+  { src: live21, alt: 'Band performing on a smoky stage as spotlights cut through the haze over the crowd', orient: 'h' },
+  { src: live04, alt: 'Stage moments',            orient: 'h' },
+  // Block C — rows 5-6
+  { src: live10, alt: 'Bespectacled saxophonist playing tenor sax under purple-blue light', orient: 'v' },
+  { src: live01, alt: 'On stage performance',    orient: 'v' },
+  { src: live13, alt: 'Saxophonist playing alto sax in a red-lit club', orient: 'v' },
+  { src: live07, alt: 'Guitarist singing lead into the mic under warm stage light', orient: 'v' },
+  // Block D — rows 7-8
+  { src: live25, alt: 'Guitarist playing beside a Marshall amp under cool blue stage light', orient: 'h' },
   { src: live12, alt: 'Drummer mid-hit on the cymbals at The Crazy Coqs', orient: 'h' },
+  { src: live22, alt: 'Bassist in sunglasses playing a white bass under colorful stage light', orient: 'h' },
+  { src: live17, alt: 'Full band performing on stage as the crowd cheers under blue and purple lighting', orient: 'h' },
+  // Block E — rows 9-10
   { src: live15, alt: 'Band performing at The Crazy Coqs as the crowd cheers',       orient: 'h' },
+  { src: live26, alt: 'Wide shot of the stage and cheering crowd under warm golden lighting', orient: 'h' },
+  { src: live20, alt: 'Drummer mid-performance with a cymbal in the foreground', orient: 'h' },
+  { src: live23, alt: 'Silhouette of a guitarist performing under bright stage spotlights', orient: 'h' },
 ];
 ---
 
