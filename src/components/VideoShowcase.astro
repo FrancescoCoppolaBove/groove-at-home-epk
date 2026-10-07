@@ -9,6 +9,10 @@ function getEmbedUrl(postUrl: string): string {
   const [, type, id] = match;
   return `https://www.instagram.com/${type}/${id}/embed/`;
 }
+
+function getPostType(postUrl: string): string {
+  return /\/reel\//.test(postUrl) ? 'Reel' : 'Post';
+}
 ---
 
 <section id="videos" class="relative py-16 md:py-24 overflow-hidden">
@@ -47,17 +51,20 @@ function getEmbedUrl(postUrl: string): string {
   style="animation-delay:.15s"
 >
   {reels.map((url) => (
-    <article class="glass-card p-3 rounded-2xl w-full max-w-[326px] ig-wrap mx-auto">
-      <div class="relative w-full aspect-[9/16] overflow-hidden rounded-xl bg-black">
-        <iframe
-          src={getEmbedUrl(url)}
-          class="absolute inset-0 w-full h-full border-0"
-          allowfullscreen
-          loading="lazy"
-          scrolling="no"
-          title="Instagram post"
-        />
-      </div>
+    <article class="glass-card p-3 rounded-2xl w-full max-w-[326px] ig-wrap mx-auto ig-card" data-embed-src={getEmbedUrl(url)}>
+      <button
+        type="button"
+        class="ig-facade relative w-full aspect-[9/16] overflow-hidden rounded-xl"
+        aria-label={`Play Instagram ${getPostType(url)}`}
+      >
+        <span class="ig-facade-icon" aria-hidden="true">
+          <IconInstagram class="w-8 h-8" />
+        </span>
+        <span class="ig-facade-play" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="ig-facade-label">View {getPostType(url)}</span>
+      </button>
       <a
         href={url}
         target="_blank"
@@ -85,4 +92,76 @@ function getEmbedUrl(postUrl: string): string {
 @media (max-width: 640px) {
   .mobile-limit-3 { justify-items: center; }
 }
+
+.ig-card :global(iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.ig-facade {
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font: inherit;
+  background: linear-gradient(145deg, var(--accent-secondary), var(--accent-blue));
+}
+
+.ig-facade-icon {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ig-facade-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: auto;
+  border-radius: 9999px;
+  background: rgba(10, 10, 15, 0.55);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.ig-facade:hover .ig-facade-play {
+  transform: scale(1.1);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.ig-facade-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(to top, rgba(10,10,15,0.85), transparent);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+}
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.ig-card').forEach((card) => {
+    const btn = card.querySelector('.ig-facade');
+    const embedSrc = card.dataset.embedSrc;
+    if (!btn || !embedSrc) return;
+
+    btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = embedSrc;
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('scrolling', 'no');
+      iframe.title = 'Instagram post';
+      btn.replaceWith(iframe);
+    }, { once: true });
+  });
+</script>

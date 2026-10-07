@@ -1,5 +1,35 @@
 ---
-/** MusicSection – solo embed Spotify in griglia responsive */
+/** MusicSection – griglia Spotify con facade: niente iframe finché l'utente non clicca play */
+
+const trackIds = [
+  '3qtF4IPMShN4etHuVu7pcX',
+  '3ESeyizygcnrKp13EiDbCe',
+  '2bg5Z9OlgD4ms74mMkrjob',
+  '7ui98HQjJiEb0Xh2rcdZdm',
+  '77PNvRbUc6CmBxBwGHaD8f',
+  '7McoTbxPItWBe9Wsh4OqKK',
+];
+
+// ═══════════════════════════════════════════════════════════
+//  HOW TO ADD/SWAP TRACKS
+//  ─────────────────────
+//  Add/replace an ID in trackIds above — grab it from the Spotify
+//  share link (open.spotify.com/track/{ID}). Cover art and title are
+//  fetched at build time from Spotify's oEmbed endpoint.
+// ═══════════════════════════════════════════════════════════
+const tracks = await Promise.all(
+  trackIds.map(async (id) => {
+    const embedSrc = `https://open.spotify.com/embed/track/${id}?utm_source=generator`;
+    try {
+      const res = await fetch(`https://open.spotify.com/oembed?url=https://open.spotify.com/track/${id}`);
+      if (!res.ok) throw new Error(`oEmbed ${res.status}`);
+      const data = await res.json();
+      return { id, embedSrc, title: data.title as string, thumbnail: data.thumbnail_url as string };
+    } catch {
+      return { id, embedSrc, title: null, thumbnail: null };
+    }
+  })
+);
 ---
 
 <section id="music" class="py-24 relative overflow-hidden">
@@ -23,69 +53,37 @@
       </p>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         HOW TO ADD/SWAP TRACKS
-         ─────────────────────
-         Each card is a Spotify track embed. To swap a track, replace the
-         ID in the /track/{ID} part of the src URL — grab it from the
-         Spotify share link (open.spotify.com/track/{ID}).
-         ═══════════════════════════════════════════════════════════ -->
-    <!-- Griglia embed -->
+    <!-- Griglia facade: l'iframe pesante si monta solo al click -->
     <div
       class="grid gap-8 md:gap-10 mobile-limit-3"
       style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));"
     >
-      <!-- Ogni card usa un wrapper glass + radius coerente con lo stile -->
-      <div class="glass rounded-3xl p-3">
-        <iframe 
-          data-testid="embed-iframe" 
-          style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/3qtF4IPMShN4etHuVu7pcX?utm_source=generator" 
-          width="100%" height="352"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="glass rounded-3xl p-3">
-        <iframe data-testid="embed-iframe" style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/3ESeyizygcnrKp13EiDbCe?utm_source=generator"
-          width="100%" height="352" allowfullscreen
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="glass rounded-3xl p-3">
-        <iframe data-testid="embed-iframe" style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/2bg5Z9OlgD4ms74mMkrjob?utm_source=generator"
-          width="100%" height="352" allowfullscreen
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="glass rounded-3xl p-3">
-        <iframe data-testid="embed-iframe" style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/7ui98HQjJiEb0Xh2rcdZdm?utm_source=generator"
-          width="100%" height="352" allowfullscreen
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="glass rounded-3xl p-3">
-        <iframe data-testid="embed-iframe" style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/77PNvRbUc6CmBxBwGHaD8f?utm_source=generator"
-          width="100%" height="352" allowfullscreen
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
-
-      <div class="glass rounded-3xl p-3">
-        <iframe data-testid="embed-iframe" style="border-radius:12px"
-          src="https://open.spotify.com/embed/track/7McoTbxPItWBe9Wsh4OqKK?utm_source=generator"
-          width="100%" height="352" allowfullscreen
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"></iframe>
-      </div>
+      {tracks.map((t) => (
+        <div class="glass rounded-3xl p-3 track-card" data-embed-src={t.embedSrc}>
+          <button
+            type="button"
+            class="track-facade"
+            aria-label={t.title ? `Play "${t.title}" on Spotify` : 'Play track on Spotify'}
+          >
+            {t.thumbnail ? (
+              <img
+                src={t.thumbnail}
+                alt={t.title ?? 'Spotify track cover'}
+                class="track-cover"
+                loading="lazy"
+                width="300"
+                height="300"
+              />
+            ) : (
+              <span class="track-cover track-cover--fallback" aria-hidden="true"></span>
+            )}
+            <span class="track-play-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            {t.title && <span class="track-title">{t.title}</span>}
+          </button>
+        </div>
+      ))}
     </div>
 
     <!-- Tag/hashtag (opzionale): lascio per coerenza visual -->
@@ -102,6 +100,92 @@
 </section>
 
 <style>
-  /* Piccolo miglioramento: smussa l'iframe nei container */
   .glass :global(iframe){ width:100%; height:352px; border-radius:12px; }
+
+  .track-card { display: flex; }
+
+  .track-facade {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 352px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    background: var(--bg-tertiary);
+    font: inherit;
+  }
+
+  .track-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+  }
+
+  .track-cover--fallback {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-blue));
+  }
+
+  .track-facade:hover .track-cover {
+    transform: scale(1.04);
+    filter: brightness(0.7);
+  }
+
+  .track-play-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin: auto;
+    border-radius: 9999px;
+    background: var(--accent-gradient);
+    color: #0a0a0f;
+    box-shadow: var(--shadow-glow);
+    transition: transform 0.25s ease;
+  }
+
+  .track-facade:hover .track-play-icon {
+    transform: scale(1.1);
+  }
+
+  .track-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.9rem 1rem;
+    background: linear-gradient(to top, rgba(10,10,15,0.85), transparent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: left;
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.track-card').forEach((card) => {
+    const btn = card.querySelector('.track-facade');
+    const embedSrc = card.dataset.embedSrc;
+    if (!btn || !embedSrc) return;
+
+    btn.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('data-testid', 'embed-iframe');
+      iframe.style.borderRadius = '12px';
+      iframe.src = embedSrc;
+      iframe.width = '100%';
+      iframe.height = '352';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+      btn.replaceWith(iframe);
+    }, { once: true });
+  });
+</script>
