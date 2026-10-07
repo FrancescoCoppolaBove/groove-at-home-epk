@@ -49,6 +49,11 @@
   /* section transitions */
   --section-clip-in: inset(0 100% 0 0);
   --section-clip-out: inset(0 0% 0 0);
+
+  /* Typography scale — fluid, grows with viewport instead of jumping between breakpoints */
+  --text-display: clamp(2.8rem, 8vw, 7rem);   /* Hero H1 only */
+  --text-h2:      clamp(2.25rem, 6vw, 5.5rem); /* section headings */
+  --text-h3:      clamp(1.5rem, 3vw, 2.25rem); /* standalone sub-headings, not small grid-card titles */
 }
 
 /* Light mode is intentionally disabled — dark is the canonical experience */
@@ -238,6 +243,24 @@
   /* Playfair display */
   .font-playfair {
     font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  /* Section heading — replaces the old fixed text-4xl/5xl/6xl pattern repeated per-section */
+  .section-heading {
+    @apply font-bold;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: var(--text-h2);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  /* Standalone sub-heading (e.g. a card's own title, not a repeated grid-card label) */
+  .card-heading {
+    @apply font-bold;
+    font-size: var(--text-h3);
+    line-height: 1.1;
+    color: #fff;
   }
 
   /* Buttons */
