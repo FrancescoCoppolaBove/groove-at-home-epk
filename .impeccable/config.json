@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-10-07T09:45:47.646Z",
         "reason": "scratch brainstorming mockup, not production code; flagged spacing is on short uppercase labels, which the rule itself exempts"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/styles/global.css"
+        ],
+        "createdAt": "2026-10-07T12:45:32.039Z",
+        "reason": "pre-existing, intentional gradient-text technique used site-wide for headline accents; documented in DESIGN.md as part of the established visual identity, not introduced this session"
       }
     ]
   }
