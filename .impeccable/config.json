@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/31773-1791366216/content/visual-direction.html"
+        ],
+        "createdAt": "2026-10-07T09:45:47.646Z",
+        "reason": "scratch brainstorming mockup, not production code; flagged spacing is on short uppercase labels, which the rule itself exempts"
+      }
+    ]
+  }
+}

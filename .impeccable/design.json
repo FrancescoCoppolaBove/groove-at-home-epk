@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T12:40:00Z",
+  "title": "Design System: Groove at Home",
+  "extensions": {
+    "colorMeta": {
+      "golden-spotlight": { "role": "primary", "displayName": "Golden Spotlight", "canonical": "#f7b538" },
+      "deep-red-velvet": { "role": "secondary", "displayName": "Deep Red Velvet", "canonical": "#c32f27" },
+      "vintage-cobalt": { "role": "tertiary", "displayName": "Vintage Cobalt", "canonical": "#1e4a8a" },
+      "sunset-orange": { "role": "accent", "displayName": "Sunset Orange", "canonical": "#d8572a" },
+      "burnt-amber": { "role": "accent", "displayName": "Burnt Amber", "canonical": "#db7c26" },
+      "cobalt-mid": { "role": "accent", "displayName": "Cobalt Mid", "canonical": "#2d6bbf" },
+      "void-black": { "role": "neutral", "displayName": "Void Black", "canonical": "#0a0a0f" },
+      "surface-dark": { "role": "neutral", "displayName": "Surface Dark", "canonical": "#12121a" },
+      "surface-elevated": { "role": "neutral", "displayName": "Surface Elevated", "canonical": "#1a1a24" },
+      "card-surface": { "role": "neutral", "displayName": "Card Surface", "canonical": "rgba(26, 26, 36, 0.60)" },
+      "text-primary": { "role": "neutral", "displayName": "Text Primary", "canonical": "#ffffff" },
+      "text-warm": { "role": "neutral", "displayName": "Text Warm", "canonical": "#e8c3a0" },
+      "text-muted": { "role": "neutral", "displayName": "Text Muted", "canonical": "#9b8574" },
+      "hairline": { "role": "neutral", "displayName": "Hairline", "canonical": "rgba(255, 255, 255, 0.08)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero H1 only; the single largest text on the page at every width." },
+      "headline": { "displayName": "Headline", "purpose": "Every section H2; fluid clamp() scale, not fixed breakpoints." },
+      "title": { "displayName": "Title", "purpose": "Standalone sub-headings inside a surface, e.g. \"Request Booking\". Not for small repeated grid-card labels." },
+      "body": { "displayName": "Body", "purpose": "Long-form paragraph copy (Bio section narrative)." },
+      "label": { "displayName": "Label", "purpose": "Uppercase eyebrows and small stat/badge sub-labels." },
+      "numeral": { "displayName": "Numeral", "purpose": "Stat figures only (e.g. \"40K+\", \"120+\"); Space Grotesk for a distinct data-readout feel." }
+    },
+    "shadows": [
+      { "name": "shadow-sm", "value": "0 2px 10px rgba(0, 0, 0, 0.30)", "purpose": "Subtle lift on small elements." },
+      { "name": "shadow-md", "value": "0 10px 30px rgba(0, 0, 0, 0.40)", "purpose": "Default card lift." },
+      { "name": "shadow-lg", "value": "0 20px 60px rgba(0, 0, 0, 0.55)", "purpose": "Photography, video cards, carousel frame." },
+      { "name": "shadow-glow", "value": "0 0 40px rgba(247, 181, 56, 0.28)", "purpose": "Warm-glow interactivity signal on primary buttons and elevated moments." },
+      { "name": "shadow-glow-red", "value": "0 0 30px rgba(195, 47, 39, 0.35)", "purpose": "Red-rotation glow variant for stat/trust/pillar cards." },
+      { "name": "shadow-glow-blue", "value": "0 0 30px rgba(30, 74, 138, 0.40)", "purpose": "Blue-rotation glow variant for stat/trust/pillar cards." }
+    ],
+    "motion": [
+      { "name": "gradient-shift", "value": "4s ease infinite, background-position 0%->100%->0%", "purpose": "Animated gradient fill on primary buttons and gradient-text headline accents." },
+      { "name": "ken-burns", "value": "28s ease-in-out infinite alternate, scale 1.08-1.14 + slight translate", "purpose": "Slow cinematic pan/zoom on hero and background photography." },
+      { "name": "fade-in-up", "value": "0.85s ease-out, opacity 0->1 + translateY(28px)->0", "purpose": "Staggered entrance for Hero content items." },
+      { "name": "reveal", "value": "0.75s ease-out, opacity 0->1 + translateY(40px)->0, triggered by .active class on scroll", "purpose": "Section-level scroll-reveal." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main CTA button (e.g. \"Book for Your Stage\"). Animated gold-to-orange gradient, white bold text, warm glow.",
+      "html": "<a href=\"#booking\" class=\"ds-btn-primary\">Book for Your Stage</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; border-radius: 9999px; font-weight: 700; color: #ffffff; background: linear-gradient(135deg, #f7b538, #d8572a); background-size: 200% 200%; animation: ds-gradient-shift 3s ease infinite; box-shadow: 0 0 40px rgba(247, 181, 56, 0.28); transition: transform 0.3s ease, box-shadow 0.3s ease; } .ds-btn-primary:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 12px 40px rgba(247, 181, 56, 0.45); } @keyframes ds-gradient-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary CTA used over imagery (e.g. \"Experience the Sound\"). Translucent, blurred, thin gold border.",
+      "html": "<a href=\"#music\" class=\"ds-btn-ghost\">Experience the Sound</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; justify-content: center; padding: 16px 32px; border-radius: 9999px; font-weight: 600; color: #ffffff; background: rgba(10, 10, 15, 0.55); backdrop-filter: blur(10px); border: 2px solid rgba(247, 181, 56, 0.32); transition: all 0.3s ease; } .ds-btn-ghost:hover { background: rgba(247, 181, 56, 0.14); border-color: #f7b538; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(247, 181, 56, 0.18); }"
+    },
+    {
+      "name": "Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Generic translucent elevated surface used for form containers, embeds, and the Jacob Collier endorsement card.",
+      "html": "<div class=\"ds-card-glass\">Card content</div>",
+      "css": ".ds-card-glass { background: rgba(26, 26, 36, 0.60); backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.40); transition: all 0.3s ease; } .ds-card-glass:hover { transform: translateY(-4px); border-color: rgba(247, 181, 56, 0.50); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55), 0 0 40px rgba(247, 181, 56, 0.28); }"
+    },
+    {
+      "name": "Stat Card (gold variant)",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Metrics-section stat card; rotates through gold/red/blue siblings (The Three-Accent Rotation Rule). Large Space Grotesk numeral, uppercase label, short description.",
+      "html": "<div class=\"ds-stat-card\"><span class=\"ds-stat-growth\">+12%</span><div class=\"ds-stat-value\">40K+</div><div class=\"ds-stat-label\">Instagram</div></div>",
+      "css": ".ds-stat-card { position: relative; overflow: hidden; border-radius: 20px; padding: 28px; border: 1.5px solid transparent; background: rgba(26, 26, 36, 0.60); backdrop-filter: blur(16px); display: flex; flex-direction: column; gap: 8px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; } .ds-stat-card:hover { transform: translateY(-6px) scale(1.01); border-color: rgba(247,181,56,0.45); box-shadow: 0 20px 50px rgba(247,181,56,0.12); } .ds-stat-growth { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; color: #f7b538; } .ds-stat-value { font-family: 'Space Grotesk', 'Inter', sans-serif; font-size: 2.5rem; font-weight: 900; line-height: 1; background: linear-gradient(135deg, #f7b538, #d8572a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; } .ds-stat-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #9b8574; }"
+    },
+    {
+      "name": "Trust Badge Chip",
+      "kind": "chip",
+      "refersTo": "chip-trust-badge",
+      "description": "Credibility pill (e.g. \"40K+ Instagram\"). Desktop: wrapped static grid. Mobile: infinite marquee.",
+      "html": "<div class=\"ds-chip\"><span class=\"ds-chip-icon\">★</span><span class=\"ds-chip-text\"><span class=\"ds-chip-label\">40K+ Instagram</span><span class=\"ds-chip-sub\">Engaged Community</span></span></div>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 9999px; border: 1px solid rgba(247, 181, 56, 0.25); background: rgba(247, 181, 56, 0.08); color: #f7b538; font-size: 0.78rem; white-space: nowrap; transition: transform 0.25s ease, border-color 0.25s ease; } .ds-chip:hover { transform: translateY(-2px); border-color: rgba(247, 181, 56, 0.5); } .ds-chip-text { display: flex; flex-direction: column; gap: 1px; } .ds-chip-label { font-weight: 700; font-size: 0.78rem; line-height: 1.2; } .ds-chip-sub { font-size: 0.62rem; opacity: 0.65; font-weight: 500; letter-spacing: 0.03em; }"
+    },
+    {
+      "name": "Side Dot Navigation",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Signature desktop navigation: fixed vertical dot column tracking scroll position, active dot widens and glows, inactive dots reveal a label on hover. Replaced by a full-height slide-in panel on mobile.",
+      "html": "<nav class=\"ds-dotnav\"><a href=\"#home\" class=\"ds-nav-link ds-active\"><div class=\"ds-nav-dot\"></div><span class=\"ds-nav-label\">Home</span></a><a href=\"#bio\" class=\"ds-nav-link\"><div class=\"ds-nav-dot\"></div><span class=\"ds-nav-label\">Bio</span></a></nav>",
+      "css": ".ds-dotnav { display: flex; flex-direction: column; gap: 14px; padding: 12px; } .ds-nav-link { display: flex; align-items: center; gap: 10px; text-decoration: none; } .ds-nav-dot { width: 10px; height: 10px; border-radius: 9999px; background: #db7c26; transition: all 0.25s ease; flex-shrink: 0; } .ds-nav-link.ds-active .ds-nav-dot { width: 36px; background: #db7c26; box-shadow: 0 0 12px rgba(219, 124, 38, 0.6); border: 1px solid #db7c26; } .ds-nav-label { opacity: 0; color: rgba(255,255,255,0.7); font-size: 0.875rem; white-space: nowrap; transition: opacity 0.25s ease; } .ds-nav-link:hover .ds-nav-label { opacity: 1; color: #db7c26; font-weight: 900; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Vintage Soul Stage",
+    "overview": "The site reads as a dark stage lit by warm spotlights, not a software product. Everything sits on a near-black, cinematic background (film grain, Ken Burns pans on photography, gradient vignettes) with a deliberately narrow three-accent vintage palette — gold stage light, deep red velvet, cobalt blue — carrying every point of emphasis. The voice is direct and proof-driven rather than ornamental: credibility is built from named collaborators, real numbers, and concrete history, and the visual system stays confident and uncluttered so that proof reads clearly. This identity was deliberately preserved (not replaced) in the most recent redesign pass — the brief was to elevate execution and typographic impact without changing the palette, fonts, or structure.",
+    "keyCharacteristics": [
+      "Always dark, cinematic, photography-led (never a light theme)",
+      "One warm gold accent carries primary interactivity; red and blue rotate in as secondary signal colors on cards/badges",
+      "Editorial serif display type (Playfair Display) paired with a clean grotesque body (Inter), plus a distinct geometric face (Space Grotesk) reserved for numerals/stats",
+      "Headline sizes scale fluidly with viewport (clamp()), not in fixed breakpoint jumps",
+      "Glassmorphism + warm glow signal elevation and interactivity rather than hard drop shadows"
+    ],
+    "rules": [
+      { "name": "The Warm Glow Rule", "body": "Every primary interactive or elevated element — primary buttons, hovered glass cards, the logo ring, the Jacob Collier endorsement card — carries a warm gold glow. Glow, not a harder shadow, is the site's signal for \"this matters\" or \"this responds.\"", "section": "colors" },
+      { "name": "The Three-Accent Rotation Rule", "body": "Repeated card/badge sets (stat cards, trust badges, pillar icons) cycle gold → red → blue across siblings rather than defaulting every instance to the primary accent.", "section": "colors" },
+      { "name": "The Fluid Scale Rule", "body": "Headline sizes use clamp()-based fluid scaling (--text-display, --text-h2, --text-h3), never fixed Tailwind breakpoint classes. Any new headline follows the same pattern.", "section": "typography" },
+      { "name": "The Small-Label Exception Rule", "body": "The fluid headline scale never applies to small, repeated grid-card titles (.pillar-title, .service-title, .stat-label). Those stay at their compact, fixed size.", "section": "typography" },
+      { "name": "The Always-Dark Rule", "body": "color-scheme is dark only; light mode is intentionally disabled in source. The cinematic dark environment is an invariant, not a toggleable default.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep the dark background and three-accent vintage palette (Golden Spotlight / Deep Red Velvet / Vintage Cobalt) as the baseline for every surface.",
+      "Do use the fluid --text-display / --text-h2 / --text-h3 scale for any new headline, never fixed Tailwind breakpoint classes.",
+      "Do apply the warm gold glow to signal interactivity on primary buttons and elevated/hovered cards.",
+      "Do rotate new stat/badge/pillar-style card sets through the gold → red → blue sequence instead of repeating one accent."
+    ],
+    "donts": [
+      "Don't modify the logo asset (Groove_transparent_logo.png) or its ring/placement treatment.",
+      "Don't introduce colors outside the established accent/neutral palette.",
+      "Don't apply the large fluid headline scale to small, repeated grid-card labels (.pillar-title, .service-title, .stat-label).",
+      "Don't enable or design for a light theme; the dark cinematic environment is invariant."
+    ]
+  }
+}

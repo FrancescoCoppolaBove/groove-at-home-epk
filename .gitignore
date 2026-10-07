@@ -26,3 +26,13 @@ pnpm-debug.log*
 # installed agent skills
 .agents/
 skills-lock.json
+
+# brainstorming visual companion
+.superpowers/
+
+# installed Claude Code / Codex tooling (local, not project source)
+.claude/
+.codex/
+
+# impeccable local cache (config.json and design.json ARE committed)
+.impeccable/hook.cache.json
