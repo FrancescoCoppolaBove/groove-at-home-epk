@@ -1,0 +1,380 @@
+---
+/** NewReleaseSection – singolo in uscita + countdown all'album. Player Spotify a facade (iframe solo al click). */
+import { Image } from 'astro:assets';
+import singleCover from '../assets/you_give_me_something_cover.jpg';
+import albumCover from '../assets/grab_a_chair_cover.jpg';
+
+// ═══════════════════════════════════════════════════════════
+//  HOW TO UPDATE THIS RELEASE
+//  ─────────────────────────
+//  Swap the Spotify track ID, titles and the album release date
+//  (ISO with Italian offset). After releaseDate passes the countdown
+//  switches to "Out now" on its own.
+// ═══════════════════════════════════════════════════════════
+const release = {
+  single: 'You Give Me Something',
+  trackId: '0WDkgGz5wdZclc3SQwTlDO',
+  album: 'Grab a Chair',
+  releaseDate: '2026-11-06T00:00:00+01:00',
+  releaseLabel: 'November 6, 2026',
+};
+
+const spotifyUrl = `https://open.spotify.com/track/${release.trackId}`;
+const embedSrc = `https://open.spotify.com/embed/track/${release.trackId}?utm_source=generator&theme=0`;
+const albumOut = Date.now() >= Date.parse(release.releaseDate);
+---
+
+<section id="release" class="release-section relative overflow-hidden film-grain">
+  <!-- Spotlight caldo: richiama il giallo della copertina -->
+  <div class="release-spotlight absolute pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 container-max section-padding">
+    <div class="grid lg:grid-cols-[1.05fr_1fr] gap-14 lg:gap-20 items-center">
+
+      <!-- ── Cover stack: album dietro, singolo davanti ── -->
+      <div class="cover-stage reveal" aria-hidden="true">
+        <div class="cover cover--album">
+          <Image src={albumCover} alt="" widths={[400, 640, 900]} sizes="(min-width: 1024px) 36vw, 70vw" quality={80} format="webp" loading="lazy" />
+        </div>
+        <div class="cover cover--single">
+          <Image src={singleCover} alt="" widths={[400, 640, 900]} sizes="(min-width: 1024px) 36vw, 70vw" quality={82} format="webp" loading="lazy" />
+        </div>
+        <span class="cover-sticker">
+          <span>New</span>
+          <span>Single</span>
+        </span>
+      </div>
+
+      <!-- ── Copy ── -->
+      <div class="reveal">
+        <span class="section-eyebrow">
+          <span class="live-dot" aria-hidden="true"></span>
+          New Single · Out Now
+        </span>
+
+        <h2 class="section-heading">
+          You Give Me<br/>
+          <em class="gradient-text">Something.</em>
+        </h2>
+
+        <p class="release-lede mt-6 max-w-xl">
+          The new single from <strong>{release.album}</strong>, our album of covers.
+          Songs we love, played our way. The full record lands on {release.releaseLabel}.
+        </p>
+
+        <!-- Player compatto a facade -->
+        <div class="player-slot mt-8" data-embed-src={embedSrc}>
+          <button type="button" class="player-facade" aria-label={`Play "${release.single}" on Spotify`}>
+            <Image src={singleCover} alt="" width={96} height={96} quality={70} format="webp" class="player-thumb" />
+            <span class="player-meta">
+              <span class="player-title">{release.single}</span>
+              <span class="player-sub">Groove at Home · {release.album}</span>
+            </span>
+            <span class="player-play" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+          </button>
+        </div>
+
+        <div class="mt-6 flex flex-col sm:flex-row gap-4">
+          <a href={spotifyUrl} target="_blank" rel="noopener" class="btn-primary inline-flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/>
+            </svg>
+            Listen on Spotify
+          </a>
+        </div>
+
+        <!-- Countdown album -->
+        <div class="album-countdown mt-10" data-release={release.releaseDate}>
+          <div class="album-countdown__label">
+            <span class="text-[var(--text-tertiary)]">The album</span>
+            <span class="font-playfair italic text-white text-xl normal-case tracking-normal">{release.album}</span>
+          </div>
+
+          <p class="countdown-out" hidden={!albumOut}>Out now, everywhere.</p>
+
+          <div class="countdown-grid" hidden={albumOut}>
+            <p class="sr-only">Out on {release.releaseLabel}.</p>
+            {[['days', 'Days'], ['hours', 'Hours'], ['minutes', 'Min'], ['seconds', 'Sec']].map(([unit, label]) => (
+              <div class="countdown-cell" aria-hidden="true">
+                <span class="countdown-num" data-unit={unit}>--</span>
+                <span class="countdown-unit">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="vintage-divider" />
+
+<style>
+  .release-section { background: var(--bg-secondary); }
+
+  .release-spotlight {
+    top: 50%;
+    left: 28%;
+    width: min(900px, 120vw);
+    height: min(900px, 120vw);
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(247, 181, 56, 0.22) 0%, rgba(195, 47, 39, 0.08) 40%, transparent 68%);
+    filter: blur(20px);
+  }
+
+  /* ── Cover stack ── */
+  .cover-stage {
+    position: relative;
+    width: min(100%, 520px);
+    aspect-ratio: 1 / 1.08;
+    margin-inline: auto;
+  }
+
+  .cover {
+    position: absolute;
+    width: 82%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .cover :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .cover--album {
+    top: 0;
+    right: 0;
+    transform: rotate(6deg);
+    filter: brightness(0.82);
+  }
+
+  .cover--single {
+    bottom: 0;
+    left: 0;
+    transform: rotate(-3deg);
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+  }
+
+  .cover-stage:hover .cover--album  { transform: rotate(9deg) translate(4%, -3%); }
+  .cover-stage:hover .cover--single { transform: rotate(-5deg) translate(-3%, 2%); }
+
+  .cover-sticker {
+    position: absolute;
+    top: 34%;
+    left: -2%;
+    z-index: 2;
+    display: grid;
+    place-content: center;
+    width: clamp(72px, 16vw, 104px);
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background: var(--accent-secondary);
+    color: #fff;
+    font-size: clamp(0.62rem, 1.4vw, 0.78rem);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    line-height: 1.25;
+    text-align: center;
+    text-transform: uppercase;
+    transform: rotate(-14deg);
+    box-shadow: var(--accent-glow-red), var(--shadow-md);
+    border: 2px dashed rgba(255, 255, 255, 0.35);
+    outline: 4px solid var(--accent-secondary);
+  }
+
+  /* ── Copy ── */
+  .release-lede {
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .release-lede strong { color: #fff; font-weight: 700; }
+
+  .live-dot {
+    display: inline-block;
+    vertical-align: middle;
+    margin: -2px 0.5rem 0 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--accent-secondary);
+    animation: live-ping 1.8s ease-out infinite;
+  }
+
+  @keyframes live-ping {
+    0%   { box-shadow: 0 0 0 0 rgba(195, 47, 39, 0.6); }
+    100% { box-shadow: 0 0 0 10px rgba(195, 47, 39, 0); }
+  }
+
+  /* ── Player facade ── */
+  .player-slot { max-width: 34rem; }
+  .player-slot :global(iframe) { display: block; width: 100%; height: 152px; border: 0; border-radius: 12px; }
+
+  .player-facade {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    height: 152px;
+    padding: 1rem 1.25rem 1rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    color: #fff;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .player-facade:hover {
+    border-color: var(--border-hover);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .player-thumb { width: 6rem; height: 6rem; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+
+  .player-meta { display: flex; flex-direction: column; gap: 0.25rem; min-width: 0; flex: 1; }
+  .player-title { font-weight: 700; font-size: 1.05rem; }
+  .player-sub { font-size: 0.85rem; color: var(--text-tertiary); }
+
+  .player-play {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    flex-shrink: 0;
+    border-radius: 9999px;
+    background: var(--accent-gradient);
+    color: #0a0a0f;
+    box-shadow: var(--shadow-glow);
+    transition: transform 0.25s ease;
+  }
+
+  .player-facade:hover .player-play { transform: scale(1.1); }
+
+  /* ── Countdown ── */
+  .album-countdown {
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--border-color);
+    max-width: 34rem;
+  }
+
+  .album-countdown__label {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+  .countdown-grid[hidden], .countdown-out[hidden] { display: none; }
+
+  .countdown-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.9rem 0.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+  }
+
+  /* Rotazione accenti: bianco → gold → red → blue */
+  .countdown-cell:nth-child(3) .countdown-num { color: var(--accent-primary); }
+  .countdown-cell:nth-child(4) .countdown-num { color: var(--accent-tertiary); }
+  .countdown-cell:nth-child(5) .countdown-num { color: var(--accent-blue-mid); }
+
+  .countdown-num {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+  }
+
+  .countdown-unit {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .countdown-out {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: var(--text-h3);
+    color: var(--accent-primary);
+  }
+
+  @media (max-width: 640px) {
+    .player-facade { height: auto; min-height: 104px; }
+    .player-thumb { width: 4.5rem; height: 4.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cover, .cover-stage:hover .cover { transition: none; }
+    .live-dot { animation: none; }
+  }
+</style>
+
+<script>
+  /* Facade Spotify: monta l'iframe solo al click */
+  const slot = document.querySelector<HTMLElement>('#release .player-slot');
+  const facade = slot?.querySelector('.player-facade');
+  const embedSrc = slot?.dataset.embedSrc;
+  if (facade && embedSrc) {
+    facade.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = embedSrc;
+      iframe.title = 'Spotify player: You Give Me Something';
+      iframe.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+      facade.replaceWith(iframe);
+    }, { once: true });
+  }
+
+  /* Countdown all'uscita dell'album; passa a "Out now" a data raggiunta */
+  const box = document.querySelector<HTMLElement>('#release .album-countdown');
+  const target = Date.parse(box?.dataset.release ?? '');
+  const grid = box?.querySelector<HTMLElement>('.countdown-grid');
+  const out = box?.querySelector<HTMLElement>('.countdown-out');
+  if (box && grid && out && !Number.isNaN(target)) {
+    const cells = new Map(
+      [...box.querySelectorAll<HTMLElement>('[data-unit]')].map((el) => [el.dataset.unit, el])
+    );
+    const pad = (n: number) => String(n).padStart(2, '0');
+    let timer = 0;
+
+    const tick = () => {
+      const diff = target - Date.now();
+      if (diff <= 0) {
+        grid.hidden = true;
+        out.hidden = false;
+        clearInterval(timer);
+        return;
+      }
+      const s = Math.floor(diff / 1000);
+      cells.get('days')!.textContent = pad(Math.floor(s / 86400));
+      cells.get('hours')!.textContent = pad(Math.floor((s % 86400) / 3600));
+      cells.get('minutes')!.textContent = pad(Math.floor((s % 3600) / 60));
+      cells.get('seconds')!.textContent = pad(s % 60);
+    };
+
+    tick();
+    timer = window.setInterval(tick, 1000);
+  }
+</script>

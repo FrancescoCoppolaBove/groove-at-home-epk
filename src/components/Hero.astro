@@ -78,6 +78,19 @@ const { metrics } = Astro.props;
       </div>
     </div>
 
+    <!-- New release pill -->
+    <div class="hero-item" style="--delay: 0.05s">
+      <div class="flex justify-center mb-4">
+        <a href="#release" class="release-pill">
+          <span class="release-pill__badge">New single</span>
+          <span class="release-pill__text">You Give Me Something <span class="hidden sm:inline text-white/50">· out now</span></span>
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
     <!-- Eyebrow -->
     <div class="hero-item" style="--delay: 0.1s">
       <div class="flex justify-center mb-5">
@@ -204,6 +217,45 @@ const { metrics } = Astro.props;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   backdrop-filter: blur(8px);
+}
+
+/* ── New release pill ── */
+.release-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 100%;
+  padding: 0.3rem 0.9rem 0.3rem 0.3rem;
+  border-radius: 999px;
+  border: 1px solid rgba(195, 47, 39, 0.5);
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.release-pill:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 24px rgba(247, 181, 56, 0.25);
+  transform: translateY(-2px);
+}
+
+.release-pill__badge {
+  flex-shrink: 0;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  background: var(--accent-secondary);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.release-pill__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Headline ── */

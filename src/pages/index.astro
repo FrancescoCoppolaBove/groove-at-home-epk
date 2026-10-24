@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
+import NewReleaseSection from "../components/NewReleaseSection.astro";
 import TrustBar from "../components/TrustBar.astro";
 import BioSection from "../components/BioSection.astro";
 import MusicSection from "../components/MusicSection.astro";
@@ -91,6 +92,9 @@ const bookingData = {
 >
   <!-- 1. HOOK: Who we are, immediate credibility -->
   <Hero {...heroData} />
+
+  <!-- 1b. NEWS: New single out now + album countdown -->
+  <NewReleaseSection />
 
   <!-- 2. TRUST: Quick credibility signals — removes first objections -->
   <TrustBar />
