@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 import NewReleaseSection from "../components/NewReleaseSection.astro";
 import TrustBar from "../components/TrustBar.astro";
+import AwardSection from "../components/AwardSection.astro";
 import BioSection from "../components/BioSection.astro";
 import MusicSection from "../components/MusicSection.astro";
 import LiveSection from "../components/LiveSection.astro";
@@ -50,6 +51,7 @@ const metricsData = {
 
 // ── Instagram Reels ───────────────────────────────────────
 const reels = [
+  "https://www.instagram.com/p/DfdRpcntEXL/",    // Musicante Awards feat. Gonzalo Rubalcaba
   "https://www.instagram.com/reel/DQOzdJqgrXS/", // Francesca Tandoi
   "https://www.instagram.com/reel/DO3GnMylTOU/", // Thomann collab
   "https://www.instagram.com/p/DI6OIPmspPu/",    // Leave a Message
@@ -93,11 +95,14 @@ const bookingData = {
   <!-- 1. HOOK: Who we are, immediate credibility -->
   <Hero {...heroData} />
 
-  <!-- 1b. NEWS: New single out now + album countdown -->
+  <!-- 1b. NEWS: New album + two new singles, out now -->
   <NewReleaseSection />
 
   <!-- 2. TRUST: Quick credibility signals — removes first objections -->
   <TrustBar />
+
+  <!-- 2b. RECOGNITION: Musicante Awards plaque + Gonzalo Rubalcaba -->
+  <AwardSection />
 
   <!-- 3. STORY: Origin and artistic identity — emotional connection -->
   <BioSection />

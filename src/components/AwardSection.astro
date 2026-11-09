@@ -1,0 +1,265 @@
+---
+/** AwardSection – Musicante Awards · Premio Pino Daniele 2026: targa con quattro menzioni + live con Gonzalo Rubalcaba. */
+import { Image } from 'astro:assets';
+import ceremonyPhoto from '../assets/musicante_premiazione.jpg';
+import rubalcabaPhoto from '../assets/musicante_rubalcaba.jpg';
+
+// Diciture originali della targa, con traduzione per il sito in inglese
+const citations = [
+  { en: 'Arrangements', it: 'Arrangiamenti' },
+  { en: "Reworking of Pino Daniele's music", it: "Elaborazione dell'opera di Pino Daniele" },
+  { en: 'Research & Contamination', it: 'Ricerca e Contaminazione' },
+  { en: 'Ensemble', it: 'Ensemble' },
+];
+
+const performanceUrl = 'https://www.instagram.com/p/DfdRpcntEXL/';
+---
+
+<section id="awards" class="awards-section relative overflow-hidden">
+  <div class="awards-glow absolute pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative z-10 container-max section-padding">
+    <div class="grid lg:grid-cols-[1.1fr_1fr] gap-14 lg:gap-20 items-center">
+
+      <!-- ── Foto: premiazione + Rubalcaba al piano ── -->
+      <figure class="photo-stack reveal">
+        <div class="photo photo--main">
+          <Image src={ceremonyPhoto} alt="Groove at Home on stage receiving the Musicante Awards plaque" widths={[480, 800, 1200]} sizes="(min-width: 1024px) 44vw, 92vw" quality={80} format="webp" loading="lazy" />
+        </div>
+        <div class="photo photo--inset">
+          <Image src={rubalcabaPhoto} alt="Gonzalo Rubalcaba at the piano, playing Leave a Message with Groove at Home" widths={[320, 560]} sizes="(min-width: 1024px) 22vw, 50vw" quality={78} format="webp" loading="lazy" />
+          <span class="photo__caption">Gonzalo Rubalcaba, piano</span>
+        </div>
+        <figcaption class="photo-credit">Photos: Roberto Panucci</figcaption>
+      </figure>
+
+      <!-- ── Copy + targa ── -->
+      <div class="reveal">
+        <span class="section-eyebrow">Musicante Awards · Premio Pino Daniele 2026</span>
+
+        <h2 class="section-heading">
+          Four Citations,<br/>
+          <em class="gradient-text">One Plaque.</em>
+        </h2>
+
+        <p class="awards-lede mt-6 max-w-xl">
+          The Musicante Awards are run by the <strong>Fondazione Pino Daniele</strong>. At the final,
+          broadcast on Rai Radio 2 from Rai's Via Asiago studios in Rome, we played our first original,
+          <em>Dove Nessuno Guarda</em>, and Pino's <em>Leave a Message</em> with Cuban pianist
+          <strong>Gonzalo Rubalcaba</strong> as our guest. We came home with this:
+        </p>
+
+        <div class="plaque mt-8">
+          <div class="plaque__head">
+            <span class="plaque__name">Groove at Home</span>
+            <span class="plaque__meta">Premio Pino Daniele · 2026</span>
+          </div>
+          <ul class="plaque__grid">
+            {citations.map((c) => (
+              <li class="plaque__tile">
+                <span class="plaque__en">{c.en}</span>
+                {c.it !== c.en && <span class="plaque__it" lang="it">{c.it}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <a href={performanceUrl} target="_blank" rel="noopener" class="watch-link mt-8">
+          <span class="watch-link__icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          Watch us play with Gonzalo Rubalcaba
+          <span class="sr-only">(opens Instagram)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="vintage-divider" />
+
+<style>
+  .awards-section { background: var(--bg-primary); }
+
+  .awards-glow {
+    top: 50%;
+    right: -10%;
+    width: min(800px, 110vw);
+    height: min(800px, 110vw);
+    transform: translateY(-50%);
+    background: radial-gradient(circle, rgba(45, 107, 191, 0.18) 0%, rgba(247, 181, 56, 0.06) 45%, transparent 70%);
+    filter: blur(30px);
+  }
+
+  /* ── Foto ── */
+  .photo-stack {
+    position: relative;
+    margin: 0;
+    padding-bottom: 18%;
+  }
+
+  .photo {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .photo :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .photo--main {
+    aspect-ratio: 3 / 2;
+    transform: rotate(-1.5deg);
+  }
+
+  .photo--inset {
+    position: absolute;
+    right: -2%;
+    bottom: 0;
+    width: 52%;
+    aspect-ratio: 3 / 2;
+    transform: rotate(3deg);
+    border: 4px solid var(--bg-primary);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(45, 107, 191, 0.25);
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .photo-stack:hover .photo--inset { transform: rotate(1deg) translateY(-4%); }
+
+  .photo__caption {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    background: rgba(10, 10, 15, 0.75);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .photo-credit {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+  }
+
+  /* ── Copy ── */
+  .awards-lede {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .awards-lede strong { color: #fff; font-weight: 700; }
+  .awards-lede em { color: var(--accent-primary); font-style: italic; }
+
+  /* ── Targa: plexiglass su fondo scuro ── */
+  .plaque {
+    position: relative;
+    max-width: 34rem;
+    padding: 1.25rem;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01) 45%, rgba(255, 255, 255, 0.05)),
+      var(--card-bg);
+    box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Viti agli angoli, come la targa vera */
+  .plaque::before {
+    content: '';
+    position: absolute;
+    inset: 0.55rem;
+    pointer-events: none;
+    background:
+      radial-gradient(circle, rgba(255,255,255,0.35) 0 2px, transparent 2.5px) top left / 10px 10px no-repeat,
+      radial-gradient(circle, rgba(255,255,255,0.35) 0 2px, transparent 2.5px) top right / 10px 10px no-repeat,
+      radial-gradient(circle, rgba(255,255,255,0.35) 0 2px, transparent 2.5px) bottom left / 10px 10px no-repeat,
+      radial-gradient(circle, rgba(255,255,255,0.35) 0 2px, transparent 2.5px) bottom right / 10px 10px no-repeat;
+  }
+
+  .plaque__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    padding: 0 0.5rem 1rem;
+  }
+
+  .plaque__name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .plaque__meta {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+  }
+
+  .plaque__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .plaque__tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 1rem;
+    border-top: 3px solid var(--accent-primary);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .plaque__tile:nth-child(2) { border-top-color: var(--accent-tertiary); }
+  .plaque__tile:nth-child(3) { border-top-color: var(--accent-blue-mid); }
+  .plaque__tile:nth-child(4) { border-top-color: var(--accent-secondary); }
+
+  .plaque__en { font-weight: 700; color: #fff; line-height: 1.3; }
+  .plaque__it { font-size: 0.78rem; font-style: italic; color: var(--text-tertiary); }
+
+  .watch-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    color: #fff;
+    transition: color 0.25s ease;
+  }
+
+  .watch-link:hover { color: var(--accent-primary); }
+
+  .watch-link__icon {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background: var(--accent-gradient);
+    color: #0a0a0f;
+    box-shadow: var(--shadow-glow);
+    transition: transform 0.25s ease;
+  }
+
+  .watch-link:hover .watch-link__icon { transform: scale(1.1); }
+
+  @media (max-width: 480px) {
+    .plaque__grid { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo--inset, .watch-link__icon { transition: none; }
+  }
+</style>

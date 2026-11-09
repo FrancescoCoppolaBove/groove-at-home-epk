@@ -28,6 +28,7 @@ const jsonLd = {
   "url": SITE_URL,
   "description": description,
   "genre": ["Funk", "Nu-Jazz", "Soul", "R&B", "Jazz Fusion"],
+  "award": "Musicante Awards – Premio Pino Daniele 2026 (Arrangiamenti, Elaborazione dell'opera di Pino Daniele, Ricerca e Contaminazione, Ensemble)",
   "foundingLocation": {
     "@type": "Place",
     "addressCountry": "IT",
@@ -120,7 +121,15 @@ const jsonLd = {
           <div class="flex items-center gap-3">
             <div class="nav-dot group-hover:w-12"></div>
             <span class="nav-label opacity-0 group-hover:opacity-100 transition-opacity text-sm text-white/70 whitespace-nowrap">
-              New Single
+              New Music
+            </span>
+          </div>
+        </a>
+        <a href="#awards" class="nav-link group" data-section="awards">
+          <div class="flex items-center gap-3">
+            <div class="nav-dot group-hover:w-12"></div>
+            <span class="nav-label opacity-0 group-hover:opacity-100 transition-opacity text-sm text-white/70 whitespace-nowrap">
+              Awards
             </span>
           </div>
         </a>
@@ -198,7 +207,8 @@ const jsonLd = {
         <div class="p-8 pt-24">
           <div class="space-y-6">
             <a href="#home" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">Home</a>
-            <a href="#release" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">New Single</a>
+            <a href="#release" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">New Music</a>
+            <a href="#awards" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">Awards</a>
             <a href="#bio" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">Bio</a>
             <a href="#videos" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">Videos</a>
             <a href="#music" class="mobile-nav-link block text-xl font-semibold hover:text-[var(--accent-primary)] transition-colors">Music</a>

@@ -22,7 +22,7 @@ Three confirmed, combined pillars (not a single tagline):
 
 1. **Home-studio origin, organic growth** — founded 2023 by Francesco Coppola Bove and co-founder Gianmaria Salerno in a home studio, no label, no plan; grew from there to festival stages and sold-out club dates. Independence is part of the claim.
 2. **Open collective model** — not a fixed lineup but a network of 120+ musicians across Italy and beyond (singers, keys, brass, guitar, etc.), which the site frames as a scalability/quality strength rather than a limitation.
-3. **Demonstrated, concrete credibility** — Jacob Collier publicly commented on their arrangement; studio work with Mario Biondi, Arabella Rustico, and Francesca Tandoi; sold-out dates at Nocera Jazz Festival, Kroton Jazz Festival, and European stops (BIKO Milan, Crazy Coqs London, Das Wohnzimmer Wiesbaden). Proof over adjectives.
+3. **Demonstrated, concrete credibility** — Musicante Awards – Premio Pino Daniele 2026 plaque (four citations) and a live guest spot by Gonzalo Rubalcaba; Jacob Collier publicly commented on their arrangement; studio work with Mario Biondi and Francesca Tandoi; sold-out dates at Nocera Jazz Festival, Kroton Jazz Festival, and European stops (BIKO Milan, Crazy Coqs London, Das Wohnzimmer Wiesbaden). Proof over adjectives.
 
 ## Operating Context
 
@@ -44,13 +44,16 @@ The band operates across the live circuit the Booking section itself enumerates:
 
 ## Evidence on Hand
 
+- Musicante Awards – Premio Pino Daniele 2026 (Fondazione Pino Daniele, final at Rai Via Asiago, Rome): one plaque citing Arrangiamenti, Elaborazione dell'opera di Pino Daniele, Ricerca e Contaminazione, Ensemble. Photos by Roberto Panucci (`src/assets/musicante_*.jpg`); performance reel https://www.instagram.com/p/DfdRpcntEXL/.
+- Gonzalo Rubalcaba (Cuban pianist) guested live on "Leave a Message" (Pino Daniele) at the Musicante final.
 - Jacob Collier Instagram comment on the band's arrangement (screenshot asset: `src/assets/jacob_comment.jpg`) — real, not simulated.
-- Named studio collaborators: Mario Biondi, Arabella Rustico, Francesca Tandoi (plus a longer word-cloud of other collaborators in `CollaboratorsSection.astro`).
+- Named studio collaborators: Mario Biondi, Francesca Tandoi; Arabella Rustico and Gabriele Esposito listed as secondary names (plus a longer word-cloud of other collaborators in `CollaboratorsSection.astro`).
 - Official brand partner: Thomann (Europe's largest music retailer).
 - Festival/venue history: first festival date summer 2025 at Nocera Jazz Festival; early 2026 European run (BIKO Milan, Crazy Coqs London, Das Wohnzimmer Wiesbaden), each sold out; Kroton Jazz Festival (summer, 3 nights) alongside Andrea Di Battista and Vincent Garcia.
 - Social/reach numbers (as of the current copy): 40,000+ Instagram followers, 5.75% engagement rate, one video at 500K views, 635K monthly cross-platform reach. Copy explicitly frames these as "not inflated, not rounded up" — current-state snapshots, not static claims to be left stale.
 - Musician breakdown by instrument (singers 47, keyboardists 23, bassists 20, guitarists 17, saxophonists 11, trumpeters 7, drummers 2) and summary stats (2023 founded, 120+ musicians, 3 countries toured, 20+ live shows).
-- First studio album planned for 2027; tracks already road-tested live.
+- Releases: covers album "Grab a Chair" (Nov 6, 2026); first original single "Dove Nessuno Guarda" and Pino Daniele cover "Leave a Message" (Nov 8, 2026).
+- First album of original music planned for 2027; tracks already road-tested live.
 - State explicitly: no other named testimonials, press mentions, or case studies exist beyond what's listed above — future work must not fabricate additional ones.
 
 ## Product Principles
